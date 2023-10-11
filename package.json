@@ -1,6 +1,6 @@
 {
   "name": "smart-bee",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "smart-bee(Smart-Box)..a one stop package for all!",
   "main": "index.js",
   "scripts": {
