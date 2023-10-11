@@ -2,6 +2,11 @@
   "name": "universal-box",
   "version": "1.2.0",
   "description": "universal-box(smart-bee)..a one stop package for all!",
+  "license":  "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Abhishek-Mallick/smart-box.git"
+  },
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
