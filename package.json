@@ -1,6 +1,6 @@
 {
   "name": "universal-box",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "universal-box(smart-bee)..a one stop package for all!",
   "main": "index.js",
   "scripts": {

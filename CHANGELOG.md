@@ -1,3 +1,11 @@
+# [1.2.0](https://github.com/Abhishek-Mallick/smart-box/compare/v1.1.0...v1.2.0) (2023-10-11)
+
+
+### Features
+
+* update04 workflow configuration ([1235177](https://github.com/Abhishek-Mallick/smart-box/commit/12351779997036744f9514a4564331c070a22d0d))
+* update04 workflow configuration ([11dae2c](https://github.com/Abhishek-Mallick/smart-box/commit/11dae2cac6cb3524afd2797c25b76fe6aea0e6f3))
+
 # [1.1.0](https://github.com/Abhishek-Mallick/smart-box/compare/v1.0.0...v1.1.0) (2023-10-11)
 
 
