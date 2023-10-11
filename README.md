@@ -24,6 +24,7 @@ npm i universal-box
 <!-- Inquirer recently underwent a rewrite from the ground up to reduce the package size and improve performance. The previous version of the package is still maintained (though not actively developed), and offered hundreds of community contributed prompts that might not have been migrated to the latest API. If this is what you're looking for, the [previous package is over here](https://github.com/SBoudrias/Inquirer.js/tree/master/packages/inquirer). -->
 
 Will add more features in our next releases..
+[NPM Package](https://www.npmjs.com/package/universal-box)
 <!-- 
 # Usage
 
