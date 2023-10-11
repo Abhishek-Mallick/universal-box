@@ -1,8 +1,8 @@
 {
   "name": "universal-box",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "universal-box(smart-bee)..a one stop package for all!",
-  "license":  "MIT",
+  "license": "ISC",
   "repository": {
     "type": "git",
     "url": "https://github.com/Abhishek-Mallick/smart-box.git"
@@ -13,7 +13,6 @@
   },
   "keywords": [],
   "author": "Abhishek Mallick <mallickabhishek97@gmail.com>",
-  "license": "ISC",
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",

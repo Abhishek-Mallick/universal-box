@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/Abhishek-Mallick/smart-box/compare/v1.2.0...v1.3.0) (2023-10-11)
+
+
+### Features
+
+* Function updation ([9144ab3](https://github.com/Abhishek-Mallick/smart-box/commit/9144ab362761638f518cc39c3a1a282845b46ce4))
+
 # [1.2.0](https://github.com/Abhishek-Mallick/smart-box/compare/v1.1.0...v1.2.0) (2023-10-11)
 
 
