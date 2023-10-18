@@ -5,7 +5,7 @@
   <img alt="Movex Logo" src="https://github.com/Abhishek-Mallick/universal-box/assets/106394426/51e61d7f-7c03-4065-ac7c-f8ef6d0dce5d" width="400">
 </picture>
 
-
+<br>
 <br/>
 
 [![npm](https://badge.fury.io/js/universal-box.svg)](https://www.npmjs.com/package/universal-box)
