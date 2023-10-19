@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/Abhishek-Mallick/universal-box/compare/v1.3.0...v1.3.1) (2023-10-19)
+
+
+### Bug Fixes
+
+* **site-break:** socials update ([4ccdf99](https://github.com/Abhishek-Mallick/universal-box/commit/4ccdf992d6f51a14cbc5d8718264cfe81f173bb3))
+
 # [1.3.0](https://github.com/Abhishek-Mallick/smart-box/compare/v1.2.0...v1.3.0) (2023-10-11)
 
 
