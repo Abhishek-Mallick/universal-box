@@ -1,3 +1,10 @@
+## [1.3.2](https://github.com/Abhishek-Mallick/universal-box/compare/v1.3.1...v1.3.2) (2023-10-19)
+
+
+### Bug Fixes
+
+* **page-break:** release update ([bf143a3](https://github.com/Abhishek-Mallick/universal-box/commit/bf143a35177343dd77a834d9e5d547137fb522be))
+
 ## [1.3.1](https://github.com/Abhishek-Mallick/universal-box/compare/v1.3.0...v1.3.1) (2023-10-19)
 
 
