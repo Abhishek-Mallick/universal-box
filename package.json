@@ -17,5 +17,8 @@
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "semantic-release": "^22.0.5"
+  },
+  "dependencies": {
+    "firebase": "^10.5.0"
   }
 }
