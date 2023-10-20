@@ -1,7 +1,7 @@
 const basicComm = "Test func iteration -> success";
 const succesComm = "Success Message";
 
-console.loig(basicComm);
+console.log(basicComm);
 console.log(succesComm);
 
 // choose frameworks React or Go terminal
