@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/Abhishek-Mallick/universal-box/compare/v1.3.2...v1.4.0) (2024-08-07)
+
+
+### Features
+
+* Configured reverse proxy mapping ([d4d374d](https://github.com/Abhishek-Mallick/universal-box/commit/d4d374d7602d62e24248b4acd29f1d0c9299ea57))
+
 ## [1.3.2](https://github.com/Abhishek-Mallick/universal-box/compare/v1.3.1...v1.3.2) (2023-10-19)
 
 
