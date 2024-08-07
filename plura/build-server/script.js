@@ -3,13 +3,13 @@ const path = require('path')
 const fs = require('fs')
 const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3')
 const mime = require('mime-types')
-require('dotenv').config(); 
+const config = require('./config')
 
 const s3Client = new S3Client({
-    region: process.env.AWS_REGION,
+    region: config.aws.region,
     credentials: {
-        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+        accessKeyId: config.aws.accessKeyId,
+        secretAccessKey: config.aws.secretAccessKey
     }
 })
 const ProjectId = process.env.PROJECT_ID

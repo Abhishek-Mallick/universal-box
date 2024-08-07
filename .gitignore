@@ -4,3 +4,4 @@ bucket-policy.json
 tests/
 .env
 config.js
+plura/build-server/README.md
