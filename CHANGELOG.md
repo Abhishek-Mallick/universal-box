@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/Abhishek-Mallick/universal-box/compare/v1.4.0...v1.5.0) (2024-08-07)
+
+
+### Features
+
+* API Server default configurations added ([85a27da](https://github.com/Abhishek-Mallick/universal-box/commit/85a27da65afd3ea4374f939c8bf2c5b38ce2a792))
+
 # [1.4.0](https://github.com/Abhishek-Mallick/universal-box/compare/v1.3.2...v1.4.0) (2024-08-07)
 
 
