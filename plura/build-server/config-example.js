@@ -6,4 +6,8 @@ module.exports = {
         accessKeyId: 'your-access-key-id',
         secretAccessKey: 'your-secret-access-key'
     },
+    cluster: {
+        ClusterARN: 'cluster-arn',
+        TaskARN: 'cluster-task-arn'
+    },
 };
