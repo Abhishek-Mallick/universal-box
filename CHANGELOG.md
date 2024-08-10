@@ -1,3 +1,17 @@
+# [1.6.0](https://github.com/Abhishek-Mallick/universal-box/compare/v1.5.0...v1.6.0) (2024-08-10)
+
+
+### Bug Fixes
+
+* config.js template added for aws-s3 bucket ([72b23f5](https://github.com/Abhishek-Mallick/universal-box/commit/72b23f59f6ba0e31e4fecf119c93256429c72f6f))
+
+
+### Features
+
+* plura-api-server configs and ecs client pushes ([0820f21](https://github.com/Abhishek-Mallick/universal-box/commit/0820f21e1a2609d9433d38bbfcc6377953f6aa1d))
+* plura-frontend ui for triggering build server and s3 reverse proxy mapping ([9f3e3d4](https://github.com/Abhishek-Mallick/universal-box/commit/9f3e3d4a31cd0919cf61c6c7157ec2af908531cb))
+* Updated package source point ([7b01af0](https://github.com/Abhishek-Mallick/universal-box/commit/7b01af091b816a318f95fe7efad536af971c61ba))
+
 # [1.5.0](https://github.com/Abhishek-Mallick/universal-box/compare/v1.4.0...v1.5.0) (2024-08-07)
 
 
