@@ -1,3 +1,16 @@
+# [2.0.0](https://github.com/Abhishek-Mallick/universal-box/compare/v1.6.0...v2.0.0) (2024-08-10)
+
+
+### Bug Fixes
+
+* Updated package source point ([7b01af0](https://github.com/Abhishek-Mallick/universal-box/commit/7b01af091b816a318f95fe7efad536af971c61ba))
+
+### Features
+
+* Added init command for code scaffolding ([8600804](https://github.com/Abhishek-Mallick/universal-box/commit/86008047a8e38f90dc8e809a057488942b44dfb9))
+* Added in-house deployment logic through CLI on Universal-Box Cloud ([0820f21](https://github.com/Abhishek-Mallick/universal-box/commit/0820f21e1a2609d9433d38bbfcc6377953f6aa1d))
+
+
 # [1.6.0](https://github.com/Abhishek-Mallick/universal-box/compare/v1.5.0...v1.6.0) (2024-08-10)
 
 
