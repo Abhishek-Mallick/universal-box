@@ -1,58 +1,47 @@
 #!/usr/bin/env node
-import inquirer from 'inquirer';
-import fs from 'fs';
-import fse from 'fs-extra';
-import path from 'path';
-import chalk from 'chalk';
-import { fileURLToPath } from 'url';
-
-// Calculate __dirname for ES Module
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const inquirer = require('inquirer');
+const fs = require('fs');
+const fse = require('fs-extra');
+const path = require('path');
+const chalk = require('chalk');
 
 const currentDir = process.cwd();
 const templatesDir = path.join(__dirname, 'templates');
 
+// Debugging: print the templates directory path
 console.log(`Templates directory: ${templatesDir}`);
 
-const importantFiles = ['README.md', 'package.json', 'requirements.txt'];
-const importantDirs = ['server', 'client'];
+const selectFolder = (folderPath) => {
+  return new Promise((resolve, reject) => {
+    try {
+      const contents = fs.readdirSync(folderPath, { withFileTypes: true });
+      const choices = contents
+        .filter(item => item.isDirectory() || (item.isFile() && item.name === 'README.md'))
+        .map(item => item.name);
 
-const selectFolder = async (folderPath) => {
-  try {
-    const contents = fs.readdirSync(folderPath, { withFileTypes: true });
-    
-    // Check for important files or directories
-    const containsImportantFile = contents.some((item) =>
-      importantFiles.includes(item.name)
-    );
-    const containsImportantDir = contents.some((item) =>
-      importantDirs.includes(item.name)
-    );
-
-    if (containsImportantFile || containsImportantDir) {
-      return folderPath;
+      if (choices.includes('README.md')) {
+        resolve(folderPath);
+      } else {
+        inquirer.prompt([
+          {
+            name: 'subfolder',
+            type: 'list',
+            message: 'Select an option:',
+            choices: choices,
+          },
+        ]).then((answer) => {
+          const selectedPath = path.join(folderPath, answer.subfolder);
+          if (fs.existsSync(path.join(selectedPath, 'README.md'))) {
+            resolve(selectedPath);
+          } else {
+            selectFolder(selectedPath).then(resolve).catch(reject);
+          }
+        }).catch(reject);
+      }
+    } catch (error) {
+      reject(error);
     }
-
-    const choices = contents
-      .filter((item) => item.isDirectory() || importantFiles.includes(item.name))
-      .map((item) => item.name);
-
-    const answer = await inquirer.prompt([
-      {
-        name: 'subfolder',
-        type: 'list',
-        message: 'Select an option:',
-        choices: choices,
-      },
-    ]);
-
-    const selectedPath = path.join(folderPath, answer.subfolder);
-    return selectFolder(selectedPath);
-  } catch (error) {
-    console.error('Error selecting folder:', error);
-    throw error;
-  }
+  });
 };
 
 const QUESTIONS = [
@@ -80,20 +69,16 @@ inquirer.prompt(QUESTIONS).then(async (answers) => {
     const templatePath = path.join(templatesDir, templateType);
 
     const finalPath = await selectFolder(templatePath);
-    setupProject(finalPath, projectName);
+    fs.mkdirSync(`${currentDir}/${projectName}`);
+    fse.copySync(finalPath, path.join(currentDir, projectName));
+    createContent(projectName);
   } catch (error) {
     console.error('Error setting up project:', error);
   }
 });
 
-function setupProject(templatePath, projectName) {
+const createContent = (projectName) => {
   const projectPath = path.join(currentDir, projectName);
-  fs.mkdirSync(projectPath);
-  fse.copySync(templatePath, projectPath);
-  createContent(projectPath, projectName);
-}
-
-function createContent(projectPath, projectName) {
   const packageJsonPath = path.join(projectPath, 'package.json');
   if (fs.existsSync(packageJsonPath)) {
     const packageObj = fse.readJsonSync(packageJsonPath);
@@ -101,10 +86,14 @@ function createContent(projectPath, projectName) {
     fs.writeFileSync(packageJsonPath, JSON.stringify(packageObj, null, 2));
   }
   welcomeMsg(projectName);
-}
+};
 
-function welcomeMsg(projectName) {
-  console.log(chalk.yellow(`Yay! We have created all the files to get started on your ${projectName}! 🚀`));
+const welcomeMsg = (projectName) => {
+  console.log(
+    chalk.yellow(
+      `Yay! We have created all the files to get started on your ${projectName}! 🚀`
+    )
+  );
   console.log(chalk.yellow(`cd ${projectName}`));
-  console.log(chalk.blue('Happy Coding!! ❤️'));
-}
+  console.log(chalk.blue(`Happy Coding!! ❤️`));
+};
