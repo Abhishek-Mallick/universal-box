@@ -9,6 +9,9 @@
   },
   "main": "index.js",
   "type": "module",
+  "bin": {
+    "universal-box": "./bin/universal-box.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
