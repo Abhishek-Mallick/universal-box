@@ -1,3 +1,10 @@
+# [2.4.0](https://github.com/Abhishek-Mallick/universal-box/compare/v2.3.0...v2.4.0) (2024-08-17)
+
+
+### Features
+
+* Adding docs page ([3debc0b](https://github.com/Abhishek-Mallick/universal-box/commit/3debc0b9e0f1c5a13aa7733774a68f179c76d926))
+
 # [2.0.0](https://github.com/Abhishek-Mallick/universal-box/compare/v1.6.0...v2.0.0) (2024-08-10)
 
 
