@@ -1,9 +1,6 @@
-<!-- <img width="75px" height="75px" align="right" alt="Inquirer Logo" src="https://raw.githubusercontent.com/SBoudrias/Inquirer.js/master/assets/inquirer_readme.svg?sanitize=true" title="Inquirer.js"/> -->
+
 <div align="center">
-<picture width="400">
-  <source media="(prefers-color-scheme: dark)" srcset="https://github.com/Abhishek-Mallick/universal-box/assets/106394426/51e61d7f-7c03-4065-ac7c-f8ef6d0dce5d" width="400">
-  <img alt="Movex Logo" src="https://github.com/Abhishek-Mallick/universal-box/assets/106394426/51e61d7f-7c03-4065-ac7c-f8ef6d0dce5d" width="400">
-</picture>
+<img src="./pages/assets/images/4470006.webp" width="140px">
 
 <br>
 <br/>
@@ -12,21 +9,17 @@
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FAbhishek-Mallick%2Fsmart-box.svg?type=shield&issueType=license)](https://app.fossa.com/projects/git%2Bgithub.com%2FAbhishek-Mallick%2Fsmart-box?ref=badge_shield&issueType=license)
 </div>
 
-<!-- A collection of common interactive command line user interfaces.
+# Universal-Box
 
-![List prompt](https://cdn.rawgit.com/SBoudrias/Inquirer.js/28ae8337ba51d93e359ef4f7ee24e79b69898962/assets/screenshots/list.svg)
-
-Give it a try in your own terminal!
-
-```sh
-npx @inquirer/demo@latest
-``` -->
+Collection of Starter templates and Projects to kick of your develovment journey in a very fast and Structured manner.
 
 # Installation
 
-```sh
-npm i universal-box
-
+```bash
+npm i -g universal-box
+```
+```bash
+universal-box init
 ```
 
 <!-- Inquirer recently underwent a rewrite from the ground up to reduce the package size and improve performance. The previous version of the package is still maintained (though not actively developed), and offered hundreds of community contributed prompts that might not have been migrated to the latest API. If this is what you're looking for, the [previous package is over here](https://github.com/SBoudrias/Inquirer.js/tree/master/packages/inquirer). -->
