@@ -1,6 +1,6 @@
 
 <div align="center">
-<img src="./pages/assets/images/4470006.webp" width="140px">
+<img src="./website/public/logo.webp" width="140px">
 
 <br>
 <br/>
