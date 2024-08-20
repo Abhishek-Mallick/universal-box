@@ -5,9 +5,9 @@ export default defineAppConfig({
       description: 'Beautifully designed Nuxt Content template built with shadcn-vue. Customizable. Compatible. Open Source.',
     },
     theme: {
-      customizable: true,
-      color: 'blue',
-      radius: 0.5,
+      ustomizable: false,
+      color: 'slate',
+      radius: 0.75,
     },
     header: {
       title: 'Universal-Box',
