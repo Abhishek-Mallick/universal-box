@@ -1,3 +1,10 @@
+## [2.4.1](https://github.com/Abhishek-Mallick/universal-box/compare/v2.4.0...v2.4.1) (2024-08-20)
+
+
+### Bug Fixes
+
+* Initialized docs template ([d912c86](https://github.com/Abhishek-Mallick/universal-box/commit/d912c86af83034cfe3c744debeca8ba387a009d4))
+
 # [2.4.0](https://github.com/Abhishek-Mallick/universal-box/compare/v2.3.0...v2.4.0) (2024-08-17)
 
 
