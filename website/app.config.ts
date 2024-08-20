@@ -2,10 +2,10 @@ export default defineAppConfig({
   shadcnDocs: {
     site: {
       name: 'Universal-Box',
-      description: 'Beautifully designed Nuxt Content template built with shadcn-vue. Customizable. Compatible. Open Source.',
+      description: 'Universal-Box is your all-in-one solution for rapid code scaffolding and streamlined development. With a wide range of pre-built templates, this npm package simplifies the process of setting up boilerplate code for any project and offers single-command deployment.',
     },
     theme: {
-      ustomizable: false,
+      customizable: false,
       color: 'slate',
       radius: 0.75,
     },
@@ -19,8 +19,13 @@ export default defineAppConfig({
       },
       nav: [],
       links: [{
+        'icon': 'i-simple-icons-discord',
+        'to': 'https://discord.gg/NBR9JmWys4',
+        'target': '_blank',
+        'aria-label': 'Universal-Box on Discord'
+      },{
         icon: 'lucide:github',
-        to: 'https://github.com/ZTL-UwU/shadcn-docs-nuxt',
+        to: 'https://github.com/Abhishek-Mallick/universal-box',
         target: '_blank',
       }],
     },
@@ -36,7 +41,7 @@ export default defineAppConfig({
       credits: 'Copyright © 2024 Universal-Box',
     colorMode: false,
     links: [{
-      'icon': 'i-simple-icons-nuxtdotjs',
+      'icon': 'lucide:box',
       'to': 'https://universal-box.co/',
       'target': '_blank',
       'aria-label': 'Universal-Box Website'
@@ -58,12 +63,12 @@ export default defineAppConfig({
       links: [{
         title: 'Star on GitHub',
         icon: 'lucide:star',
-        to: 'https://github.com/ZTL-UwU/shadcn-docs-nuxt',
+        to: 'https://github.com/Abhishek-Mallick/universal-box',
         target: '_blank',
       }, {
         title: 'Create Issues',
         icon: 'lucide:circle-dot',
-        to: 'https://github.com/ZTL-UwU/shadcn-docs-nuxt/issues',
+        to: 'https://github.com/Abhishek-Mallick/universal-box/issues',
         target: '_blank',
       }],
     },
