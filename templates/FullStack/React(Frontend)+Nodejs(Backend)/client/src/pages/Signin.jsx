@@ -1,34 +1,30 @@
 import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
-const Signup = () => {
+const Signin = () => {
   const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: '',
   });
 
   const [errors, setErrors] = useState({});
+  const [serverError, setServerError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
   const validate = () => {
     const errors = {};
 
-    if (!formData.username.trim()) {
-      errors.username = 'Username is required';
-    }
 
-    if (!formData.email.trim()) {
-      errors.email = 'Email is required';
+    if (!formData.emailid.trim()) {
+      errors.emailid = 'Email is required';
     } else if (
-      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formData.email)
+      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formData.emailid)
     ) {
-      errors.email = 'Email address is invalid';
+      errors.emailid = 'Email address is invalid';
     }
 
     if (!formData.password) {
@@ -40,118 +36,127 @@ const Signup = () => {
     return errors;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const validationErrors = validate();
-    setErrors(validationErrors);
 
-    if (Object.keys(validationErrors).length === 0) {
-      
-      console.log('Form Data Submitted:', formData);
-     
-      setFormData({
-        username: '',
-        email: '',
-        password: '',
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
+
+    try {
+      const res = await fetch('http://localhost:3000/api/auth/signin', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
       });
+    
+      // Check if the response is not successful
+      setLoading(false);
+      if (!res.ok) {
+        throw new Error('Failed to sign in');
+      } else if (res.ok) {
+        navigate('/');
+      }
+    
+      const data = await res.json();
+      if (!data.success === false) {
+        return setErrorMessage(data.message);
+      }
+      setSuccessMessage('Signin successful!');
+      setServerError('');
+    } catch (error) {
+      setServerError(error.message || 'An error occurred during signup');
+      setSuccessMessage('');
     }
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen ">
-    <div className="w-full max-w-md p-8 space-y-6 bg-white border-4 border-black-800 rounded-lg shadow-xl">
-      <h2 className="text-3xl font-bold text-center">
-        Log In
-      </h2>
-      <form onSubmit={handleSubmit} className="space-y-5">
-       
-        <div>
-          <label
-            htmlFor="username"
-            className="block mb-2 text-sm font-medium"
-          >
-            Username
-          </label>
-          <input
-            type="text"
-            name="username"
-            id="username"
-            value={formData.username}
-            onChange={handleChange}
-            className={`w-full px-4 py-2 text-sm border-2 rounded-md focus:outline-none focus:ring-2`}
-            placeholder="Enter your username"
-          />
-          {errors.username && (
-            <p className="mt-2 text-sm text-red-500">{errors.username}</p>
+    <div className="flex items-center justify-center min-h-screen">
+      <div className="w-full max-w-md p-8 space-y-6 bg-white border-4 border-black-800 rounded-lg shadow-xl">
+        <h2 className="text-3xl font-bold text-center">Log In</h2>
+        <form className="space-y-5" onSubmit={handleSubmit}>
+
+          {/* Email */}
+          <div>
+            <label
+              htmlFor="emailid"
+              className="block mb-2 text-sm font-medium"
+            >
+              Email Address
+            </label>
+            <input
+              type="email"
+              name="emailid"
+              id="emailid"
+              value={formData.emailid}
+              onChange={handleChange}
+              className={`w-full px-4 py-2 text-sm border-2 rounded-md focus:outline-none focus:ring-2 ${
+                errors.emailid ? 'border-red-500' : ''
+              }`}
+              placeholder="Enter your email"
+            />
+            {errors.emailid && (
+              <p className="mt-2 text-sm text-red-500">{errors.emailid}</p>
+            )}
+          </div>
+
+          {/* Password */}
+          <div>
+            <label
+              htmlFor="password"
+              className="block mb-2 text-sm font-medium"
+            >
+              Password
+            </label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              value={formData.password}
+              onChange={handleChange}
+              className={`w-full px-4 py-2 text-sm border-2 rounded-md focus:outline-none focus:ring-2 ${
+                errors.password ? 'border-red-500' : ''
+              }`}
+              placeholder="Enter your password"
+            />
+            {errors.password && (
+              <p className="mt-2 text-sm text-red-500">{errors.password}</p>
+            )}
+          </div>
+
+          {/* Server Error */}
+          {serverError && (
+            <p className="mt-2 text-sm text-red-500">{serverError}</p>
           )}
-        </div>
 
-        {/* Email */}
-        <div>
-          <label
-            htmlFor="email"
-            className="block mb-2 text-sm font-medium"
-          >
-            Email Address
-          </label>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            value={formData.email}
-            onChange={handleChange}
-            className={`w-full px-4 py-2 text-sm border-2 rounded-md focus:outline-none focus:ring-2`}
-            placeholder="Enter your email"
-          />
-          {errors.email && (
-            <p className="mt-2 text-sm text-red-500">{errors.email}</p>
+          {/* Success Message */}
+          {successMessage && (
+            <p className="mt-2 text-sm text-green-500">{successMessage}</p>
           )}
-        </div>
 
-        {/* Password */}
-        <div>
-          <label
-            htmlFor="password"
-            className="block mb-2 text-sm font-medium"
+          {/* Submit Button */}
+          <button
+            type="submit"
+            className="w-full px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-green-400 to-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2"
           >
-            Password
-          </label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            value={formData.password}
-            onChange={handleChange}
-            className={`w-full px-4 py-2 text-sm border-2 rounded-md focus:outline-none focus:ring-2`}
-            placeholder="Enter your password"
-          />
-          {errors.password && (
-            <p className="mt-2 text-sm text-red-500">{errors.password}</p>
-          )}
-        </div>
+            Sign In
+          </button>
+        </form>
 
-        {/* Submit Button */}
-        <button
-          type="submit"
-          className="w-full px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-green-400 to-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 "
-        >
-          Sign In
-        </button>
-      </form>
-
-      {/* Additional Links */}
-      <p className="text-sm text-center text-gray-600">
-        Already have an account?{' '}
-        <a
-          href="/signup"
-          className="text-blue-500 hover:underline"
-        >
-          Sign Up
-        </a>
-      </p>
+        {/* Additional Links */}
+        <p className="text-sm text-center text-gray-600">
+          Don't have an account?{' '}
+          <a href="/signup" className="text-blue-500 hover:underline">
+            Sign Up
+          </a>
+        </p>
+      </div>
     </div>
-  </div>
   );
 };
 
-export default Signup;
+export default Signin;
