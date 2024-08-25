@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -7,6 +8,8 @@ const Signup = () => {
   const [errors, setErrors] = useState({});
   const [serverError, setServerError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -53,13 +56,18 @@ const Signup = () => {
         },
         body: JSON.stringify(formData),
       });
-    
+      const data = await res.json();
+      if (data.success === false) {
+        return setErrorMessage(data.message);
+      }
+      setLoading(false);
+      if(res.ok) {
+        navigate('/signin');
+      }
       // Check if the response is not successful
       if (!res.ok) {
         throw new Error('Failed to sign up');
       }
-    
-      const data = await res.json();
       setSuccessMessage('Signup successful!');
       setServerError('');
     } catch (error) {
