@@ -1,4 +1,11 @@
 /node_modules
 /templates/node_modules
-/pages
 pages/
+.env
+config.js
+tests/
+
+website/
+
+# for 2.4.4 release
+plura/
