@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab|Amatic+SC" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+</head>
+<body>
+    <!-- BACK TO TOP ARROW -->
+    <a class="smoothScroll" href="#welcome">
+        <img id="btt" class="img-responsive" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAYFBMVEX///9AQEA6Ojpzc3M9PT3S0tIzMzMrKys2NjYuLi4nJyfz8/P7+/ubm5tERESHh4dYWFjY2NhoaGhQUFDp6emysrKRkZFubm4gICDAwMCnp6e6urp8fHwWFhbg4OBKSkp3BCqvAAACbElEQVR4nO3c23KqMBSA4SQGSBAR8Hxo+/5v2QRarVu92FPZmcX+v5le1Hqx/goxcaZVCgAAAAAAAAAAAAAAAAAAAAAAAAAA4Q7z1BOMbPu2TD3CyBrTpB5hXFWhiyr1EKNqvfZZ6iFGdcy1W6QeYlSd1XaVeogxzUutdblOPcaINnkonPRlurKh0NrUY4wn8zryp9SDjKYzfeF015pDoQd+k3qUkXzYr0JrprmvWeT6m5vk9juL16j9+ioOqcd5vcqEsjruabo63orTOyY2YR0ts7PR5pyFnY2Z3Ho6c1rnSzULhTO1DHek61KP9FqzfHjZhsL+Bc1nqYd6pV0ItG59KVzHm3JCifPGxeWzVZdC1caF1TUTWW4yFzdr+/5o/12osn14zLgpnPerZRmuSFsMLZfC8PYYHy63KWd7iZONV6ix7fDttVC1Nr60eS37vf+08nEH4y833I/CcHvGbZz1jdjG90Xd99n99VD/s1Cpbdn/3NeL9xQD/k62rb0b5l+114dvC1X7MfwOnK+3whadxb7P0za3N2fBPwqV2ph8eKLby/r45tyf5o2vj7cnwbtCVR21H558/pcD/trSaZMX3d0acl8YHHZFbqSdGU9vvjs++Fz0YWHYxW12xZuwjzae7MeeFAaVwOX0keeFU0GhfBTKR6F8FMpHoXwUykehfBTKR6F8FMpHoXwUykehfBTKR6F8FMpHoXwUykehfBTKR6F8FMpHoXwUykehfBTKR6F8FMpHoXwUykehfBTKtwuFu9RDjCorfSnsD+//1vow5f8LCQAAAAAAAAAAAAAAAAAAAAAAAAD4P3wCJ1wQsgzArBwAAAAASUVORK5CYII=" alt="Back to Top">
+    </a>
+
+    <!-- NAV -->
+    <div id="myNav" class="overlay">
+        <!-- Button to close the overlay navigation -->
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+        <!-- Overlay content -->
+        <div class="overlay-content">
+            <a class="smoothScroll" href="#welcome" onclick="closeNav()">Home</a>
+            <a class="smoothScroll" href="#about" onclick="closeNav()">About</a>
+            <a class="smoothScroll" href="#portfolio" onclick="closeNav()">Projects</a>
+        </div>
+    </div>
+
+    <!-- Use any element to open/show the overlay navigation menu -->
+    <span id="openmenu" onclick="openNav()"><b>Menu</b></span>
+
+    <center>
+        <!-- WELCOME -->
+        <div id="welcome">
+            <h1>Portfolio</h1>
+            <h3><b>Your Profession</b></h3>
+            <a class="smoothScroll" href="#about">
+                <img id="press" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJQAAACUCAMAAABC4vDmAAAAY1BMVEX///8AAAD5+fmGhoZ0dHRwcHCxsbG1tbWsrKwUFBS9vb38/Pypqanq6uq6urrj4+NlZWXd3d0ODg7y8vIqKio/Pz8gICDKyspRUVFWVlZ7e3uVlZVdXV1JSUnT09M1NTWdnZ0557JCAAAEkElEQVR4nO2c65KiMBCFBxmDXAOEi6Pr5f2fctOJOAoB2lroULX5fm1hanMqp5N0SztfX0sgUs6LgvNULPLfLUARnPM69CRhnZ+DwrYeSZvfvDdueWtXkciqTkvYNGH37yqyaGObaxG1z6JWEjG/1k/srda9hPmbMxdx9ygW/NzA0/JuRVKqlumYDD9JjmqxUnpNQs18N86cnuGzH/LASn8glkYjp4XY+iFeK/FnZimU6Jx2rU5yyj+TC8FB9olKD8AQ5qi1Cmj0AFxGTMlnR0HUzY5aihg2F5sfd5DDzuvL0cASfO/mx+2+5UCqpZJRXl0xA68NXazL2yUfPGS+P4xqeeiXFIrkLSJN6SdNhb6HTY8PJKJkpDT9yR851a2vSvr3TaEpPQ72lNqOiv5m8+WVTXHZtOXAJvFMPuvexXKV2R9FahVJ9/qimmfO2RNVyE8iAlHJ0BFx6UQde6LSC+qY/Vdi33ByJp2o/lYTexln8dfagKhTX5S6fE3JzE4etP76ouDuGE4jchn+5TB/Mq7rCqKkIb7hOQ8yw963LMqME4XFicLiRGFxorA4UVicKCxOFBYnCosThcWJwuJEYXGisDhRWJwoLE4UFicKixOFxYnC4kRhoRJl/HJ/DOP7ieWBFxsntCii1yDKEHS7CNELI3hjhe+sgdeohmamxck8r0I3G/CK5iVkG3oeqisBoHpdyy+ed8cOPnvehaSHQ8buDTtWurdfU8uTg6ErYoQrrlNnAQS+Wws6cNY/OhV7dAMOmXsftipRNQvCoe5l8+PkiUZxxzyAfpty9qoRpaEjZ0UCQ7NGH7hhKBsFVazPdHEK6OKlinKNWobjRLDvoP2FpEvpBbhsvMvowaDadGkumFfg/vequ/nDu/qQXJN0EPpwvUs08FBEta3Wbxk2uuntcri+6NpdD7qZ6kx0vQzQS+JVuZ+0PE15m/i5/tFDTZHZjZHUnoGaIgOeQLB9X9Ke2f9Jjyii/PnjlDCPCvuSOtKibQsr+83h+H+Ii4+yyaKgSIijpvognwyahuDGUSUKusCEH9gQfGn2FZX43Bty+ZDibo5hphKlKlD6aYos+DIB4yBDjlsGFmKqUahFQ8IaK0DMF4TUdR8ztem/gfV4SdjMHsTvhiWZdpDeO41aqxF/mJV1UjOPOmjHOw2sR2g4GbKQPsZ/CYyzM+LzyTR/38HA8IyWYUQHE/FPRX/vY8769Xl30L53msOLDtq8YAr2dHAb3mm6aA8+yEnXRzsYWPTOVGKxx9cuBu+ISqzqNiwFmBY11JRVFcGb0ZESaySnIy2xDGtVGWrUCLYASYmVGJOD2BA8Kl040JRYySclFs1P2yWJ2cEeyjsyTXqt5srxKKRcJyCZTVAY8ToBStVEkZxZ0DTnIL13mikHbXinUSeD0cGM9Cx4B1SVphKrtKdJqjIW5yrVs6ZJ3zh9B216p0kGCUtgXdPDwZe1yux6p4nfo13HOFl/yyivDm7BO82vg5vwTvN0cCveaZLfEmsb66RIuhJrQ5qef21mU5oeqjamSRZ+4ba8U8ScL7bv/gIUwy9Nc1BarAAAAABJRU5ErkJggg==" alt="Scroll Down">
+            </a>
+        </div>
+    </center>
+
+    <!-- ABOUT -->
+    <div id="about">
+        <h1>About Me</h1>
+        <center>
+            <div id="self">
+                <img class="img-responsive" src="https://raw.githubusercontent.com/gist/InfiniteVerma/13993a86f297c1ce72cca015ab3a29cb/raw/dc3d7693b7ce6b863b38dafbe5a23c77b616b51c/About%20Me.png" alt="About Me Image">
+            </div>
+        </center>
+        <br>
+        <p>Hi! I'm [Your Name], and web development is my passion.<br><br> I help people build websites they love, and I absolutely adore making people smile.<br><br> When I’m not programming, you can find me enjoying other hobbies or relaxing.</p>
+        <br><br>
+        <span id="email">
+            <img src="images/email.png" alt=""> [your.email@example.com]
+        </span>
+        <span id="portScroll">
+            <a class="smoothScroll" href="#portfolio">
+                <img src="images/portfolio-icon2.png" alt=""> View My Portfolio
+            </a>
+        </span>
+    </div>
+
+    <!-- Projects -->
+    <div id="portfolio">
+        <h1>My Projects</h1>
+        <h3>Here you'll find some projects I've worked on! Click on a project to see a demo of it.</h3>
+        <br>
+        <center>
+            <div id="port" class="container">
+                <table>
+                    <!-- Project 1 -->
+                    <tr>
+                        <td>
+                            <a target="_blank" href="">
+                                <img class="img-responsive thumbnail" src="https://s3.envato.com/files/395838012/Nest_Preview_Django.__large_preview.png" alt="Project 1">
+                            </a>
+                        </td>
+                    </tr>
+                    <!-- Project 2 -->
+                    <tr>
+                        <td>
+                            <a target="_blank" href="">
+                                <img class="img-responsive thumbnail" src="https://camo.githubusercontent.com/a425f0760939bee6c1b2ac731817d7f099a82a25d235b97e9eb18377897b99da/68747470733a2f2f686f6e67686f6e672e6d652f696d616765732f70726f6a656374732f626c6f672f636f7665722e706e67" alt="Project 2">
+                            </a>
+                        </td>
+                    </tr>
+                    <!-- Project 3 -->
+                    <tr>
+                        <td>
+                            <a target="_blank" href="">
+                                <img class="img-responsive thumbnail" src="https://cdn.dribbble.com/users/2196041/screenshots/15985106/media/7848b220d6b50aca12930571dd5aa1ec.png" alt="Project 3">
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </center>        
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const Signup = () => {
-  const [formData, setFormData] = useState({
-  });
+  const [formData, setFormData] = useState({});
 
   const [errors, setErrors] = useState({});
-  const [serverError, setServerError] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
+  const [serverError, setServerError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -19,21 +18,21 @@ const Signup = () => {
     const errors = {};
 
     if (!formData.username.trim()) {
-      errors.username = 'Username is required';
+      errors.username = "Username is required";
     }
 
     if (!formData.emailid.trim()) {
-      errors.emailid = 'Email is required';
+      errors.emailid = "Email is required";
     } else if (
       !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formData.emailid)
     ) {
-      errors.emailid = 'Email address is invalid';
+      errors.emailid = "Email address is invalid";
     }
 
     if (!formData.password) {
-      errors.password = 'Password is required';
+      errors.password = "Password is required";
     } else if (formData.password.length < 6) {
-      errors.password = 'Password needs to be at least 6 characters';
+      errors.password = "Password needs to be at least 6 characters";
     }
 
     return errors;
@@ -49,10 +48,10 @@ const Signup = () => {
     }
 
     try {
-      const res = await fetch('http://localhost:3000/api/auth/signup', {
-        method: 'POST',
+      const res = await fetch("http://localhost:3000/api/auth/signup", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
@@ -61,18 +60,18 @@ const Signup = () => {
         return setErrorMessage(data.message);
       }
       setLoading(false);
-      if(res.ok) {
-        navigate('/signin');
+      if (res.ok) {
+        navigate("/signin");
       }
       // Check if the response is not successful
       if (!res.ok) {
-        throw new Error('Failed to sign up');
+        throw new Error("Failed to sign up");
       }
-      setSuccessMessage('Signup successful!');
-      setServerError('');
+      setSuccessMessage("Signup successful!");
+      setServerError("");
     } catch (error) {
-      setServerError(error.message || 'An error occurred during signup');
-      setSuccessMessage('');
+      setServerError(error.message || "An error occurred during signup");
+      setSuccessMessage("");
     }
   };
 
@@ -96,7 +95,7 @@ const Signup = () => {
               value={formData.username}
               onChange={handleChange}
               className={`w-full px-4 py-2 text-sm border-2 rounded-md focus:outline-none focus:ring-2 ${
-                errors.username ? 'border-red-500' : ''
+                errors.username ? "border-red-500" : ""
               }`}
               placeholder="Enter your username"
             />
@@ -107,10 +106,7 @@ const Signup = () => {
 
           {/* Email */}
           <div>
-            <label
-              htmlFor="emailid"
-              className="block mb-2 text-sm font-medium"
-            >
+            <label htmlFor="emailid" className="block mb-2 text-sm font-medium">
               Email Address
             </label>
             <input
@@ -120,7 +116,7 @@ const Signup = () => {
               value={formData.emailid}
               onChange={handleChange}
               className={`w-full px-4 py-2 text-sm border-2 rounded-md focus:outline-none focus:ring-2 ${
-                errors.emailid ? 'border-red-500' : ''
+                errors.emailid ? "border-red-500" : ""
               }`}
               placeholder="Enter your email"
             />
@@ -144,7 +140,7 @@ const Signup = () => {
               value={formData.password}
               onChange={handleChange}
               className={`w-full px-4 py-2 text-sm border-2 rounded-md focus:outline-none focus:ring-2 ${
-                errors.password ? 'border-red-500' : ''
+                errors.password ? "border-red-500" : ""
               }`}
               placeholder="Enter your password"
             />
@@ -174,7 +170,7 @@ const Signup = () => {
 
         {/* Additional Links */}
         <p className="text-sm text-center text-gray-600">
-          Already have an account?{' '}
+          Already have an account?{" "}
           <a href="/signin" className="text-blue-500 hover:underline">
             Sign in
           </a>

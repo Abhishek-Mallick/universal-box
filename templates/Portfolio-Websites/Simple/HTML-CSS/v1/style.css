@@ -1,0 +1,272 @@
+body {
+    font-family: 'Roboto Slab', serif;
+    color: white;
+    background-color: #68BDCA;
+  }
+  
+  /* BACK TO TOP BUTTON*/
+  
+  #btt {
+    position: fixed;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    bottom: 0;
+    right: 0;
+    opacity: 0.8;
+    width: 50px;
+    transition: margin-bottom 0.6s, opacity 0.6s;
+  }
+  
+  #btt:hover {
+    margin-bottom: 25px;
+    opacity: 1;
+    transition: margin-bottom 0.6s, opacity 0.6s;
+  }
+  
+  
+  /* WELCOME */
+  
+  #welcome {
+    font-family: 'Amatic SC', cursive;
+    color: #FCFFFF;
+    background: url("https://images.unsplash.com/photo-1423589989400-cc0270157ed0?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&w=1080&fit=max&s=458cf2662814c68b6eb24d9e55801fa0");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    width: auto;
+    padding: 5% 5% 5% 5%;
+  }
+  
+  #welcome h1,
+  #portfolio h1 {
+    font-size: 70pt;
+    font-weight: bold;
+  }
+  
+  #welcome h3,
+  #portfolio h3 {
+    font-size: 28pt;
+  }
+  
+  
+  /* DOWN ARROW */
+  
+  #press {
+    width: 60px;
+    border: solid 4px white;
+    border-radius: 40px;
+    margin-top: 20%;
+    transition: background-color 0.6s, opacity 0.6s, margin-top 1s;
+  }
+  
+  #press:hover {
+    background-color: #5BC2B4;
+    opacity: 0.8;
+    margin-top: 21%;
+    transition: background-color 0.6s, opacity 0.6s, margin-top 1s;
+  }
+  
+  
+  /* ABOUT */
+  
+  #about {
+    background-color: #0A3739;
+    padding: 5% 5% 5% 5%;
+    height: 100vh;
+    width: auto;
+  }
+  
+  #about h1 {
+    font-family: 'Amatic SC', cursive;
+    font-size: 40pt;
+    font-weight: bold;
+    text-align: left;
+  }
+  
+  #about p {
+    text-align: left;
+  }
+  
+  #about #email img {
+    text-align: left;
+    width: 25px;
+  }
+  
+  #email {
+    background-color: #26816E;
+    padding: 2% 2% 2% 2%;
+    border-radius: 40px;
+    transition: box-shadow 0.5s, color 0.8s, background-color 0.5s;
+  }
+  
+  #portScroll {
+    background-color: #26816E;
+    padding: 2% 2% 2% 2%;
+    border-radius: 40px;
+    margin-left: 2%;
+    transition: box-shadow 0.5s, color 0.8s, background-color 0.5s;
+  }
+  
+  #about #portScroll img {
+    text-align: left;
+    margin-right: 5px;
+    width: 18px;
+  }
+  
+  #portScroll a,
+  #portScroll a:hover {
+    color: white;
+    text-decoration: none;
+  }
+  
+  #email:hover,
+  #portScroll:hover {
+    box-shadow: 5px 15px 30px #062928;
+    background-color: #1A616C;
+    transition: box-shadow 0.5s, color 0.8s, background-color 0.5s;
+    cursor: pointer;
+  }
+  
+  #self img {
+    width: 35%;
+    float: right;
+    border: solid 8px #26816E;
+    border-radius: 2000px;
+    box-shadow: 5px 15px 30px #062928;
+  }
+  
+  
+  /* PORTFOLIO */
+  
+  #portfolio {
+    font-family: 'Amatic SC', cursive;
+    background-color: #68BDCA;
+    text-decoration: none;
+    color: white;
+    padding: 5% 5% 5% 5%;
+    width: auto;
+    height: 100vh;
+  }
+  
+  #portfolio h3 {
+    font-family: 'Roboto Slab', serif;
+    font-size: 15pt;
+  }
+  
+  #port img {
+    width: 500px;
+    opacity: 0.5;
+    transition: opacity 0.5s, box-shadow 0.5s;
+  }
+  
+  #port img:hover {
+    opacity: 1;
+    box-shadow: 0px 10px 50px #406D91;
+    transition: opacity 0.5s, box-shadow 0.5s;
+  }
+  
+  
+  /* NAV */
+  
+  #openmenu {
+    font-family: 'Amatic SC', cursive;
+    font-size: 20pt;
+    background-color: #68BDCA;
+    border-bottom: solid 2px white;
+    border-right: solid 2px white;
+    position: fixed;
+    padding: 2px;
+    width: 10%;
+    text-align: center;
+    top: 0;
+    left: 0;
+    transition: width 0.5s;
+  }
+  
+  #openmenu:hover {
+    width: 15%;
+    transition: width 0.5s;
+    cursor: pointer;
+  }
+  
+  .overlay {
+    /* Height & width depends on how you want to reveal the overlay (see JS below) */
+    height: 100%;
+    width: 0;
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    background-color: rgb(0, 0, 0);
+    /* Black fallback color */
+    background-color: rgba(0, 0, 0, 0.9);
+    /* Black w/opacity */
+    overflow-x: hidden;
+    /* Disable horizontal scroll */
+    transition: 0.5s;
+    /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
+  }
+  
+  
+  /* Position the content inside the overlay */
+  
+  .overlay-content {
+    position: relative;
+    top: 25%;
+    /* 25% from the top */
+    width: 100%;
+    /* 100% width */
+    text-align: center;
+    /* Centered text/links */
+    margin-top: 30px;
+    /* 30px top margin to avoid conflict with the close button on smaller screens */
+  }
+  
+  
+  /* The navigation links inside the overlay */
+  
+  .overlay a {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 36px;
+    color: #818181;
+    display: block;
+    /* Display block instead of inline */
+    transition: 0.3s;
+    /* Transition effects on hover (color) */
+  }
+  
+  
+  /* When you mouse over the navigation links, change their color */
+  
+  .overlay a:hover,
+  .overlay a:focus {
+    color: #f1f1f1;
+  }
+  
+  
+  /* Position the close button (top right corner) */
+  
+  .closebtn {
+    position: absolute;
+    top: 20px;
+    right: 45px;
+    font-size: 60px !important;
+    /* Override the font-size specified earlier (36px) for all navigation links */
+  }
+  
+  
+  /* When the height of the screen is less than 450 pixels, change the font-size of the links and position the close button again, so they don't overlap */
+  
+  @media screen and (max-height: 450px) {
+    .overlay a {
+      font-size: 20px
+    }
+    .closebtn {
+      font-size: 40px !important;
+      top: 15px;
+      right: 35px;
+    }
+  }
