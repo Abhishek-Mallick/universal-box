@@ -1,256 +1,64 @@
-
 <div align="center">
-<img src="./website/public/logo.webp" width="140px">
+  <img src="https://github.com/user-attachments/assets/6a8119d2-e60a-470e-b426-a598df1aa862" width="140px" alt="Universal Box Logo">
 
-<br>
-<br/>
+  <br>
+  <br/>
 
-[![npm](https://badge.fury.io/js/universal-box.svg)](https://www.npmjs.com/package/universal-box)
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FAbhishek-Mallick%2Fsmart-box.svg?type=shield&issueType=license)](https://app.fossa.com/projects/git%2Bgithub.com%2FAbhishek-Mallick%2Fsmart-box?ref=badge_shield&issueType=license)
+  [![npm](https://badge.fury.io/js/universal-box.svg)](https://www.npmjs.com/package/universal-box)
+  [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FAbhishek-Mallick%2Fsmart-box.svg?type=shield&issueType=license)](https://app.fossa.com/projects/git%2Bgithub.com%2FAbhishek-Mallick%2Fsmart-box?ref=badge_shield&issueType=license)
+  [![snyk](https://snyk.io/advisor/npm-package/universal-box/badge.svg)](https://snyk.io/advisor/npm-package/universal-box)
+  ![NPM Downloads](https://img.shields.io/npm/dy/universal-box)
 </div>
 
 # Universal-Box
 
-Collection of Starter templates and Projects to kick of your develovment journey in a very fast and Structured manner.
+**Universal-Box** is a powerful tool designed to streamline your development process with a collection of starter templates and projects. It provides a fast and structured way to kickstart your development journey, allowing you to set up new projects with ease and efficiency.
 
-# Installation
+## Features
+
+- **Starter Templates:** Quickly scaffold new projects using a variety of pre-built templates.
+- **Project Initialization:** Simplify project setup with a single command.
+- **Flexible Scaffolding:** Easily configure and customize your project structure.
+
+## Installation
+
+To install Universal-Box globally, run:
 
 ```bash
-npm i -g universal-box
+npm install -g universal-box
 ```
+
+Once installed, you can initialize a new project with:
 ```bash
 universal-box init
 ```
 
-<!-- Inquirer recently underwent a rewrite from the ground up to reduce the package size and improve performance. The previous version of the package is still maintained (though not actively developed), and offered hundreds of community contributed prompts that might not have been migrated to the latest API. If this is what you're looking for, the [previous package is over here](https://github.com/SBoudrias/Inquirer.js/tree/master/packages/inquirer). -->
+## Usage
 
-Will add more features in our next releases..
-[NPM Package](https://www.npmjs.com/package/universal-box)
-<!-- 
-# Usage
+Here's a brief overview of the available commands:
 
+- **`init`**: Initialize a new project using one of the starter templates.
+- **`get`**: Clone a GitHub repository or a specific subdirectory from it.
+- **`deploy`**: Trigger the build and deployment pipeline.
+- **`--help`**: Display the help message with command usage.
 
-```js
-import { input } from '@inquirer/prompts';
+### Examples
 
-const answer = await input({ message: 'Enter your name' });
+```bash
+universal-box --help
+universal-box init
+universal-box deploy
+universal-box get https://github.com/username/repo
+universal-box get https://github.com/username/repo/tree/<path_to_sub-directory>
 ```
 
-# Prompts
+## Documentation
 
-## [Input](https://github.com/SBoudrias/Inquirer.js/tree/master/packages/input)
+For more details and advanced usage, visit the [Universal-Box Documentation](https://universal-box.co/).
 
-![Input prompt](https://cdn.rawgit.com/SBoudrias/Inquirer.js/28ae8337ba51d93e359ef4f7ee24e79b69898962/assets/screenshots/input.svg)
+## License
 
-```js
-import { input } from '@inquirer/prompts';
-```
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-[See documentation](https://github.com/SBoudrias/Inquirer.js/tree/master/packages/input) for usage example and options documentation.
-
-## [Select](https://github.com/SBoudrias/Inquirer.js/tree/master/packages/select)
-
-![Select prompt](https://cdn.rawgit.com/SBoudrias/Inquirer.js/28ae8337ba51d93e359ef4f7ee24e79b69898962/assets/screenshots/list.svg)
-
-```js
-import { select } from '@inquirer/prompts';
-```
-
-[See documentation](https://github.com/SBoudrias/Inquirer.js/tree/master/packages/select) for usage example and options documentation.
-
-## [Checkbox](https://github.com/SBoudrias/Inquirer.js/tree/master/packages/checkbox)
-
-![Checkbox prompt](https://cdn.rawgit.com/SBoudrias/Inquirer.js/28ae8337ba51d93e359ef4f7ee24e79b69898962/assets/screenshots/checkbox.svg)
-
-```js
-import { checkbox } from '@inquirer/prompts';
-```
-
-[See documentation](https://github.com/SBoudrias/Inquirer.js/tree/master/packages/checkbox) for usage example and options documentation.
-
-## [Confirm](https://github.com/SBoudrias/Inquirer.js/tree/master/packages/confirm)
-
-![Confirm prompt](https://cdn.rawgit.com/SBoudrias/Inquirer.js/28ae8337ba51d93e359ef4f7ee24e79b69898962/assets/screenshots/confirm.svg)
-
-```js
-import { confirm } from '@inquirer/prompts';
-```
-
-[See documentation](https://github.com/SBoudrias/Inquirer.js/tree/master/packages/confirm) for usage example and options documentation.
-
-## [Password](https://github.com/SBoudrias/Inquirer.js/tree/master/packages/password)
-
-![Password prompt](https://cdn.rawgit.com/SBoudrias/Inquirer.js/28ae8337ba51d93e359ef4f7ee24e79b69898962/assets/screenshots/password.svg)
-
-```js
-import { password } from '@inquirer/prompts';
-```
-
-[See documentation](https://github.com/SBoudrias/Inquirer.js/tree/master/packages/password) for usage example and options documentation.
-
-## [Expand](https://github.com/SBoudrias/Inquirer.js/tree/master/packages/expand)
-
-![Expand prompt closed](https://cdn.rawgit.com/SBoudrias/Inquirer.js/28ae8337ba51d93e359ef4f7ee24e79b69898962/assets/screenshots/expand-y.svg)
-![Expand prompt expanded](https://cdn.rawgit.com/SBoudrias/Inquirer.js/28ae8337ba51d93e359ef4f7ee24e79b69898962/assets/screenshots/expand-d.svg)
-
-```js
-import { expand } from '@inquirer/prompts';
-```
-
-[See documentation](https://github.com/SBoudrias/Inquirer.js/tree/master/packages/expand) for usage example and options documentation.
-
-## [Editor](https://github.com/SBoudrias/Inquirer.js/tree/master/packages/editor)
-
-Launches an instance of the users preferred editor on a temporary file. Once the user exits their editor, the content of the temporary file is read as the answer. The editor used is determined by reading the $VISUAL or $EDITOR environment variables. If neither of those are present, the OS default is used (notepad on Windows, vim on Mac or Linux.)
-
-```js
-import { editor } from '@inquirer/prompts';
-```
-
-[See documentation](https://github.com/SBoudrias/Inquirer.js/tree/master/packages/editor) for usage example and options documentation.
-
-## [Raw List](https://github.com/SBoudrias/Inquirer.js/tree/master/packages/rawlist)
-
-![Raw list prompt](https://cdn.rawgit.com/SBoudrias/Inquirer.js/28ae8337ba51d93e359ef4f7ee24e79b69898962/assets/screenshots/rawlist.svg)
-
-```js
-import { rawlist } from '@inquirer/prompts';
-```
-
-[See documentation](https://github.com/SBoudrias/Inquirer.js/tree/master/packages/rawlist) for usage example and options documentation.
-
-# Create your own prompts
-
-The [API documentation is over here](https://github.com/SBoudrias/Inquirer.js/tree/master/packages/core), and our [testing utilities here](https://github.com/SBoudrias/Inquirer.js/tree/master/packages/testing).
-
-# Advanced usage
-
-All inquirer prompts are a function taking 2 arguments. The first argument is the prompt configuration (unique to each prompt). The second is providing contextual or runtime configuration.
-
-The context options are:
-
-| Property          | Type                    | Required | Description                                                  |
-| ----------------- | ----------------------- | -------- | ------------------------------------------------------------ |
-| input             | `NodeJS.ReadableStream` | no       | The stdin stream (defaults to `process.stdin`)               |
-| output            | `NodeJS.WritableStream` | no       | The stdout stream (defaults to `process.stdout`)             |
-| clearPromptOnDone | `boolean`               | no       | If true, we'll clear the screen after the prompt is answered |
-
-Example:
-
-```js
-import { confirm } from '@inquirer/prompts';
-
-const allowEmail = await confirm(
-  { message: 'Do you allow us to send you email?' },
-  {
-    output: new Stream.Writable({
-      write(chunk, _encoding, next) {
-        // Do something
-        next();
-      },
-    }),
-    clearPromptOnDone: true,
-  },
-);
-```
-
-## Canceling prompt
-
-All prompt functions are returning a cancelable promise. This special promise type has a `cancel` method that'll cancel and cleanup the prompt.
-
-On calling `cancel`, the answer promise will become rejected.
-
-```js
-import { confirm } from '@inquirer/prompts';
-
-const answer = confirm(...); // note: for this you cannot use `await`
-
-answer.cancel();
-```
-
-# Recipes
-
-## Get answers in an object
-
-When asking many questions, you might not want to keep one variable per answer everywhere. In which case, you can put the answer inside an object.
-
-```js
-import { input, confirm } from '@inquirer/prompts';
-
-const answers = {
-  firstName: await input({ message: "What's your first name?" }),
-  allowEmail: await confirm({ message: 'Do you allow us to send you email?' }),
-};
-
-console.log(answers.firstName);
-```
-
-## Ask a question conditionally
-
-Maybe some questions depend on some other question's answer.
-
-```js
-import { input, confirm } from '@inquirer/prompts';
-
-const allowEmail = await confirm({ message: 'Do you allow us to send you email?' });
-
-let email;
-if (allowEmail) {
-  email = await input({ message: 'What is your email address' });
-}
-```
-
-## Get default value after timeout
-
-```js
-import { setTimeout } from 'node:timers/promises';
-import { input } from '@inquirer/prompts';
-
-const answer = input(...);
-
-const defaultValue = setTimeout(5000).then(() => {
-  answer.cancel();
-  return 'default answer';
-});
-
-const answer = await Promise.race([defaultValue, answer])
-```
-
-## Using as pre-commit/git hooks, or scripts
-
-By default scripts ran from tools like `husky`/`lint-staged` might not run inside an interactive shell. In non-interactive shell, Inquirer cannot run, and users cannot send keypress events to the process.
-
-For it to work, you must make sure you start a `tty` (or "interactive" input stream.)
-
-If those scripts are set within your `package.json`, you can define the stream like so:
-
-```json
-  "precommit": "my-script < /dev/tty"
-```
-
-Or if in a shell script file, you'll do it like so: (on Windows that's likely your only option)
-
-```sh
-#!/bin/sh
-exec < /dev/tty
-
-node my-script.js
-```
-
-# Community prompts
-
-If you created a cool prompt, [send us a PR adding it](https://github.com/SBoudrias/Inquirer.js/edit/master/README.md) to the list below!
-
-[**Interactive List Prompt**](https://github.com/pgibler/inquirer-interactive-list-prompt)<br/>
-Select a choice either with arrow keys + Enter or by pressing a key associated with a choice.
-
-```
-? Choose an option:
->   Run command (D)
-    Quit (Q)
-``` -->
-
-# License
-
-Copyright (c) 2023 Abhishek Mallick ([Linkedin](https://www.linkedin.com/in/abhishek-mallick09/))<br/>
-Licensed under the MIT license.
+Copyright (c) 2023 Abhishek Mallick  
+[LinkedIn](https://www.linkedin.com/in/abhishek-mallick09/)
