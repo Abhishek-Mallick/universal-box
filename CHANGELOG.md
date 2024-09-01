@@ -1,3 +1,23 @@
+# [2.5.0](https://github.com/Abhishek-Mallick/universal-box/compare/v2.4.2...v2.5.0) (2024-09-01)
+
+
+### Bug Fixes
+
+* Code cleanup - templates ([4a7156d](https://github.com/Abhishek-Mallick/universal-box/commit/4a7156d1e571738165b923bdc0d7e450323aa571))
+* Code cleanup for [2.4.3] ([7c7ba2c](https://github.com/Abhishek-Mallick/universal-box/commit/7c7ba2c2c3ec62612fdbb548e2fff45e7918b2f0))
+* update customization ([ccfdfab](https://github.com/Abhishek-Mallick/universal-box/commit/ccfdfabc2e43721b032e26869539ec1fb523b11b))
+* Updated documentation ([535b75f](https://github.com/Abhishek-Mallick/universal-box/commit/535b75fd76fc328d3e1a757e2d304383e1ae7eee))
+
+
+### Features
+
+* Added flask template ([2bc7f1b](https://github.com/Abhishek-Mallick/universal-box/commit/2bc7f1b08ed6b1c135660f1a90d261d10d41ef13))
+* Added sign-in and sign-up functionalities ([5dd6562](https://github.com/Abhishek-Mallick/universal-box/commit/5dd656211d8b2b911edca5a6d37710fc161c629d))
+* added signout and readme.md ([fc180c0](https://github.com/Abhishek-Mallick/universal-box/commit/fc180c07d1b118b5daaf3564138b0ab4b543b4c9))
+* Adding Flask template ([bf2cdec](https://github.com/Abhishek-Mallick/universal-box/commit/bf2cdecb87888348103cf9b78f562a6b694e1f90))
+* adding React+Mongo template ([c5f7f68](https://github.com/Abhishek-Mallick/universal-box/commit/c5f7f68e9cdf6a601f7c143401f48e55ee41f4bc))
+* Updated workflow checks ([8d8d7f6](https://github.com/Abhishek-Mallick/universal-box/commit/8d8d7f6398939f5f13c28da3287df5e0fb42c677))
+
 ## [2.4.2](https://github.com/Abhishek-Mallick/universal-box/compare/v2.4.1...v2.4.2) (2024-08-20)
 
 

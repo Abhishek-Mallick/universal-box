@@ -1,6 +1,6 @@
 {
   "name": "universal-box",
-  "version": "2.4.2",
+  "version": "2.5.0",
   "description": "Universal-box is a smart solution for scaffold generation, project initialization, and targeted repository cloning and many more.",
   "license": "ISC",
   "repository": {
