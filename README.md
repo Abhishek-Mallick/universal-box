@@ -7,7 +7,7 @@
   [![npm](https://badge.fury.io/js/universal-box.svg)](https://www.npmjs.com/package/universal-box)
   [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FAbhishek-Mallick%2Fsmart-box.svg?type=shield&issueType=license)](https://app.fossa.com/projects/git%2Bgithub.com%2FAbhishek-Mallick%2Fsmart-box?ref=badge_shield&issueType=license)
   [![snyk](https://snyk.io/advisor/npm-package/universal-box/badge.svg)](https://snyk.io/advisor/npm-package/universal-box)
-  ![NPM Downloads](https://img.shields.io/npm/dy/universal-box)
+  ![NPM Downloads](https://img.shields.io/npm/dm/universal-box)
 </div>
 
 # Universal-Box
