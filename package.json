@@ -1,7 +1,7 @@
 {
   "name": "universal-box",
-  "version": "2.4.2",
-  "description": "universal-box..a one stop package for all!",
+  "version": "2.5.0",
+  "description": "Universal-box is a smart solution for scaffold generation, project initialization, and targeted repository cloning and many more.",
   "license": "ISC",
   "repository": {
     "type": "git",
@@ -27,6 +27,7 @@
     "firebase": "^10.5.0",
     "fs-extra": "^11.2.0",
     "http-proxy": "^1.18.1",
-    "inquirer": "^8.2.6"
+    "inquirer": "^8.2.6",
+    "progress": "^2.0.3"
   }
 }

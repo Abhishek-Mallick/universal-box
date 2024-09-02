@@ -9,3 +9,6 @@ website/
 
 # for 2.4.4 release
 plura/
+
+CHANGELOG.md
+index.js
