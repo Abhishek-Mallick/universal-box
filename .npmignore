@@ -14,3 +14,7 @@ CHANGELOG.md
 index.js
 
 template/
+
+.github/
+.vscode/
+.releaserc.json
