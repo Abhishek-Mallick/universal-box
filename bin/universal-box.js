@@ -4,9 +4,13 @@ const inquirer = require("inquirer");
 const fs = require("fs-extra");
 const path = require("path");
 const chalk = require("chalk");
-const cloneRepository = require("./clone-dir.js");
 
-const templatesDir = path.resolve(__dirname, "../templates");
+const cloneRepository1 = require("./get/clone-dir.js");
+
+// Scaffold directory is maintained as a mirror version of the templates directory. Maintained by maintainers.
+const scaffoldDir = path.resolve(__dirname, "../scaffold");
+const templatesRepoBaseURL =
+  "https://github.com/Abhishek-Mallick/universal-box/tree/main/template";
 
 const user_selection = process.argv.slice(2);
 const [, , command, ...args] = process.argv;
@@ -31,7 +35,7 @@ switch (command) {
       console.error("Please provide a repository URL.");
       process.exit(1);
     }
-    cloneRepository(repoUrl);
+    cloneRepository1(repoUrl, "universal-box");
     break;
 
   default:
@@ -53,39 +57,66 @@ function initProject() {
     ])
     .then(async (answers) => {
       const projectName = answers.projectName;
-      const templatePath = await selectTemplate(templatesDir);
-      const projectPath = path.resolve(process.cwd(), projectName);
 
-      fs.copySync(templatePath, projectPath);
+      // Error handling for same dir name
+      const projectDir = path.resolve(process.cwd(), projectName);
+      if (fs.existsSync(projectDir)) {
+        console.error(
+          chalk.red(
+            `❌ A project with the name "${projectName}" already exists. Please choose a different name.`
+          )
+        );
+        return;
+      }
 
-      console.log(
-        chalk.green(
-          `✅ Success! Project "${projectName}" has been initialized with the selected template.`
-        )
-      );
-      console.log(chalk.yellow("\nNext steps:"));
-      console.log(chalk.yellow(`1. Change to your new project directory:`));
-      console.log(chalk.cyan(`   cd ${projectName}`));
-      console.log(chalk.yellow("2. Install dependencies (if required):"));
-      console.log(chalk.cyan("   npm install") + " or " + chalk.cyan("yarn"));
-      console.log(
-        chalk.yellow(
-          "3. Start your development server (check package.json for specific commands)"
-        )
-      );
-      console.log(
-        chalk.yellow(
-          "\nFor more information, refer to the README.md file in your project directory."
-        )
-      );
-      console.log(
-        chalk.blue("\n------ Happy Coding with Universal-Box 🚀 ------")
-      );
-      console.log(
-        chalk.gray(
-          "Need help? Visit our documentation: https://universal-box.co/"
-        )
-      );
+      const selectedTemplate = await selectTemplate(scaffoldDir);
+      let relativeTemplatePath = path.relative(scaffoldDir, selectedTemplate);
+      relativeTemplatePath = relativeTemplatePath.replace(/\\/g, "/");
+
+      const encodedTemplatePath = relativeTemplatePath
+        .replace(/ /g, "%20") // Encode spaces
+        .replace(/\+/g, "%2B"); // Encode plus sign
+      const repoURL = `${templatesRepoBaseURL}/${encodedTemplatePath}`;
+
+      console.log("Codebase available at: ", repoURL);
+
+      try {
+        await cloneRepository1(repoURL, projectName);
+
+        console.log(
+          chalk.green(
+            `✅ Success! Project "${projectName}" has been initialized with the selected template.`
+          )
+        );
+        console.log(chalk.yellow("\nNext steps:"));
+        console.log(chalk.yellow(`1. Change to your new project directory:`));
+        console.log(chalk.cyan(`   cd ${projectName}`));
+        console.log(chalk.yellow("2. Install dependencies (if required):"));
+        console.log(chalk.cyan("   npm install") + " or " + chalk.cyan("yarn"));
+        console.log(
+          chalk.yellow(
+            "3. Start your development server (check package.json for specific commands)"
+          )
+        );
+        console.log(
+          chalk.yellow(
+            "\nFor more information, refer to the README.md file in your project directory."
+          )
+        );
+        console.log(
+          chalk.blue("\n------ Happy Coding with Universal-Box 🚀 ------")
+        );
+        console.log(
+          chalk.gray(
+            "Need help? Visit our documentation: https://universal-box.co/"
+          )
+        );
+      } catch (error) {
+        console.error(
+          chalk.red("An error occurred while cloning the repository."),
+          error.message
+        );
+      }
     });
 }
 
@@ -127,7 +158,8 @@ async function selectTemplate(currentDir) {
   if (
     contents.includes("README.md") ||
     contents.includes("server") ||
-    contents.includes("client")
+    contents.includes("client") ||
+    contents.includes("dump")
   ) {
     return currentDir;
   }
@@ -153,7 +185,9 @@ function getDirectoryContents(dir) {
     .readdirSync(dir, { withFileTypes: true })
     .filter(
       (dirent) =>
-        dirent.isDirectory() || (dirent.isFile() && dirent.name === "README.md")
+        dirent.isDirectory() ||
+        (dirent.isFile() &&
+          (dirent.name === "README.md" || dirent.name === "dump"))
     )
     .map((dirent) => dirent.name);
 }
