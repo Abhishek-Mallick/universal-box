@@ -7,3 +7,4 @@ config.js
 plura/build-server/README.md
 __pycache__/
 .dist/
+scaffold/
