@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Contact</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/vendor.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="icon" type="image/png"
+        href="https://cdn3d.iconscout.com/3d/premium/thumb/burger-shape-6808067-5576442.png?f=webp">
+</head>
+
+<body>
+
+    <section id="contact">
+
+        <div style="background-color: transparent;" class="row section-intro">
+            <div class="col-twelve">
+
+                <h5>Contact</h5>
+                <h1>I'd Love To Hear From You.</h1>
+            </div>
+        </div> <!-- /section-intro -->
+        <div id="successMessage" style="display: none;"><center>Form submitted successfully!</center></div>
+
+
+        <div class="row contact-form">
+
+            <!-- generate your key from web3forms.com and paste the key here at your key="" -->
+
+            <div class="col-twelve">
+                <form action="https://api.web3forms.com/submit" method="POST" id="contactForm" style="font-family: poppins-semibold, serif;">
+                    <fieldset style="border: none" ;>
+                        <input type="hidden" name="access_key" value="${your key}">
+                        <div class="form-field">
+                            <input name="name" type="text" id="name" placeholder="Your Name" value="" minlength="2"
+                                required="">
+                        </div>
+                        <div class="form-field">
+                            <input name="email" type="email" id="email" placeholder="Your Email" value="" required="">
+                        </div>
+                        <div class="form-field">
+                            <textarea name="message" id="message" placeholder="message" rows="10" cols="50"
+                                required=""></textarea>
+                        </div>
+                        <div class="form-field">
+                            <button class="submitform" type="submit" style="width: 180px;margin-left: auto;margin-right: auto;">Submit</button>
+                        </div>
+
+                    </fieldset>
+                </form>
+            </div>
+
+        </div>
+
+    </section>
+    
+    <script src="js/contact.js"></script>
+
+
+
+
+</html>
