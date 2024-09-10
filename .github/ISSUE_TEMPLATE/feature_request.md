@@ -1,11 +1,4 @@
 ---
-name: Feature request
-about: Suggest an idea for this project
-title: 'Feature Request: [Concise Description of the Feature]'
-labels: ''
-assignees: ''
-
----
 
 name: "✨ Feature Request"
 about: Suggest an amazing new idea for this project

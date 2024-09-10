@@ -1,5 +1,3 @@
-# Pull Request Template for Universal-Box
-
 ## Description
 Please provide a summary of the changes made in this pull request. Include any relevant motivation and context for the changes.
 
