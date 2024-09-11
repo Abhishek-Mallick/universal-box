@@ -1,13 +1,36 @@
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/6a8119d2-e60a-470e-b426-a598df1aa862" width="140px" alt="Universal Box Logo">
-
+  <a href="https://www.npmjs.com/package/universal-box">
+    <img src="https://github.com/user-attachments/assets/6a8119d2-e60a-470e-b426-a598df1aa862" width="140px" alt="Universal Box Logo">
+  </a>
   <br>
   <br/>
 
-  [![npm](https://badge.fury.io/js/universal-box.svg)](https://www.npmjs.com/package/universal-box)
-  [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FAbhishek-Mallick%2Fsmart-box.svg?type=shield&issueType=license)](https://app.fossa.com/projects/git%2Bgithub.com%2FAbhishek-Mallick%2Fsmart-box?ref=badge_shield&issueType=license)
-  [![snyk](https://snyk.io/advisor/npm-package/universal-box/badge.svg)](https://snyk.io/advisor/npm-package/universal-box)
-  ![NPM Downloads](https://img.shields.io/npm/dm/universal-box)
+</div>
+
+<div align="center">
+  <a href="https://img.shields.io/github/actions/workflow/status/Abhishek-Mallick/universal-box/.github%2Fworkflows%2Frelease.yml" target="_blank"><img src="https://img.shields.io/github/actions/workflow/status/Abhishek-Mallick/universal-box/.github%2Fworkflows%2Frelease.yml?branch=main&style=flat&colorA=000000&colorB=000000" alt="CI" /></a>
+  <a href="https://www.npmjs.com/package/universal-box" target="_blank"><img src="https://img.shields.io/npm/v/universal-box?style=flat&colorA=000000&colorB=000000" alt="NPM Version" /></a>
+    <a href="https://www.npmjs.com/package/universal-box" target="_blank"><img src="https://img.shields.io/npm/dt/universal-box?style=flat&colorA=000000&colorB=000000" alt="NPM Downloads" /></a>
+  <a href="https://discord.gg/NBR9JmWys4" target="_blank"><img src="https://img.shields.io/discord/1164935524990066740?style=flat&colorA=000000&colorB=000000&label=discord&logo=discord&logoColor=ffffff" /></a>
+<a href="https://snyk.io/advisor/npm-package/universal-box" target="_blank">
+  <img src="https://snyk.io/advisor/npm-package/universal-box/badge.svg" alt="Snyk" style="border: none;"/>
+</a>
+  
+<table>
+    <tbody>
+      <tr>
+        <td>
+          <a href="https://universal-box.co/">📚 Read the docs</a>
+        </td>
+        <td>
+          <a href="https://discord.gg/NBR9JmWys4">💬 Join our Discord</a>
+        </td>
+        <td>
+          <a href="https://universal-box.instatus.com" target="_blank">🔍 Monitor Project Status</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
 # Universal-Box
