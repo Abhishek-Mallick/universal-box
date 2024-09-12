@@ -12,7 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "apollo-server-express": "^2.16.0",
+    "apollo-server-express": "^3.13.0",
     "express": "^4.17.1",
     "uuidv4": "^6.2.0"
   },
