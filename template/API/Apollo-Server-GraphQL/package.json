@@ -21,7 +21,7 @@
     "@graphql-codegen/cli": "5.0.2",
     "@graphql-codegen/introspection": "1.17.0",
     "@graphql-codegen/typescript": "1.17.0",
-    "@graphql-codegen/typescript-resolvers": "1.17.0",
+    "@graphql-codegen/typescript-resolvers": "1.20.0",
     "concurrently": "^5.2.0",
     "nodemon": "^2.0.4",
     "typescript": "^5.5.4"
