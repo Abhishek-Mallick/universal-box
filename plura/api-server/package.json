@@ -10,7 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "@aws-sdk/client-ecs": "^3.637.0",
-    "express": "^4.19.2",
+    "express": "^4.20.0",
     "random-word-slugs": "^0.1.7"
   }
 }
