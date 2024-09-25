@@ -5,7 +5,7 @@ export default defineAppConfig({
       description: 'Universal-Box is your all-in-one solution for rapid code scaffolding and streamlined development. With a wide range of pre-built templates, this npm package simplifies the process of setting up boilerplate code for any project and offers single-command deployment.',
     },
     theme: {
-      customizable: false,
+      customizable: true,
       color: 'slate',
       radius: 0.75,
     },
@@ -42,7 +42,7 @@ export default defineAppConfig({
     colorMode: false,
     links: [{
       'icon': 'lucide:box',
-      'to': 'https://universal-box.co/',
+      'to': 'https://universal-box.dev/',
       'target': '_blank',
       'aria-label': 'Universal-Box Website'
     }, {

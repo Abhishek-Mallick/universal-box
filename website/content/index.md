@@ -6,7 +6,7 @@ navigation: false
 ::hero
 ---
 announcement:
-  title: 'Release v2.4.2'
+  title: 'Release v2.6.1'
   icon: 'noto:party-popper'
   to: https://www.npmjs.com/package/universal-box
 actions:
@@ -56,57 +56,41 @@ universal-box init
 ::card-group
   ::card
   ---
-  title: Prebuilt templates and Projects.
+  title: Prebuilt Templates for Every Need.
   icon: i-heroicons-cube
-  to: https://nuxt.com/docs/api/components/client-only
+  to: https://universal-box.dev/templates
   target: _blank
   ---
-  Explore the [Docs](https://universal-box.co/templates) with 50+ project templates, select and download in 2 commands in your local machine for free.
+  Explore our extensive library of **50+ project templates** designed for various applications. Select and download your preferred template in just two commands!
   ::
+
   ::card
   ---
-  title: Customizable
+  title: Tailor-Made Customization.
   icon: i-heroicons-arrows-right-left
-  to: https://nuxt.com/docs/api/composables/use-app-config
+  to: /api/configuration
   target: _blank
   ---
-  Work on top of pre-built templates and customize them accordingly to fulfil your own buisness case.
+  Customize pre-built templates effortlessly to meet your unique business requirements, ensuring your project stands out.
   ::
+
   ::card
   ---
-  title: Deploy project with CLI.
+  title: Streamlined Deployment Process.
   icon: i-heroicons-scissors
-  to: https://nuxt.com/docs/api/utils/dollarfetch
+  to: /getting-started/deployment
   target: _blank
   ---
-  Comming soon....
+  Launch your projects with ease using our one-click deployment feature, simplifying the transition from development to production.
   ::
+
   ::card
   ---
-  title: Commands
-  icon: i-heroicons-command-line
-  to: https://nuxt.com/docs/api/commands/add
+  title: Comprehensive Support and Resources.
+  icon: i-heroicons-document-text
+  to: https://universal-box.dev/docs
   target: _blank
   ---
-  List of Nuxt CLI commands to init, analyze, build, and preview your application.
+  Access detailed documentation and community support to guide you through setup, customization, and troubleshooting for your projects.
   ::
 ::
-
-<!-- ::accordion{default-value="first-item" collapsible}
-  ::accordion-item{value="first-item"}
-  #title
-  Is it accessible?
-
-  #content
-  Yes. It adheres to the WAI-ARIA design pattern.
-  ::
-  ::accordion-item
-  #title
-  Is it unstyled?
-
-  #content
-  Yes. It's unstyled by default, giving you freedom over the look and feel.
-  ::
-  :accordion-item{title="Can it be animated?" content="Yes! You can use the transition prop to configure the animation."}
-:: -->
-
