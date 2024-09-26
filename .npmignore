@@ -18,6 +18,7 @@ template/
 .github/
 .vscode/
 .releaserc.json
+LICENSE
 
 # for 2.4.5 release
 bin/format/

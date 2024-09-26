@@ -6,6 +6,7 @@ const path = require("path");
 const chalk = require("chalk");
 
 const cloneRepository1 = require("./get/clone-dir.js");
+const { generateFromConfig } = require("./generate/generate-from-config.js");
 
 // Scaffold directory is maintained as a mirror version of the templates directory. Maintained by maintainers.
 const scaffoldDir = path.resolve(__dirname, "../scaffold");
@@ -37,7 +38,15 @@ switch (command) {
     }
     cloneRepository1(repoUrl, "universal-box");
     break;
-
+  case "generate":
+      const configFileName = args[0];
+      if (!configFileName) {
+        console.error("Please provide a configuration file name (e.g., idea.yml).");
+        process.exit(1);
+      }
+      generateFromConfig(configFileName);
+      break;
+  
   default:
     console.log(
       chalk.red(
@@ -91,11 +100,19 @@ function initProject() {
         console.log(chalk.yellow("\nNext steps:"));
         console.log(chalk.yellow(`1. Change to your new project directory:`));
         console.log(chalk.cyan(`   cd ${projectName}`));
-        console.log(chalk.yellow("2. Install dependencies (if required):"));
-        console.log(chalk.cyan("   npm install") + " or " + chalk.cyan("yarn"));
         console.log(
           chalk.yellow(
-            "3. Start your development server (check package.json for specific commands)"
+            "2. Refer to the README.md file for installation and running commands."
+          )
+        );
+        console.log(
+          chalk.yellow(
+            "   This file contains all necessary instructions specific to your project type."
+          )
+        );
+        console.log(
+          chalk.yellow(
+            "3. Start your development server (check package.json or README.md for specific commands)"
           )
         );
         console.log(
@@ -108,7 +125,7 @@ function initProject() {
         );
         console.log(
           chalk.gray(
-            "Need help? Visit our documentation: https://universal-box.co/"
+            "Need help? Visit our documentation: https://universal-box.dev/"
           )
         );
       } catch (error) {
@@ -135,19 +152,21 @@ ${chalk.bold("Commands:")}
   ${chalk.cyan("deploy")}       ${chalk.dim(
     "Trigger build and deployment pipeline"
   )}
+  ${chalk.cyan("generate")}     ${chalk.dim("Generate project from a configuration file")}
   ${chalk.cyan("--help")}       ${chalk.dim("Display this help message")}
 
 ${chalk.bold("Examples:")}
   ${chalk.green("universal-box --help")}
   ${chalk.green("universal-box init")}
   ${chalk.green("universal-box deploy")}
+  ${chalk.green("universal-box generate <idea.yml>")}
   ${chalk.green("universal-box get https://github.com/username/repo")}
   ${chalk.green(
     "universal-box get https://github.com/username/repo/tree/<path_to_sub-directory>"
   )}
 
 ${chalk.gray("Need help? Visit our documentation:")} ${chalk.underline.blue(
-    "https://universal-box.co/"
+    "https://universal-box.dev/"
   )}
 `);
 }

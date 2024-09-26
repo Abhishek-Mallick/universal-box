@@ -2,6 +2,7 @@
   <a href="https://www.npmjs.com/package/universal-box">
     <img src="https://github.com/user-attachments/assets/6a8119d2-e60a-470e-b426-a598df1aa862" width="140px" alt="Universal Box Logo">
   </a>
+    <h1>Universal-Box</h1>
   <br>
   <br/>
 
@@ -12,6 +13,7 @@
   <a href="https://www.npmjs.com/package/universal-box" target="_blank"><img src="https://img.shields.io/npm/v/universal-box?style=flat&colorA=000000&colorB=000000" alt="NPM Version" /></a>
     <a href="https://www.npmjs.com/package/universal-box" target="_blank"><img src="https://img.shields.io/npm/dt/universal-box?style=flat&colorA=000000&colorB=000000" alt="NPM Downloads" /></a>
   <a href="https://discord.gg/NBR9JmWys4" target="_blank"><img src="https://img.shields.io/discord/1164935524990066740?style=flat&colorA=000000&colorB=000000&label=discord&logo=discord&logoColor=ffffff" /></a>
+  <a href="https://opensource.org/licenses/Apache-2.0"><img alt="License" src="https://img.shields.io/github/license/Abhishek-Mallick/universal-box?color=black" /></a>
 <a href="https://snyk.io/advisor/npm-package/universal-box" target="_blank">
   <img src="https://snyk.io/advisor/npm-package/universal-box/badge.svg" alt="Snyk" style="border: none;"/>
 </a>
@@ -20,7 +22,7 @@
     <tbody>
       <tr>
         <td>
-          <a href="https://universal-box.co/">📚 Read the docs</a>
+          <a href="https://universal-box.dev/">📚 Read the docs</a>
         </td>
         <td>
           <a href="https://discord.gg/NBR9JmWys4">💬 Join our Discord</a>
@@ -33,7 +35,7 @@
   </table>
 </div>
 
-# Universal-Box
+
 
 **Universal-Box** is a powerful tool designed to streamline your development process with a collection of starter templates and projects. It provides a fast and structured way to kickstart your development journey, allowing you to set up new projects with ease and efficiency.
 
@@ -77,7 +79,7 @@ universal-box get https://github.com/username/repo/tree/<path_to_sub-directory>
 
 ## Documentation
 
-For more details and advanced usage, visit the [Universal-Box Documentation](https://universal-box.co/).
+For more details and advanced usage, visit the [Universal-Box Documentation](https://universal-box.dev/).
 
 ## License
 
