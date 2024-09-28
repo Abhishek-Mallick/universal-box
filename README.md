@@ -25,7 +25,7 @@
           <a href="https://universal-box.dev/">📚 Read the docs</a>
         </td>
         <td>
-          <a href="https://discord.gg/NBR9JmWys4">💬 Join our Discord</a>
+          <a href="https://discord.gg/aWtZQTQPe4">💬 Join our Discord</a>
         </td>
         <td>
           <a href="https://universal-box.instatus.com" target="_blank">🔍 Monitor Project Status</a>
