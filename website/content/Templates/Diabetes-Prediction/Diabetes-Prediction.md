@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ## 📚 Introduction
+=======
+## 🏥 Diabetes Prediction App
+>>>>>>> 368dd10dfe94e956e82a24cfbda7045375b87f62
 
 This is a **Streamlit** web application that predicts the likelihood of diabetes based on user input features. The app allows users to input health metrics such as glucose levels, BMI, and age to receive predictions from multiple machine learning models.
 
