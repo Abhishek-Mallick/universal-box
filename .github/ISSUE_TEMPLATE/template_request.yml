@@ -16,9 +16,9 @@ body:
         - "API"
         - "Competitive Programming"
         - "FullStack"
-        - "DataScience"
+        - "Data Science"
         - "Web3"
-        - "Portfolio-Websites"
+        - "Portfolio Websites"
         - "CMS"
         - "Clones"
         - "Microservices"
@@ -55,15 +55,15 @@ body:
     attributes:
       label: "👀 Have you spent some time checking if this issue has been raised before?"
       options:
-        - "Yes"
-        - "No"
+        - label: "Yes"
+        - label: "No"
   
   - type: checkboxes
     id: code_of_conduct
     attributes:
       label: "🏢 Have you read the Code of Conduct?"
       options:
-        - "I have read the [Code of Conduct](https://github.com/Abhishek-Mallick/universal-box/blob/main/.github/CODE_OF_CONDUCT.md)"
+        - label: "I have read the [Code of Conduct](https://github.com/Abhishek-Mallick/universal-box/blob/main/.github/CODE_OF_CONDUCT.md)"
     validations:
       required: true
   
