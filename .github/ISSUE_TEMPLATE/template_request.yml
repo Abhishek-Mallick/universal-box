@@ -50,7 +50,7 @@ body:
       label: "Brief Description"
       placeholder: "Describe what the template is about, how it functions, and how beneficial it will be for users to scaffold using the 'universal-box init' command."
       
-  - type: checkbox
+  - type: checkboxes
     id: check_previous_requests
     attributes:
       label: "👀 Have you spent some time checking if this issue has been raised before?"
@@ -58,7 +58,7 @@ body:
         - "Yes"
         - "No"
   
-  - type: checkbox
+  - type: checkboxes
     id: code_of_conduct
     attributes:
       label: "🏢 Have you read the Code of Conduct?"
