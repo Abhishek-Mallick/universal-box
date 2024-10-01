@@ -1,3 +1,18 @@
+# [2.6.1](https://github.com/Abhishek-Mallick/universal-box/compare/v2.5.0...v2.6.1) (2024-09-29)
+
+
+### Bug Fixes
+
+* Code cleanup for [2.4.3] ([7c7ba2c](https://github.com/Abhishek-Mallick/universal-box/commit/7c7ba2c2c3ec62612fdbb548e2fff45e7918b2f0))
+* Updated documentation ([04bce44](https://github.com/Abhishek-Mallick/universal-box/commit/04bce44a784fcc5fc395333065eb6c666e05d111))
+
+
+### Features
+
+* Added `generate` command logic for generating node.js project with express framework for any given `yaml` config. ([82a87b1](https://github.com/Abhishek-Mallick/universal-box/commit/82a87b1eb2b324a50053a97c93a0788a139ca0e0))
+* Added templates ([170f332](https://github.com/Abhishek-Mallick/universal-box/commit/170f3323a11022d143d7c6aaca6e3d0b307aeb0f), [f3a3cf6](https://github.com/Abhishek-Mallick/universal-box/commit/f3a3cf6ac175562c589b9ea996f864dbbf46a296), [423358b](https://github.com/Abhishek-Mallick/universal-box/commit/423358b65a9bbdb0a6d48343fc85ad55eff8178e))
+* Updated workflow checks ([8d8d7f6](https://github.com/Abhishek-Mallick/universal-box/commit/8d8d7f6398939f5f13c28da3287df5e0fb42c677))
+
 # [2.5.0](https://github.com/Abhishek-Mallick/universal-box/compare/v2.4.2...v2.5.0) (2024-09-01)
 
 

@@ -1,5 +1,5 @@
 /node_modules
-/templates/node_modules
+/template/node_modules
 pages/
 .env
 config.js
@@ -12,3 +12,13 @@ plura/
 
 CHANGELOG.md
 index.js
+
+template/
+
+.github/
+.vscode/
+.releaserc.json
+LICENSE
+
+# for 2.4.5 release
+bin/format/

@@ -1,6 +1,6 @@
 {
   "name": "universal-box",
-  "version": "2.5.0",
+  "version": "2.6.1",
   "description": "Universal-box is a smart solution for scaffold generation, project initialization, and targeted repository cloning and many more.",
   "license": "ISC",
   "repository": {
@@ -24,10 +24,11 @@
   "dependencies": {
     "chalk": "^4.1.2",
     "express": "^4.19.2",
-    "firebase": "^10.5.0",
+    "firebase": "^10.13.0",
     "fs-extra": "^11.2.0",
     "http-proxy": "^1.18.1",
     "inquirer": "^8.2.6",
+    "js-yaml": "^4.1.0",
     "progress": "^2.0.3"
   }
 }

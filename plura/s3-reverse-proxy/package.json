@@ -9,7 +9,7 @@
   "author": "Abhishek Mallick",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.19.2",
+    "express": "^4.20.0",
     "http-proxy": "^1.18.1"
   }
 }
