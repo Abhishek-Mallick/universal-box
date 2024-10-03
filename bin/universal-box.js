@@ -4,9 +4,13 @@ const inquirer = require("inquirer");
 const fs = require("fs-extra");
 const path = require("path");
 const chalk = require("chalk");
+const { exec } = require("child_process");
 
 const cloneRepository1 = require("./get/clone-dir.js");
 const { generateFromConfig } = require("./generate/generate-from-config.js");
+const setupESLint = require("./generate/setup-eslint.js")
+const setupPrettier = require("./generate/setup-prettier.js");
+const setupFlake8 = require("./generate/setup-flake.js")
 
 // Scaffold directory is maintained as a mirror version of the templates directory. Maintained by maintainers.
 const scaffoldDir = path.resolve(__dirname, "../scaffold");
@@ -29,6 +33,9 @@ switch (command) {
         "Deployment utility function is still under development in a UAT environment and will be published soon."
       )
     );
+    break;
+  case "lint":
+    lintProject();
     break;
   case "get":
     const repoUrl = args[0];
@@ -136,6 +143,31 @@ function initProject() {
       }
     });
 }
+function lintProject() {
+  const projectDir = process.cwd();
+
+  inquirer
+    .prompt([
+      { type: "list", name: "projectType", message: "Select the project type:", choices: ["JavaScript", "Python"] },
+    ])
+    .then(async (answers) => {
+      const { projectType } = answers;
+
+      if (projectType === "JavaScript") {
+        setupESLint(projectDir);
+        const { usePrettier } = await inquirer.prompt([
+          { type: "confirm", name: "usePrettier", message: "Include Prettier for formatting?", default: false },
+        ]);
+        if (usePrettier) setupPrettier(projectDir);
+        await installDependencies("npm install eslint prettier --save-dev", projectDir);
+      } else if (projectType === "Python") {
+        setupFlake8(projectDir);
+        await installDependencies("pip install flake8", projectDir);
+      }
+
+      console.log(chalk.green(`✅ Linter setup complete! Run your linter using the appropriate commands.`));
+    });
+}
 
 function showHelp() {
   console.log(`
@@ -149,6 +181,7 @@ ${chalk.bold("Commands:")}
   ${chalk.cyan("get")}          ${chalk.dim(
     "Clone a GitHub repository or a specific subdirectory from it"
   )}
+  ${chalk.cyan("lint")}         ${chalk.dim("Add the default linting configurations")}
   ${chalk.cyan("deploy")}       ${chalk.dim(
     "Trigger build and deployment pipeline"
   )}
@@ -159,6 +192,7 @@ ${chalk.bold("Examples:")}
   ${chalk.green("universal-box --help")}
   ${chalk.green("universal-box init")}
   ${chalk.green("universal-box deploy")}
+  ${chalk.green("universal-box lint")}
   ${chalk.green("universal-box generate <idea.yml>")}
   ${chalk.green("universal-box get https://github.com/username/repo")}
   ${chalk.green(
@@ -209,4 +243,16 @@ function getDirectoryContents(dir) {
           (dirent.name === "README.md" || dirent.name === "dump"))
     )
     .map((dirent) => dirent.name);
+}
+function installDependencies(command, projectDir) {
+  return new Promise((resolve, reject) => {
+    exec(command, { cwd: projectDir }, (error, stdout, stderr) => {
+      if (error) {
+        console.error(chalk.red(`❌ Error installing dependencies:\n${stderr}`));
+        return reject(error);
+      }
+      console.log(chalk.green(`✅ Installed dependencies.\n${stdout}`));
+      resolve();
+    });
+  });
 }
