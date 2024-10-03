@@ -35,7 +35,9 @@ switch (command) {
     );
     break;
   case "lint":
-    lintProject();
+    lintProject().catch((error) => {
+      console.error(chalk.red("An error occurred during lint setup:"), error.message);
+    });
     break;
   case "get":
     const repoUrl = args[0];
