@@ -36,6 +36,7 @@ export default defineAppConfig({
     main: {
       breadCrumb: true,
       showTitle: true,
+      id: 'top'
     },
     footer: {
       credits: 'Copyright © 2024 Universal-Box',
@@ -55,7 +56,14 @@ export default defineAppConfig({
       'to': 'https://github.com/Abhishek-Mallick/universal-box',
       'target': '_blank',
       'aria-label': 'Universal-Box on GitHub'
-    }]
+    },
+      {
+        'icon': 'lucide:arrow-up-circle',  // Icon for 'Back to Top'
+        'to': '#top',
+        'id': 'back-to-top',
+        'aria-label': 'Back to Top',
+        'onClick': 'scrollToTop()',  // Smooth scroll back to top
+      }]
     },
     toc: {
       enable: true,
@@ -65,11 +73,13 @@ export default defineAppConfig({
         icon: 'lucide:star',
         to: 'https://github.com/Abhishek-Mallick/universal-box',
         target: '_blank',
+        'aria-label': 'Star the Universal-Box repo on GitHub'
       }, {
         title: 'Create Issues',
         icon: 'lucide:circle-dot',
         to: 'https://github.com/Abhishek-Mallick/universal-box/issues',
         target: '_blank',
+        'aria-label': 'Create issues for Universal-Box on GitHub'
       }],
     },
     search: {
