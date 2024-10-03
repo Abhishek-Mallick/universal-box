@@ -146,35 +146,36 @@ function initProject() {
     });
 }
 async function lintProject() {
-  const projectDir = process.cwd();
+  try {
+    const projectDir = process.cwd();
 
-  inquirer
-    .prompt([
+    const { projectType } = await inquirer.prompt([
       { type: "list", name: "projectType", message: "Select the project type:", choices: ["JavaScript", "Python"] },
-    ])
-    .then(async (answers) => {
-      const { projectType } = answers;
+    ]);
 
-      if (projectType === "JavaScript") {
-        setupESLint(projectDir);
-        const { usePrettier } = await inquirer.prompt([
-          { type: "confirm", name: "usePrettier", message: "Include Prettier for formatting?", default: false },
-        ]);
-        if (usePrettier) {
-          setupPrettier(projectDir);
-          await installDependencies("npm install eslint prettier --save-dev", projectDir);
-        } else {
-          await installDependencies("npm install eslint --save-dev", projectDir);
-        }
-      } else if (projectType === "Python") {
-        setupFlake8(projectDir);
-        await installDependencies("pip install flake8", projectDir);
+    if (projectType === "JavaScript") {
+      setupESLint(projectDir);
+
+      const { usePrettier } = await inquirer.prompt([
+        { type: "confirm", name: "usePrettier", message: "Include Prettier for formatting?", default: false },
+      ]);
+
+      if (usePrettier) {
+        setupPrettier(projectDir);
+        await installDependencies("npm install eslint prettier --save-dev", projectDir);
+      } else {
+        await installDependencies("npm install eslint --save-dev", projectDir);
       }
+    } else if (projectType === "Python") {
+      setupFlake8(projectDir);
+      await installDependencies("pip install flake8", projectDir);
+    }
 
-      console.log(chalk.green(`✅ Linter setup complete! Run your linter using the appropriate commands.`));
-    });
+    console.log(chalk.green(`✅ Linter setup complete! Run your linter using the appropriate commands.`));
+  } catch (error) {
+    console.error(chalk.red(`❌ Error setting up linter: ${error.message}`));
+  }
 }
-
 function showHelp() {
   console.log(`
 ${chalk.blue.bold("Universal Box - The Ultimate Project Scaffolding Tool")}
