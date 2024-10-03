@@ -145,7 +145,7 @@ function initProject() {
       }
     });
 }
-function lintProject() {
+async function lintProject() {
   const projectDir = process.cwd();
 
   inquirer
