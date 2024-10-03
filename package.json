@@ -24,7 +24,7 @@
   "dependencies": {
     "chalk": "^4.1.2",
     "express": "^4.19.2",
-    "firebase": "^10.13.0",
+    "firebase": "^10.13.1",
     "fs-extra": "^11.2.0",
     "http-proxy": "^1.18.1",
     "inquirer": "^8.2.6",
