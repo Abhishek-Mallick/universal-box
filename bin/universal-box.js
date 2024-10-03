@@ -160,8 +160,12 @@ function lintProject() {
         const { usePrettier } = await inquirer.prompt([
           { type: "confirm", name: "usePrettier", message: "Include Prettier for formatting?", default: false },
         ]);
-        if (usePrettier) setupPrettier(projectDir);
-        await installDependencies("npm install eslint prettier --save-dev", projectDir);
+        if (usePrettier) {
+          setupPrettier(projectDir);
+          await installDependencies("npm install eslint prettier --save-dev", projectDir);
+        } else {
+          await installDependencies("npm install eslint --save-dev", projectDir);
+        }
       } else if (projectType === "Python") {
         setupFlake8(projectDir);
         await installDependencies("pip install flake8", projectDir);
