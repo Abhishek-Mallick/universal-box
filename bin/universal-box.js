@@ -4,13 +4,15 @@ const inquirer = require("inquirer");
 const fs = require("fs-extra");
 const path = require("path");
 const chalk = require("chalk");
-const { exec } = require("child_process");
+const { exec, execSync } = require("child_process");
 
 const cloneRepository1 = require("./get/clone-dir.js");
 const { generateFromConfig } = require("./generate/generate-from-config.js");
-const setupESLint = require("./generate/setup-eslint.js")
+const setupESLint = require("./generate/setup-eslint.js");
 const setupPrettier = require("./generate/setup-prettier.js");
-const setupFlake8 = require("./generate/setup-flake.js")
+const setupFlake8 = require("./generate/setup-flake8.js");
+const setupBlack = require("./generate/setup-black.js")
+const setupPylint = require("./generate/setup-pylint.js")
 
 // Scaffold directory is maintained as a mirror version of the templates directory. Maintained by maintainers.
 const scaffoldDir = path.resolve(__dirname, "../scaffold");
@@ -145,30 +147,118 @@ function initProject() {
       }
     });
 }
+
 async function lintProject() {
   try {
     const projectDir = process.cwd();
 
     const { projectType } = await inquirer.prompt([
-      { type: "list", name: "projectType", message: "Select the project type:", choices: ["JavaScript", "Python"] },
+      { 
+        type: "list", 
+        name: "projectType", 
+        message: "Select the project type:", 
+        choices: ["JavaScript", "Python"] 
+      },
     ]);
 
     if (projectType === "JavaScript") {
-      setupESLint(projectDir);
-
-      const { usePrettier } = await inquirer.prompt([
-        { type: "confirm", name: "usePrettier", message: "Include Prettier for formatting?", default: false },
+      const responses = await inquirer.prompt([
+        { 
+          type: "confirm", 
+          name: "useAirbnb", 
+          message: "Use Airbnb ESLint config?", 
+          default: false 
+        },
+        { 
+          type: "confirm", 
+          name: "useReact", 
+          message: "Is this a React project?", 
+          default: false 
+        },
+        { 
+          type: "confirm", 
+          name: "useTypeScript", 
+          message: "Do you want to use TypeScript?", 
+          default: false 
+        },
+        { 
+          type: "confirm", 
+          name: "usePrettier", 
+          message: "Include Prettier for formatting?", 
+          default: false 
+        },
       ]);
 
-      if (usePrettier) {
-        setupPrettier(projectDir);
-        await installDependencies("npm install eslint prettier --save-dev", projectDir);
-      } else {
-        await installDependencies("npm install eslint --save-dev", projectDir);
+      // Setup ESLint with user preferences
+      setupESLint(projectDir, {
+        useAirbnb: responses.useAirbnb,
+        useReact: responses.useReact,
+        isTypeScript: responses.useTypeScript,
+        usePrettier: responses.usePrettier,
+      });
+
+      // If TypeScript is selected, generate tsconfig.json
+      if (responses.useTypeScript) {
+        setupTypeScriptConfig(projectDir);
       }
+
+      // Setup Prettier if selected
+      if (responses.usePrettier) {
+        setupPrettier(projectDir);
+        setupPrettierIgnore(projectDir); // Create .prettierignore
+      }
+
+      // Install necessary dependencies based on selections
+      let deps = 'npm install eslint';
+      if (responses.useAirbnb) {
+        deps += ' eslint-config-airbnb';
+      }
+      if (responses.useReact) {
+        deps += ' eslint-plugin-react';
+      }
+      if (responses.useTypeScript) {
+        deps += ' @typescript-eslint/parser @typescript-eslint/eslint-plugin';
+      }
+      if (responses.usePrettier) {
+        deps += ' prettier eslint-config-prettier eslint-plugin-prettier';
+      }
+      deps += ' --save-dev --legacy-peer-deps';
+
+      await installDependencies(deps, projectDir);
+
+      // If Prettier is selected, create .prettierignore
+      if (responses.usePrettier) {
+        console.log(chalk.blue('🔧 Setting up Prettier ignore file...'));
+        setupPrettierIgnore(projectDir);
+      }
+
+      // If TypeScript is selected, ensure TypeScript is installed
+      if (responses.useTypeScript) {
+        await installDependencies('npm install typescript --save-dev', projectDir);
+        console.log(chalk.blue("🔧 Initializing TypeScript..."));
+        await installDependencies('npx tsc --init', projectDir);
+      }
+
     } else if (projectType === "Python") {
       setupFlake8(projectDir);
       await installDependencies("pip install flake8", projectDir);
+      const { useBlack } = await inquirer.prompt([
+        { type: "confirm", name: "useBlack", message: "Include Black for code formatting?", default: false },
+      ]);
+
+      if (useBlack) {
+        setupBlack(projectDir);
+        await installDependencies("pip install black", projectDir);
+      }
+
+      const { usePylint } = await inquirer.prompt([
+        { type: "confirm", name: "usePylint", message: "Include Pylint for code analysis?", default: false },
+      ]);
+
+      if (usePylint) {
+        setupPylint(projectDir);
+        await installDependencies("pip install pylint", projectDir);
+      }
     }
 
     console.log(chalk.green(`✅ Linter setup complete! Run your linter using the appropriate commands.`));
@@ -176,6 +266,33 @@ async function lintProject() {
     console.error(chalk.red(`❌ Error setting up linter: ${error.message}`));
   }
 }
+
+function setupTypeScriptConfig(projectDir) {
+  const tsconfig = {
+    "compilerOptions": {
+      "target": "ES2021",
+      "module": "CommonJS",
+      "strict": true,
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "forceConsistentCasingInFileNames": true,
+      "outDir": "./dist",
+      "rootDir": "./src",
+      "moduleResolution": "node",
+      "resolveJsonModule": true,
+      "isolatedModules": true,
+      "noEmit": true
+    },
+    "include": ["src/**/*"],
+    "exclude": ["node_modules", "**/*.spec.ts"]
+  };
+
+  const filePath = path.join(projectDir, 'tsconfig.json');
+  fs.writeFileSync(filePath, JSON.stringify(tsconfig, null, 2));
+
+  console.log('✅ TypeScript configuration has been set up.');
+}
+
 function showHelp() {
   console.log(`
 ${chalk.blue.bold("Universal Box - The Ultimate Project Scaffolding Tool")}
@@ -251,6 +368,8 @@ function getDirectoryContents(dir) {
     )
     .map((dirent) => dirent.name);
 }
+
+
 function installDependencies(command, projectDir) {
   return new Promise((resolve, reject) => {
     exec(command, { cwd: projectDir }, (error, stdout, stderr) => {
@@ -262,4 +381,18 @@ function installDependencies(command, projectDir) {
       resolve();
     });
   });
+}
+
+function setupPrettierIgnore(projectDir) {
+  const prettierIgnoreContent = `
+node_modules
+dist
+build
+coverage
+*.min.js
+*.bundle.js
+`;
+
+  const filePath = path.join(projectDir, '.prettierignore');
+  fs.writeFileSync(filePath, prettierIgnoreContent);
 }
