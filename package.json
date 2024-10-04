@@ -19,6 +19,8 @@
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
+    "eslint": "^9.11.1",
+    "prettier": "^3.3.3",
     "semantic-release": "^22.0.5"
   },
   "dependencies": {
