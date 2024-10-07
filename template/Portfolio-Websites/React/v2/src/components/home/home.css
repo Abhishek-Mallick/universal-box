@@ -1,0 +1,140 @@
+.homecontainer{
+    min-height: 100vh;
+    display: flex;
+    /* flex-direction: column; */
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+}
+.introcontainer{
+    /* border: 1px solid red; */
+    /* height: 100vh; */
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding-right: 10%;
+    justify-content: center;
+    gap: 10px;
+    flex-grow: 1;
+
+}
+.helloworld{
+    font-family: "Press Start 2P", system-ui;
+    font-size: 62px;
+    /* border: 1px solid red; */
+}
+
+
+.impj{
+    /* border: 1px solid red; */
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 32px;
+    font-family: "Press Start 2P", jetbrains mono;
+}
+.pj{
+    font-family: "Press Start 2P", jetbrains mono;
+    font-size: 62px;
+    color: var(--pc);
+    text-shadow: 3px 3px 1px #9D5CF2; 
+}
+.fdev{
+    position: relative;
+    /* left: 15px;
+    top: -10px; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    /* border: 1px solid red; */
+}
+
+
+
+.scrollindicator{
+    margin-bottom: 10px;
+    height: 40px;
+    width: 27px;
+    background-color: transparent;
+    border: 2px solid grey;
+    border-radius: 20px;
+    /* position: relative;
+    top: 50px;
+    left: 50px; */
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
+.wheel{
+    width: 2px;
+    height: 7px;
+    background-color: grey;
+    margin-top: 6px;
+    animation: mwheel 2s infinite;
+}
+@keyframes mwheel {
+    0%{
+        transform: translateY(0px);
+        background-color: grey;
+    }
+    100%{
+        transform: translateY(9px);
+        background-color: transparent;
+    }
+    /* 100%{
+        transform: translateY(0px);
+        background-color: black;
+    } */
+}
+
+.dvlpr{
+    color: #44CCFF;
+}
+.dvlpr:hover{
+    color: red;
+    cursor: pointer;
+}
+
+.arrdwn{
+    width: 50px;
+    height: 50px;
+    /* border: 1px solid red; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+.arrline1{
+    background-color: grey;
+    width: 25px;
+    height: 2px;
+    transform: rotateZ(45deg);
+
+    animation: arrline 2s infinite;
+    
+}
+.arrline2{
+    background-color: grey;
+    width: 25px;
+    height: 2px;
+    transform: rotateZ(-45deg);
+    margin-top: -5px;
+
+    animation: arrline 2s infinite;
+}
+@keyframes arrline {
+    0%{
+        /* transform: translateY(0px); */
+        background-color: grey;
+    }
+    50%{
+        /* transform: translateY(9px); */
+        background-color: transparent;
+    }
+    100%{
+        background-color: gray;
+    }
+}

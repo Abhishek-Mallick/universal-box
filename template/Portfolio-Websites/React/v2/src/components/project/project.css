@@ -1,0 +1,67 @@
+.projcontainer{
+    width: 500px;
+    height: 500px;
+    overflow: hidden;
+    position: relative;
+}
+img{
+    z-index: -2;
+    position: absolute;
+    display: block;
+    object-fit: cover;
+    transform: scale(1.1);
+    transition: all 200ms ease-in;
+}
+.projcontainer:hover img{
+    transform: scale(1);
+}
+.cvr{
+    position: absolute;
+    z-index: -1;
+    background-color: #2121216b;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 200ms ease-in-out;
+}
+.projcontainer:hover .cvr{
+    opacity: 1;
+}
+.projdet{
+    color: rgb(200, 255, 0);
+    z-index: 1;
+    /* display: none; */
+    opacity: 0;
+    position: absolute;
+    bottom: 5px;
+    transform: translateY(-1rem);
+    transition: all 200ms ease-in-out;
+}
+.projcontainer:hover .projdet{
+    /* display: block; */
+    opacity: 1;
+    transform: translateY(0);
+}
+.arrow{
+    border: 2px solid #212121;
+    display: block;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    opacity: 0;
+    transform:translateX(-2rem) rotate(135deg) ;      
+    transform: rotate(135deg) translateX(-2rem);
+    transition: all 500ms ease-out 150ms;
+}
+.projcontainer:hover .arrow{
+    transform: rotate(0) translateX(0);
+    opacity: 1;
+
+    cursor: pointer;
+}
+
+.projstack{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

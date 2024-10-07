@@ -1,0 +1,73 @@
+.projcontainer{
+    border: 2px solid red;
+    /* height: 200px;
+    width: 200px; */
+    flex-grow: 1;
+    /* padding: 50px; */
+}
+.proj{
+    width: 500px;
+    height: 500px;
+    border: 1px solid white;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    /* align-items: flex-end; */
+    justify-content: flex-end;
+}
+.projdetail{
+    /* background-color: pink; */
+    border: 1px solid green;
+    /* width: 50%; */
+    /* height: 100%; */
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+
+}
+.projtitle,.projdesc,.projtech{
+    border: 1px solid white;
+}
+
+.projdesc, .projtech{
+    flex-grow: 1;
+    display: none;
+    transform: translateY(-1rem);
+    transition: all 2s ease-in-out;
+}
+.proj:hover .projdesc{
+    display: block;
+    transform: translateY(0);
+    /* cursor: pointer; */
+}
+/* .projdesc:hover + .projtech{             taki projdesc pe hover karu to projtech dikhe               
+    display: block;
+} */
+.proj:hover .projtech{
+    transform: translateY(0);
+    display: block;
+}
+
+
+
+/* .projdesc,
+.projtech {
+    flex-grow: 1;
+    opacity: 0; 
+    position: absolute;
+    transition: opacity 0.3s ease-in; 
+    pointer-events: none; 
+}
+
+.proj:hover .projdesc {
+    opacity: 1; 
+    position: inherit;
+    cursor: pointer;
+    pointer-events: auto; 
+}
+
+.projdesc:hover + .projtech {
+    opacity: 1; 
+    position: inherit;
+    pointer-events: auto; 
+} */
