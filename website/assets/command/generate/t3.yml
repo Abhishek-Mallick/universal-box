@@ -1,0 +1,44 @@
+models:
+  - 'articles'
+  - 'authors'
+  - 'comments'
+
+controllers:
+  articleController:
+    - 'create'
+    - 'update'
+    - 'delete'
+    - 'list'
+
+  commentController:
+    - 'create'
+    - 'update'
+    - 'delete'
+
+views:
+  - 'home'
+  - 'articles'
+  - 'article-detail'
+  - 'about'
+
+routes:
+  article-routes:
+    post:
+      - '/articles'
+    put:
+      - '/articles/{id}'
+    delete:
+      - '/articles/{id}'
+    get:
+      - '/articles'
+      - '/articles/{id}'
+
+  comment-routes:
+    post:
+      - '/articles/{id}/comments'
+    put:
+      - '/comments/{id}'
+    delete:
+      - '/comments/{id}'
+    get:
+      - '/articles/{id}/comments'

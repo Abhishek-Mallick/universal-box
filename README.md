@@ -44,6 +44,10 @@
 - **Starter Templates:** Quickly scaffold new projects using a variety of pre-built templates.
 - **Project Initialization:** Simplify project setup with a single command.
 - **Flexible Scaffolding:** Easily configure and customize your project structure.
+- **Linting Configuration:** Automatically set up linting configurations for JavaScript (ESLint) and Python (Flake8) projects, enhancing code quality.
+- **Project Generation:** Generate project files based on user-defined configuration files (e.g., YAML).
+- **Repository Cloning:** Clone GitHub repositories or specific subdirectories directly into your project.
+- **Deployment Pipeline:** Trigger build and deployment processes (currently under development).
 
 ## Installation
 
@@ -54,17 +58,31 @@ npm install -g universal-box
 ```
 
 Once installed, you can initialize a new project with:
-```bash
-universal-box init
-```
+ - Checkout the available commands using `universal-box --help`
 
 ## Usage
 
 Here's a brief overview of the available commands:
 
-- **`init`**: Initialize a new project using one of the starter templates.
+- **`init`**: Initialize a new project using one of the [starter templates](https://universal-box.dev/templates).
+
+https://github.com/user-attachments/assets/6e0e25e0-0ec4-4293-b555-9729ae7fb8d4
+
 - **`get`**: Clone a GitHub repository or a specific subdirectory from it.
-- **`deploy`**: Trigger the build and deployment pipeline.
+  
+https://github.com/user-attachments/assets/31f9ba03-e0b4-4e73-801e-d5e6928abf97
+
+- **`lint`**: Add the default linting configurations for your project. This command sets up ESLint for JavaScript projects and Flake8 for Python projects, along with an optional Prettier configuration for formatting.
+  
+https://github.com/user-attachments/assets/c47dbcdc-268b-4740-adfe-675233c264fb
+
+- **`generate <file.yml>`**: Generate project files based on a provided configuration file (e.g., YAML).
+  
+https://github.com/user-attachments/assets/7c3b9fa9-60b1-4aab-b1f6-465b79cac6d3
+
+Here's some [example YAML scripts](https://github.com/Abhishek-Mallick/universal-box/tree/main/website/assets/command/generate) for you to get started.
+
+- **`deploy`**: Trigger the build and deployment pipeline.  
 - **`--help`**: Display the help message with command usage.
 
 ### Examples
@@ -72,6 +90,8 @@ Here's a brief overview of the available commands:
 ```bash
 universal-box --help
 universal-box init
+universal-box lint
+universal-box generate <file.yml>
 universal-box deploy
 universal-box get https://github.com/username/repo
 universal-box get https://github.com/username/repo/tree/<path_to_sub-directory>
@@ -83,7 +103,7 @@ For more details and advanced usage, visit the [Universal-Box Documentation](htt
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the Apache-2.0 License. See the [LICENSE](LICENSE) file for details.
 
-Copyright (c) 2023 Abhishek Mallick  
+Copyright (c) 2024 Abhishek Mallick  
 [LinkedIn](https://www.linkedin.com/in/abhishek-mallick09/)

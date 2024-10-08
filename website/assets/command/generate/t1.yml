@@ -1,0 +1,45 @@
+models:
+  - 'products'
+  - 'categories'
+  - 'orders'
+
+controllers:
+  productController:
+    - 'create'
+    - 'update'
+    - 'delete'
+    - 'list'
+
+  orderController:
+    - 'place'
+    - 'cancel'
+    - 'track'
+
+views:
+  - 'home'
+  - 'shop'
+  - 'cart'
+  - 'checkout'
+
+routes:
+  product-routes:
+    post:
+      - '/products'
+    put:
+      - '/products/{id}'
+    delete:
+      - '/products/{id}'
+    get:
+      - '/products'
+      - '/products/{id}'
+
+  order-routes:
+    post:
+      - '/orders'
+    put:
+      - '/orders/{id}'
+    delete:
+      - '/orders/{id}'
+    get:
+      - '/orders'
+      - '/orders/{id}'

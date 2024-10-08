@@ -1,0 +1,30 @@
+models:
+  - 'users'
+  - 'admins'
+  - 'players'
+
+controllers:
+  authController:
+    - 'login'
+    - 'signUp'
+
+  playerController:
+    - 'pass'
+    - 'shoot'
+
+views:
+  - 'home'
+  - 'profile' 
+
+routes:
+  admin-routes:
+    post:
+      - '/delete'
+      - '/another-route'
+    get:
+      - '/get-here'
+      - '/lol'
+  player-routes:
+    get:
+      - '/shoot'
+      - '/kick'
