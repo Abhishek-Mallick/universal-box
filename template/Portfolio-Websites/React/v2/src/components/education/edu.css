@@ -1,0 +1,50 @@
+.educontainer{
+    /* width: 400px; */
+    height: fit-content;
+    /* border: 2px solid red; */
+    display: flex;
+    /* flex-direction: column; */
+    gap: 20px;
+    /* flex-wrap: wrap; */      /*ye hatake vertical scroll aa paya*/
+
+}
+
+.educard{ 
+    position: relative;
+
+    background-color: #3741514D;
+    border: 2px solid #6B72804D;
+    border-radius: 10px;
+    padding: 5px;
+    width: 150px;
+    height: 110px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+/* .eduyear, .eduinst, .educourse{
+    border: 1px solid red;
+} */
+
+.educourse{
+    flex-grow: 1;
+    font-size: 14px;
+}
+
+.eduinst{
+    /* position: absolute; */
+    /* bottom: 5px; */    /*no need of this flex grow 1 kar rkha hai*/
+    font-size: 10px;
+    height: 15px;
+    width: 126px;     /*2px of borrder*/
+    white-space: nowrap; /* Prevents wrapping */
+    overflow: hidden; /* Hides overflowing text */
+    text-overflow: ellipsis; /* Displays ellipsis for overflow */  
+}
+
+.eduyear{
+    font-size: 12px;
+    color: #2399C4;
+}
+
