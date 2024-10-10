@@ -1,3 +1,20 @@
+# [2.6.2](https://github.com/Abhishek-Mallick/universal-box/compare/v2.6.1...v2.6.2) (2024-10-09)
+
+### Major Changes
+
+* **Added `lint` Command**: 
+  - Introduced the `lint` command to add default linting configurations for your project. This command sets up ESLint for JavaScript projects and Flake8 for Python projects, along with an optional Prettier configuration for formatting. ([0fc3a42](https://github.com/Abhishek-Mallick/universal-box/pull/112/commits/0fc3a42dd2ca756a82bc972915f1c9583eb30c67))
+
+* **Expanded Templates**: 
+  - Added new starter templates for various frameworks and use cases, enhancing the flexibility of project scaffolding. This includes templates for React, Vue.js, and more, allowing developers to kickstart projects tailored to their specific needs. ([8e7512b](https://github.com/Abhishek-Mallick/universal-box/pull/123/commits/8e7512b8aacd37b9b4b27e214326e13fe9c77589), [aba8f7d](https://github.com/Abhishek-Mallick/universal-box/pull/108/commits/aba8f7df60741809113181fc34d5da4eb153111e), [423358b](https://github.com/Abhishek-Mallick/universal-box/pull/88/commits/423358b65a9bbdb0a6d48343fc85ad55eff8178e))
+
+* **Improved Documentation**: 
+  - Updated the README and documentation to include detailed usage instructions for the new `lint` command and the newly added templates. This aims to provide clearer guidance for users on how to utilize these features effectively. ([0fc3a42](https://github.com/Abhishek-Mallick/universal-box/pull/112/commits/0fc3a42dd2ca756a82bc972915f1c9583eb30c67))
+
+### Bug Fixes
+
+* Resolved minor typos and inconsistencies in the documentation. ([bbd2c7b](https://github.com/Abhishek-Mallick/universal-box/commit/bbd2c7bf9c437c408144b775f1deff12efad7829))
+
 # [2.6.1](https://github.com/Abhishek-Mallick/universal-box/compare/v2.5.0...v2.6.1) (2024-09-29)
 
 
