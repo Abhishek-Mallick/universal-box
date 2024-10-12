@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+    
+    <%- include('./nav.ejs', {action}) %>
+    
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <section class="text-center mb-16">
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">Welcome</h1>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto">Discover insightful articles, share your thoughts, and connect with fellow bloggers.</p>
+        </section>
+
+        <section class="mb-16">
+            <h2 class="text-2xl font-semibold text-gray-900 mb-6">Featured Posts</h2>
+            <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                <article class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="https://picsum.photos/200" alt="Blog post thumbnail" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">The Future of Web Development</h3>
+                        <p class="text-gray-600 mb-4">Explore the latest trends and technologies shaping the future of web development.</p>
+                        <a href="#" class="text-indigo-600 hover:text-indigo-800 font-medium">Read more</a>
+                    </div>
+                </article>
+                <article class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="https://picsum.photos/200" alt="Blog post thumbnail" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Mastering Productivity Techniques</h3>
+                        <p class="text-gray-600 mb-4">Learn effective strategies to boost your productivity and achieve your goals.</p>
+                        <a href="#" class="text-indigo-600 hover:text-indigo-800 font-medium">Read more</a>
+                    </div>
+                </article>
+                <article class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="https://picsum.photos/200" alt="Blog post thumbnail" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">The Art of Mindful Living</h3>
+                        <p class="text-gray-600 mb-4">Discover practical tips for incorporating mindfulness into your daily life.</p>
+                        <a href="#" class="text-indigo-600 hover:text-indigo-800 font-medium">Read more</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="text-center">
+            <h2 class="text-2xl font-semibold text-gray-900 mb-6">Join Our Community</h2>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto mb-8">Be part of our growing community of writers and readers. Share your stories and ideas with the world.</p>
+            <a href="#" class="inline-block bg-indigo-600 text-white font-medium py-3 px-6 rounded-md hover:bg-indigo-700 transition duration-300">Start Writing</a>
+        </section>
+    </main>
+
+    <footer class="bg-gray-100 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="text-center md:text-left mb-4 md:mb-0">
+                    <h2 class="text-2xl font-bold text-indigo-600">Blogify</h2>
+                    <p class="text-gray-600">Your platform for sharing ideas</p>
+                </div>
+                <nav class="flex space-x-4">
+                    <a href="#" class="text-gray-600 hover:text-indigo-600">About</a>
+                    <a href="#" class="text-gray-600 hover:text-indigo-600">Contact</a>
+                    <a href="#" class="text-gray-600 hover:text-indigo-600">Privacy Policy</a>
+                    <a href="#" class="text-gray-600 hover:text-indigo-600">Terms of Service</a>
+                </nav>
+            </div>
+            <div class="mt-8 text-center text-gray-500">
+                <p>&copy; 2024 Blogify. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
