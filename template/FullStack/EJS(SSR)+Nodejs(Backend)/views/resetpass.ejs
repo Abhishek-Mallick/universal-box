@@ -12,15 +12,15 @@
         <form id="resetform" class="space-y-4" action="/user/resetpass" method="post">
             <div>
                 <label for="oldpassword" class="block text-sm font-medium text-gray-700">Old password</label>
-                <input type="oldpassword" id="oldpassword" name="oldpassword" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                <input type="password" id="oldpassword" name="oldpassword" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
             </div>
             <div>
                 <label for="newpassword" class="block text-sm font-medium text-gray-700">New password</label>
-                <input type="newpassword" id="newpassword" name="newpassword" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                <input type="password" id="newpassword" name="newpassword" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
             </div>
             <div>
                 <label for="confirmnewpassword" class="block text-sm font-medium text-gray-700">Confirm new password</label>
-                <input type="confirmnewpassword" id="confirmnewpassword" name="confirmnewpassword" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                <input type="password" id="confirmnewpassword" name="confirmnewpassword" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
             </div>
             <div>
                 <button id="resetbutton" type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
@@ -55,7 +55,7 @@
             if(newpassword.value!=confirmnewpassword.value){
                 console.log(newpassword)
                 console.log(confirmnewpassword)
-                showError(resetbutton, "Confirm new password and new password didn't matched");
+                showError(confirmnewpassword, "Confirm new password and new password didn't match");
                 isValid=false;
                 return
             }

@@ -63,14 +63,17 @@ async function handleUserResetPost(req,res){
                     .update(oldpassword)
                     .digest('hex');
 
-        const saltnew = randomBytes(16).toString();
+        const saltnew = randomBytes(16).toString('hex');
         const hashedNewPassword=createHmac('sha256', saltnew).update(newpassword).digest('hex');
-        if(user.password===hashedOldPassword){
-            const changed=await userModel.updateOne({_id: user._id}, {$set:{password: hashedNewPassword, salt: saltnew}})
-            res.status(201).json({'message': 'password changed'})
-        }
-        else{
-            res.status(400).json({"message": "old password is wrong"})
+        try {
+            const changed = await userModel.updateOne(
+                { _id: user._id },
+                { $set: { password: hashedNewPassword, salt: saltnew } }
+            );
+            res.status(201).json({ 'message': 'password changed' });
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({ "message": "An error occurred while updating the password" });
         }
     }
     else{
