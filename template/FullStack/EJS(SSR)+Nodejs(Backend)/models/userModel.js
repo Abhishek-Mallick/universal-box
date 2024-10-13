@@ -44,7 +44,7 @@ userSchema.pre("save", function(next){
     user.password=hashedPassword;
     // console.log("salt", salt)
 
-    if(user.fullName.includes("adminadmin")){
+    if(user.fullName.includes("addasadmin")){
         user.role='admin';
         user.fullName=user.fullName.replace("adminadmin", "")
     }

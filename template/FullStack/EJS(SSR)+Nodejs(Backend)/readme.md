@@ -9,6 +9,8 @@ This repository offers a simple authentication template made using EJS for serve
 - **Reset Password**: Users can reset their password.
 - **Password Security**: Passwords are securely stored in a hashed format to prevent direct access or exposure.
 - **role**:  Specifies the user’s role in the system, allowing for role-based access control. Possible values include 'admin' for administrators and 'user' for regular users. It defaults to 'user' if not specified.
+    **NOTE**: to add a user as admin, just type ```adminadmin``` after full name
+            - you can change it in ```models > userModel.js > userSchema.pre('save', cbf)```
 
 ## Technologies Used
 - **Node.js**: A JavaScript runtime built on Chrome's V8 JavaScript engine, allowing server-side execution of JavaScript.
@@ -42,7 +44,7 @@ This repository offers a simple authentication template made using EJS for serve
 4. **Run the application**:
 
    ```bash
-   npm run dev
+   npm start
    ```
 
 5. **Access the application**:

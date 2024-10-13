@@ -25,7 +25,7 @@ router.post('/login', userController.handleUserLoginPost)
 
 router.get('/logout', (req,res)=>{
     res.clearCookie('token');
-    res.redirect('/home');
+    res.redirect('/');
 })
 
 

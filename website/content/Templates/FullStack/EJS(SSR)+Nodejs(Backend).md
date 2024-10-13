@@ -1,6 +1,6 @@
-# Authentication Template: ejs + Node.js
+## Introduction
 
-This repository offers a simple authentication template made using EJS for server-side rendering (SSR). It includes key features such as user authentication, role-based authorization, and password reset functionality.
+This template offers a simple authentication template made using EJS for server-side rendering (SSR). It includes key features such as user authentication, role-based authorization, and password reset functionality.
 
 ## Features
 
@@ -9,6 +9,8 @@ This repository offers a simple authentication template made using EJS for serve
 - **Reset Password**: Users can reset their password.
 - **Password Security**: Passwords are securely stored in a hashed format to prevent direct access or exposure.
 - **role**:  Specifies the user’s role in the system, allowing for role-based access control. Possible values include 'admin' for administrators and 'user' for regular users. It defaults to 'user' if not specified.
+    **NOTE**: to add a user as admin, just type ```addasadmin``` after full name in fullname box.
+            - you can change it in ```models > userModel.js > userSchema.pre('save', cbf)```
 
 ## Technologies Used
 - **Node.js**: A JavaScript runtime built on Chrome's V8 JavaScript engine, allowing server-side execution of JavaScript.
@@ -19,6 +21,10 @@ This repository offers a simple authentication template made using EJS for serve
 - **JWT**: A secure way to implement token-based authentication, enabling stateless user sessions.
 - **crypto**: It is an npm package used for hashing user passwords securely.
 - **TailwindCSS**: A utility-first CSS framework for quickly designing and customizing modern, responsive web interfaces.
+
+
+## Screenshots
+
 
 
 ## Installation
@@ -42,7 +48,7 @@ This repository offers a simple authentication template made using EJS for serve
 4. **Run the application**:
 
    ```bash
-   npm run dev
+   npm start
    ```
 
 5. **Access the application**:

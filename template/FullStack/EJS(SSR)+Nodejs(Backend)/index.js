@@ -23,7 +23,7 @@ app.use(cookieParser())
 
 app.use('/user', userRoutes)
 
-app.get('/home', (req,res)=>{
+app.get('/', (req,res)=>{
     let action='login';
     if(req.cookies.token) action='logout'
     res.render('home', {action})

@@ -1,4 +1,4 @@
-import { createHmac } from 'crypto'
+import { createHmac, randomBytes } from 'crypto'
 import jwt from 'jsonwebtoken'
 import userModel from "../models/userModel.js"
 
@@ -62,18 +62,23 @@ async function handleUserResetPost(req,res){
         const hashedOldPassword = createHmac('sha256', salt)
                     .update(oldpassword)
                     .digest('hex');
-
-        const saltnew = randomBytes(16).toString('hex');
-        const hashedNewPassword=createHmac('sha256', saltnew).update(newpassword).digest('hex');
-        try {
-            const changed = await userModel.updateOne(
-                { _id: user._id },
-                { $set: { password: hashedNewPassword, salt: saltnew } }
-            );
-            res.status(201).json({ 'message': 'password changed' });
-        } catch (error) {
-            console.log(error);
-            res.status(500).json({ "message": "An error occurred while updating the password" });
+        
+        if(hashedOldPassword===user.password){
+            const saltnew = randomBytes(16).toString('hex');
+            const hashedNewPassword=createHmac('sha256', saltnew).update(newpassword).digest('hex');
+            try {
+                const changed = await userModel.updateOne(
+                    { _id: user._id },
+                    { $set: { password: hashedNewPassword, salt: saltnew } }
+                );
+                res.status(201).json({ 'message': 'password changed' });
+            } catch (error) {
+                console.log(error);
+                res.status(500).json({ "message": "An error occurred while updating the password" });
+            }
+        }
+        else{
+            res.status(400).json({ "message": "old password is wrong" });
         }
     }
     else{
