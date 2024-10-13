@@ -33,6 +33,7 @@ This is a full stack project template using Vite for the frontend and Flask for 
     GITHUB_CLIENT_ID=YOUR_GITHUB_CLIENT_ID
     GITHUB_CLIENT_SECRET=YOUR_GITHUB_CLIENT_SECRET
     ```
+Follow this documentation to get the Github_ClientId and Github_ClientSecret: [Github OAuth](https://docs.github.com/en/developers/apps/building-oauth-apps/creating-an-oauth-app)
 6. Start the server:
     ```sh
     flask run
