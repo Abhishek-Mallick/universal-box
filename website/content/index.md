@@ -6,7 +6,7 @@ navigation: false
 ::hero
 ---
 announcement:
-  title: 'Release v2.6.1'
+  title: 'Release v2.6.2'
   icon: 'noto:party-popper'
   to: https://www.npmjs.com/package/universal-box
 actions:
