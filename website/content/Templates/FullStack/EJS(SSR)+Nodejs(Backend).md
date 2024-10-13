@@ -24,6 +24,17 @@ This template offers a simple authentication template made using EJS for server-
 
 
 ## Screenshots
+![image](https://github.com/user-attachments/assets/c0859525-7b94-48b2-b574-c205caa847c5)
+![image](https://github.com/user-attachments/assets/200fb551-1641-40ac-bd33-4c4c56ae0e47)
+![image](https://github.com/user-attachments/assets/ea58c6d1-e15e-43f1-a0b3-693679ba7274)
+![image](https://github.com/user-attachments/assets/ea3753c5-d434-4d88-858a-f01ea6db5c68)
+![image](https://github.com/user-attachments/assets/c1de462b-72bb-47fa-8a24-ee408ccdb247)
+
+
+
+
+
+
 
 
 
