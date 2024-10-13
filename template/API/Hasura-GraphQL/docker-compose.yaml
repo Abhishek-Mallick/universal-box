@@ -1,0 +1,49 @@
+services:
+  postgres:
+    image: postgres:15.5
+    ports:
+      - "${POSTGRES_PORT}:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+    networks:
+      - hasura-network
+
+  hasura:
+    image: hasura/graphql-engine:v2.44.0
+    ports:
+      - "${HASURA_PORT}:8080"
+    depends_on:
+      - postgres
+      - data-connector-agent
+    environment:
+      HASURA_GRAPHQL_METADATA_DATABASE_URL: postgres://postgres:${POSTGRES_PASSWORD}@postgres:5432/postgres
+      PG_DATABASE_URL: postgres://postgres:${POSTGRES_PASSWORD}@postgres:5432/postgres
+      HASURA_GRAPHQL_ENABLE_CONSOLE: ${HASURA_GRAPHQL_ENABLE_CONSOLE}
+      HASURA_GRAPHQL_DEV_MODE: ${HASURA_GRAPHQL_DEV_MODE}
+      HASURA_GRAPHQL_ENABLED_LOG_TYPES: ${HASURA_GRAPHQL_ENABLED_LOG_TYPES}
+      HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET}
+      HASURA_GRAPHQL_JWT_SECRET: ${HASURA_GRAPHQL_JWT_SECRET}
+      HASURA_GRAPHQL_METADATA_DEFAULTS: '{"backend_configs": {"dataconnector": {"athena": {"uri": "http://data-connector-agent:${DATA_CONNECTOR_PORT}/api/v1/athena"}, "mariadb": {"uri": "http://data-connector-agent:${DATA_CONNECTOR_PORT}/api/v1/mariadb"}, "mysql8": {"uri": "http://data-connector-agent:${DATA_CONNECTOR_PORT}/api/v1/mysql"}, "oracle": {"uri": "http://data-connector-agent:${DATA_CONNECTOR_PORT}/api/v1/oracle"}, "snowflake": {"uri": "http://data-connector-agent:${DATA_CONNECTOR_PORT}/api/v1/snowflake"}}}}'
+    networks:
+      - hasura-network
+
+  data-connector-agent:
+    image: hasura/graphql-data-connector:v2.30.0
+    ports:
+      - "${DATA_CONNECTOR_PORT}:8081"
+    environment:
+      QUARKUS_LOG_LEVEL: ERROR
+      QUARKUS_OPENTELEMETRY_ENABLED: "false"
+    networks:
+      - hasura-network
+
+volumes:
+  db_data:
+
+networks:
+  hasura-network:
+    driver: bridge
