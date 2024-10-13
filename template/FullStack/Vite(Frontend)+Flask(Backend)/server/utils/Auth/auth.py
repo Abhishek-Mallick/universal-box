@@ -1,7 +1,36 @@
 from flask import request, jsonify
+import requests
 from models import User  
 from werkzeug.security import generate_password_hash, check_password_hash 
 from bson import ObjectId 
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+GITHUB_CLIENT_ID = os.getenv('GITHUB_CLIENT_ID')
+GITHUB_CLIENT_SECRET = os.getenv('GITHUB_CLIENT_SECRET')
+
+def github_callback():
+    data = request.get_json()
+    code = data.get('code')
+
+    # Exchange code for an access token
+    token_url = 'https://github.com/login/oauth/access_token'
+    payload = {
+        'client_id': GITHUB_CLIENT_ID,
+        'client_secret': GITHUB_CLIENT_SECRET,
+        'code': code
+    }
+    headers = {'Accept': 'application/json'}
+    response = requests.post(token_url, json=payload, headers=headers)
+    token_data = response.json()
+
+    access_token = token_data.get('access_token')
+    if access_token:
+        return jsonify({'access_token': access_token}), 200
+    else:
+        return jsonify({'error': 'Failed to obtain access token'}), 400
 
 def signup_handler():
     data = request.json

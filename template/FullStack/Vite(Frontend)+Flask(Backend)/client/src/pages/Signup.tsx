@@ -5,8 +5,50 @@ import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 import { Link, useNavigate } from "react-router-dom";
+import {
+    IconBrandGithub
+} from "@tabler/icons-react";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
+
+export const loginWithGithub = async () => {
+    const clientId = 'github_clientId';
+    const redirectUri = `${BACKEND_URL}/home`; 
+
+    const githubUrl = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=user`;
+
+    window.location.href = githubUrl;
+};
+
+export const handleGitHubCallback = async () => {
+    const query = new URLSearchParams(window.location.search);
+    const code = query.get('code');
+
+    if (code) {
+        const response = await fetch('http://localhost:5000/api/github/callback', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ code }),
+        });
+        const data = await response.json();
+
+        // Store access_token in localStorage
+        localStorage.setItem('access_token', data.access_token);
+        window.location.href = '/';  // Redirect after login
+    }
+};
+
+export const checkSession = () => {
+    const token = localStorage.getItem('access_token');
+    return token;
+};
+
+export const logout = () => {
+    localStorage.removeItem('access_token');
+    window.location.href = '/'; 
+};
 
 export default function Signup() {
     const navigate = useNavigate();
@@ -17,6 +59,13 @@ export default function Signup() {
         email: "",
         password: "",
     });
+
+    const token = checkSession();
+
+    if (token) {
+        // Redirect to dashboard if already logged in
+        window.location.href = '/home';
+    }
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { id, value } = e.target;
@@ -131,6 +180,21 @@ export default function Signup() {
                             Sign in
                         </Link>
                     </p>
+                    <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
+
+                    <div className="flex flex-col space-y-4">
+                        <button
+                            className=" relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
+                            type="button" onClick={loginWithGithub}
+                        >
+                            <IconBrandGithub className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />
+                            <span className="text-neutral-700 dark:text-neutral-300 text-sm">
+                                GitHub
+                            </span>
+                            <BottomGradient />
+                        </button>
+                       
+                    </div>
                 </form>
             </div>
         </div>

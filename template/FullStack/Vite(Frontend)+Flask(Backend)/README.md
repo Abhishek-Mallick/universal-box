@@ -27,9 +27,11 @@ This is a full stack project template using Vite for the frontend and Flask for 
     ```sh
     pip install -r requirements.txt
     ```
-5. Ensure you have MongoDB running and set the `MONGODB_URL` in your `.env` file:
+5. Ensure you have MongoDB running and set the `MONGODB_URL` and to use GithubOAuth you need Github_ClientId and Github_ClientSecret from the Github account in your `.env` file:
     ```env
-    MONGODB_URI=your_mongodb_connection_string
+    MONGODB_URI=YOUR_MONGODB_URI
+    GITHUB_CLIENT_ID=YOUR_GITHUB_CLIENT_ID
+    GITHUB_CLIENT_SECRET=YOUR_GITHUB_CLIENT_SECRET
     ```
 6. Start the server:
     ```sh
@@ -46,7 +48,9 @@ This is a full stack project template using Vite for the frontend and Flask for 
     ```sh
     npm install
     ```
-3. Start the development server:
+3. Replace the Github_clientId with yours in `./client/pages/signup.tsx` in order to use GithubOAuth
+
+4. Start the development server:
     ```sh
     npm run dev
     ```
