@@ -1,0 +1,22 @@
+{
+  "name": "bloggingapp",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "blogging app by hero",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "author": "hero",
+  "license": "ISC",
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.21.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.7.0",
+    "nodemailer": "^6.9.15",
+    "nodemon": "^3.1.7"
+  }
+}
