@@ -12,6 +12,8 @@ The app fetches real-time weather data using the **OpenWeather API** and uses ma
 - **Temperature prediction**: Uses machine learning (XGBoost) to predict the next day's temperature based on historical weather data.
 - **User-friendly interface**: Allows easy input of city names and provides clear output for current and predicted weather conditions.
 
+## Colab Link for Model [Here](https://colab.research.google.com/drive/1v4vpe-YiZhJjMsE1W2h94BzMdPhZHhov?usp=sharing)
+
 ## Prerequisites
 
 Before running the app, ensure you have the following:
