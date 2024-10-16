@@ -1,0 +1,21 @@
+table:
+  name: tags
+  schema: public
+array_relationships:
+- name: book_tags
+  using:
+    foreign_key_constraint_on:
+      column: tag_id
+      table:
+        name: book_tags
+        schema: public
+select_permissions:
+- comment: ""
+  permission:
+    columns:
+    - name
+    - created_at
+    - updated_at
+    - id
+    filter: {}
+  role: user

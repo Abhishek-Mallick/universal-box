@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password - Blogify</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-md w-96">
+        <h2 class="text-2xl font-bold mb-6 text-center text-gray-900">Forgot Password</h2>
+        <p class="text-gray-600 mb-6 text-center">Enter your email address and we'll send you a link to reset your password.</p>
+        <form id="forgotPasswordForm" class="space-y-4">
+            <!-- <div>
+                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                <input type="email" id="email" name="email" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+            </div> -->
+            <div>
+                <label for="recoveryphrase" class="block text-sm font-medium text-gray-700">enter the recovery phrase</label>
+                <input type="text" id="recoveryphrase" name="recoveryphrase" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+            </div>
+            <div>
+                <button type="submit" id="submitbtn" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    Reset
+                </button>
+            </div>
+        </form>
+        <div class="mt-4 text-center">
+            <a href="/user/login" class="text-sm text-indigo-600 hover:text-indigo-500">Back to Login</a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('forgotPasswordForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Reset error messages
+            document.querySelectorAll('.error-message').forEach(el => el.remove());
+            
+            const recoveryphrase = document.getElementById('recoveryphrase');
+
+            sendRecoveryPhrase()
+            
+            // if (email.value.trim() === '') {
+            //     showError(email, 'Email is required');
+            // } else if (!isValidEmail(email.value)) {
+            //     showError(email, 'Please enter a valid email address');
+            // } else {
+            //     // Here you would typically send the form data to your server
+            //     alert('Password reset link sent to ' + email.value);
+            // }
+        });
+
+        async function sendRecoveryPhrase(){
+        const recoveryphrase = document.getElementById('recoveryphrase').value;
+        console.log("hii", recoveryphrase)
+        try {
+            const response = await fetch('/user/forgotpass', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ recoveryphrase}) // Convert form data to JSON
+            });
+            if (response.ok) {
+                const result = await response.json();
+                console.log(result)
+                if (response.status === 201) {
+                    // Redirect to success page
+                    window.location.href = '/changepass';
+                } 
+            } else {
+                const result = await response.json();
+                console.log(result)
+                // console.log(result.message)
+                const submitbtn=document.getElementById('submitbtn')
+                showError(submitbtn, result.message)
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+
+        function showError(input, message) {
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message text-red-500 text-sm mt-1';
+            errorDiv.textContent = message;
+            input.parentNode.appendChild(errorDiv);
+        }
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+table:
+  name: authors
+  schema: public
+array_relationships:
+- name: books
+  using:
+    foreign_key_constraint_on:
+      column: author_id
+      table:
+        name: books
+        schema: public
+select_permissions:
+- comment: ""
+  permission:
+    columns:
+    - born
+    - died
+    - name
+    - created_at
+    - updated_at
+    - id
+    filter: {}
+  role: user

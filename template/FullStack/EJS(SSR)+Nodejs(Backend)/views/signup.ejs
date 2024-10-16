@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-200 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-md w-96">
+        <h2 class="text-2xl font-bold mb-6 text-center">Sign Up</h2>
+        <form id="signupForm" class="space-y-4" action="/user/signup" method="post">
+            <div>
+                <label for="fullName" class="block text-sm font-medium text-gray-700">Full Name</label>
+                <input type="text" id="fullName" name="fullName" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+            </div>
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                <input type="email" id="email" name="email" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+            </div>
+            <div>
+                <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+                <input type="text" id="username" name="username" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+            </div>
+            <div>
+                <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                <input type="password" id="password" name="password" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+            </div>
+            <div>
+                <label for="confirmPassword" class="block text-sm font-medium text-gray-700">Confirm password</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+            </div>
+            <div>
+                <button type="submit" id="signupbtn" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    Sign Up
+                </button>
+            </div>
+            <div class="flex align-center justify-center">
+                <p class="text-sm ">Already have an account? <a href="/user/login" class="text-indigo-600 hover:text-indigo-500" >login</a></p>
+            </div>
+        </form>
+    </div>
+</body>
+    <script>
+
+    document.getElementById('signupForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Reset error messages
+        document.querySelectorAll('.error-message').forEach(el => el.remove());
+        
+        let isValid = true;
+        
+        // Validate Full Name
+        const fullName = document.getElementById('fullName');
+        if (fullName.value.trim() === '') {
+            showError(fullName, 'Full Name is required');
+            isValid = false;
+            return
+        }
+        
+        // Validate Email
+        const email = document.getElementById('email');
+        if (!/^\S+@\S+\.\S+$/.test(email.value)) {
+            showError(email, 'Please enter a valid email address');
+            isValid = false;
+            return
+        }
+        
+        // Validate Username
+        // const username = document.getElementById('username');
+        // if (username.value.length < 3) {
+        //     showError(username, 'Username must be at least 3 characters long');
+        //     isValid = false; 
+        // }
+        
+        // Validate Password
+        const password = document.getElementById('password');
+        if (password.value.length < 8) {
+            showError(password, 'Password must be at least 8 characters long');
+            isValid = false;
+            return
+        }
+        const confirmPassword=document.getElementById('confirmPassword')
+        const signupbtn=document.getElementById('signupbtn')
+        if(password.value!=confirmPassword.value){
+            showError(signupbtn, "Confirm password and password didn't matched");
+            isValid=false;
+            return
+        }
+        
+        if (isValid) {
+            sendFromData();
+            // Here you would typically send the form data to your server
+        }
+    });
+
+    function showError(input, message) {
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'error-message text-red-500 text-sm mt-1';
+        errorDiv.textContent = message;
+        input.parentNode.appendChild(errorDiv);
+    }
+
+    async function sendFromData(){
+            // Get the form field values
+            const fullName = document.getElementById('fullName').value;
+            const email = document.getElementById('email').value;
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            console.log(fullName, username, email, password, confirmPassword)
+            try {
+                const response = await fetch('/user/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ fullName, username, email, password }) // Convert form data to JSON
+                });
+
+                // Handle the response
+                if (response.ok) {
+                    const result = await response.json();
+                    alert(`User signed up successfully: ${result.message}`);
+                    if (response.status === 201) {
+                        // Redirect to success page
+                        window.location.href = '/user/login';
+                    } 
+                } else {
+                    const result = await response.json();
+                    if(result.message.includes("email")){
+                        const email = document.getElementById('email');
+                        showError(email, result.message)
+                    }
+                    else{
+                        alert('Signup failed', result.message);
+                    }
+                    
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+        
+    </script>
+</html>
