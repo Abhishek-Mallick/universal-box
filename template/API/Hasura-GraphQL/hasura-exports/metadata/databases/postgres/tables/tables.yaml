@@ -1,0 +1,7 @@
+- "!include public_authors.yaml"
+- "!include public_book_genres.yaml"
+- "!include public_book_tags.yaml"
+- "!include public_books.yaml"
+- "!include public_genres.yaml"
+- "!include public_tags.yaml"
+- "!include public_users.yaml"
