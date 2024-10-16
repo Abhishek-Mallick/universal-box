@@ -1,0 +1,21 @@
+table:
+  name: genres
+  schema: public
+array_relationships:
+- name: book_genres
+  using:
+    foreign_key_constraint_on:
+      column: genre_id
+      table:
+        name: book_genres
+        schema: public
+select_permissions:
+- comment: ""
+  permission:
+    columns:
+    - name
+    - created_at
+    - updated_at
+    - id
+    filter: {}
+  role: user

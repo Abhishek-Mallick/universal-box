@@ -1,0 +1,44 @@
+table:
+  name: books
+  schema: public
+object_relationships:
+- name: author
+  using:
+    foreign_key_constraint_on: author_id
+- name: user
+  using:
+    foreign_key_constraint_on: user_id
+array_relationships:
+- name: book_genres
+  using:
+    foreign_key_constraint_on:
+      column: book_id
+      table:
+        name: book_genres
+        schema: public
+- name: book_tags
+  using:
+    foreign_key_constraint_on:
+      column: book_id
+      table:
+        name: book_tags
+        schema: public
+select_permissions:
+- comment: ""
+  permission:
+    columns:
+    - isbn
+    - language
+    - pages
+    - published_year
+    - series_volume
+    - description
+    - series_name
+    - title
+    - created_at
+    - updated_at
+    - author_id
+    - id
+    - user_id
+    filter: {}
+  role: user
