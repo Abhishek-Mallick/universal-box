@@ -76,7 +76,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
+    <div className="flex items-center justify-center   pt-32">
       <div className="w-full max-w-md p-8 space-y-6 bg-white border-4 border-black-800 rounded-lg shadow-xl">
         <h2 className="text-3xl font-bold text-center">Create an Account</h2>
         <form className="space-y-5" onSubmit={handleSubmit}>
@@ -94,7 +94,7 @@ const Signup = () => {
               id="username"
               value={formData.username}
               onChange={handleChange}
-              className={`w-full px-4 py-2 text-sm border-2 rounded-md focus:outline-none focus:ring-2 ${
+              className={`w-full px-4 py-2 text-sm border-2 rounded-md focus:outline-none focus:border-black ${
                 errors.username ? "border-red-500" : ""
               }`}
               placeholder="Enter your username"
@@ -115,7 +115,7 @@ const Signup = () => {
               id="emailid"
               value={formData.emailid}
               onChange={handleChange}
-              className={`w-full px-4 py-2 text-sm border-2 rounded-md focus:outline-none focus:ring-2 ${
+              className={`w-full px-4 py-2 text-sm border-2 rounded-md focus:outline-none focus:border-black  ${
                 errors.emailid ? "border-red-500" : ""
               }`}
               placeholder="Enter your email"
@@ -139,7 +139,7 @@ const Signup = () => {
               id="password"
               value={formData.password}
               onChange={handleChange}
-              className={`w-full px-4 py-2 text-sm border-2 rounded-md focus:outline-none focus:ring-2 ${
+              className={`w-full px-4 py-2 text-sm border-2 rounded-md focus:outline-none focus:border-black ${
                 errors.password ? "border-red-500" : ""
               }`}
               placeholder="Enter your password"
@@ -162,7 +162,7 @@ const Signup = () => {
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-green-400 to-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2"
+            className="w-full px-4 py-2  text-sm font-semibold  bg-black text-white rounded-md focus:scale-105"
           >
             Sign Up
           </button>
@@ -171,7 +171,7 @@ const Signup = () => {
         {/* Additional Links */}
         <p className="text-sm text-center text-gray-600">
           Already have an account?{" "}
-          <a href="/signin" className="text-blue-500 hover:underline">
+          <a href="/signin" className="text-black font-semibold hover:underline">
             Sign in
           </a>
         </p>

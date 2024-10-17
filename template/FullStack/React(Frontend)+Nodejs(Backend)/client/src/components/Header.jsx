@@ -60,7 +60,7 @@ function Header() {
             <>
               <button
                 onClick={handleSignOut}
-                className="text-white hover:text-gray-300 transition duration-200"
+                className="text-white hover:text-gray-300 transition duration-200 border-1  border-white px-3 py-1 rounded-md"
               >
                 Sign Out
               </button>
@@ -73,7 +73,7 @@ function Header() {
           ) : (
             <a
               href="/signin"
-              className="text-white hover:text-gray-300 transition duration-200"
+              className="text-white hover:text-gray-300 transition duration-200 border-1 border-white px-3 py-1 rounded-md"
               onClick={handleSignIn}
             >
               Sign In

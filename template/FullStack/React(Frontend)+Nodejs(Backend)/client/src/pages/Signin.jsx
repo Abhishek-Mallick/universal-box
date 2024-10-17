@@ -75,8 +75,8 @@ const Signin = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
-      <div className="w-full max-w-md p-8 space-y-6 bg-white border-4 border-black-800 rounded-lg shadow-xl">
+    <div className="flex items-center justify-center  pt-32">
+      <div className="w-full max-w-md p-8 space-y-6 bg-white border-black-800 shadow-2xl border-t-[1px]  border-black rounded-lg ">
         <h2 className="text-3xl font-bold text-center">Log In</h2>
         <form className="space-y-5" onSubmit={handleSubmit}>
 
@@ -94,7 +94,7 @@ const Signin = () => {
               id="emailid"
               value={formData.emailid}
               onChange={handleChange}
-              className={`w-full px-4 py-2 text-sm border-2 rounded-md focus:outline-none focus:ring-2 ${
+              className={`w-full px-4 py-2 text-sm border-2 rounded-md focus:outline-none focus:border-black  ${
                 errors.emailid ? 'border-red-500' : ''
               }`}
               placeholder="Enter your email"
@@ -118,7 +118,7 @@ const Signin = () => {
               id="password"
               value={formData.password}
               onChange={handleChange}
-              className={`w-full px-4 py-2 text-sm border-2 rounded-md focus:outline-none focus:ring-2 ${
+              className={`w-full px-4 py-2 text-sm border-2 rounded-md focus:outline-none focus:border-black ${
                 errors.password ? 'border-red-500' : ''
               }`}
               placeholder="Enter your password"
@@ -141,7 +141,7 @@ const Signin = () => {
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-green-400 to-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2"
+            className="w-full px-4 py-2  text-sm font-semibold  bg-black text-white rounded-md focus:scale-105 "
           >
             Sign In
           </button>
@@ -150,7 +150,7 @@ const Signin = () => {
         {/* Additional Links */}
         <p className="text-sm text-center text-gray-600">
           Don't have an account?{' '}
-          <a href="/signup" className="text-blue-500 hover:underline">
+          <a href="/signup" className="text-black font-semibold hover:underline">
             Sign Up
           </a>
         </p>
