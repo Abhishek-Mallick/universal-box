@@ -1,45 +1,47 @@
+//client/src/stores/auth.js
+
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import api from '../api.js'
+import { signin as apiSignin, signout as apiSignout, getProfile } from '../api'
 
-// Pinia setup store
 export const useAuthStore = defineStore('auth', () => {
-  const user = ref(null)  
+  const user = ref(null)
   const isAuthenticated = computed(() => !!user.value)
-  const getUser = computed(() => user.value)
+  const hasCheckedAuth = ref(false)
 
-  // user sign-in with server API request
   const signin = async (credentials) => {
+    const response = await apiSignin(credentials)
+    user.value = response.data.user
+    hasCheckedAuth.value = true
+    return response.data.user
+  }
+
+  const signout = async () => {
+    await apiSignout()
+    user.value = null
+    hasCheckedAuth.value = true
+  }
+
+  const fetchUser = async () => {
+    if (hasCheckedAuth.value) return
+
     try {
-      const response = await api.post('/api/auth/signin', credentials)
+      const response = await getProfile()
       user.value = response.data.user
     } catch (error) {
-      throw error 
-    }
-  }
-
-  // user sign-out
-  const signout = async () => {
-    await api.post('/api/user/signout')
-    user.value = null  
-  }
-
-  // fetch the current user profile from the server
-  const fetchUser = async () => {
-    try {
-      const response = await api.get('/api/user/profile')
-      user.value = response.data.user 
-    } catch (error) {
       user.value = null
+    } finally {
+      hasCheckedAuth.value = true
     }
   }
+
   return {
     user,
     isAuthenticated,
-    getUser,
+    hasCheckedAuth,
     signin,
     signout,
-    fetchUser,
+    fetchUser
   }
 }, {
   persist: true

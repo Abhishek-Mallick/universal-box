@@ -1,0 +1,35 @@
+snippets:
+  - name: "Fibonacci in JavaScript"
+    description: "Generate Fibonacci sequence"
+    code: |
+      function fibonacci(n) {
+        if (n <= 1) return n;
+        return fibonacci(n - 1) + fibonacci(n - 2);
+      }
+    language: "JavaScript"
+    tags: "recursion"
+    visibility: true
+
+  - name: "Fibonacci in Python"
+    description: "Generate Fibonacci sequence"
+    code: |
+      def fibonacci(n):
+          if n <= 1:
+              return n
+          return fibonacci(n-1) + fibonacci(n-2)
+    language: "Python"
+    tags: "recursion"
+    visibility: true
+
+  - name: "Fibonacci in Go"
+    description: "Generate Fibonacci sequence"
+    code: |
+      func fibonacci(n int) int {
+          if n <= 1 {
+              return n
+          }
+          return fibonacci(n-1) + fibonacci(n-2)
+      }
+    language: "Go"
+    tags: "recursion"
+    visibility: true

@@ -1,60 +1,48 @@
 <template>
-  <div class="flex items-center justify-center ">
-    <div class="w-full max-w-md p-8 space-y-6 bg-white border-4 border-black-800 rounded-lg shadow-xl">
-      <h2 class="text-3xl font-bold text-center">Create an Account</h2>
-      <form class="space-y-5" @submit.prevent="handleSubmit">
-        <div>
-          <label for="username" class="block mb-2 text-sm font-medium">Username</label>
-          <input
-            type="text"
-            id="username"
-            v-model="formData.username"
-            :class="{'border-red-500': errors.username}"
-            class="w-full px-4 py-2 text-sm border-2 rounded-md focus:outline-none focus:ring-2"
-            placeholder="Enter your username"
-          />
-          <p v-if="errors.username" class="mt-2 text-sm text-red-500">{{ errors.username }}</p>
-        </div>
-        <div>
-          <label for="emailid" class="block mb-2 text-sm font-medium">Email Address</label>
-          <input
-            type="email"
-            id="emailid"
-            v-model="formData.emailid"
-            :class="{'border-red-500': errors.emailid}"
-            class="w-full px-4 py-2 text-sm border-2 rounded-md focus:outline-none focus:ring-2"
-            placeholder="Enter your email"
-          />
-          <p v-if="errors.emailid" class="mt-2 text-sm text-red-500">{{ errors.emailid }}</p>
-        </div>
-        <div>
-          <label for="password" class="block mb-2 text-sm font-medium">Password</label>
-          <input
-            type="password"
-            id="password"
-            v-model="formData.password"
-            :class="{'border-red-500': errors.password}"
-            class="w-full px-4 py-2 text-sm border-2 rounded-md focus:outline-none focus:ring-2"
-            placeholder="Enter your password"
-          />
-          <p v-if="errors.password" class="mt-2 text-sm text-red-500">{{ errors.password }}</p>
-        </div>
-
+  <div class="flex items-center justify-center py-8 bg-gray-900">
+    <div class="w-full max-w-md p-8 space-y-6 bg-gray-800 border border-gray-700 rounded-lg shadow-xl">
+      <h2 class="text-3xl font-bold text-center text-white">Create an Account</h2>
+      <form @submit.prevent="handleSubmit" class="space-y-6">
+        <BaseInput
+          id="username"
+          label="Username"
+          v-model="formData.username"
+          :error="errors.username"
+          type="text"
+          placeholder="Enter your username"
+        />
+        <BaseInput
+          id="emailid"
+          label="Email Address"
+          v-model="formData.emailid"
+          :error="errors.emailid"
+          type="email"
+          placeholder="Enter your email"
+        />
+        <BaseInput
+          id="password"
+          label="Password"
+          v-model="formData.password"
+          :error="errors.password"
+          type="password"
+          placeholder="Enter your password"
+        />
+        
         <p v-if="serverError" class="mt-2 text-sm text-red-500">{{ serverError }}</p>
         <p v-if="successMessage" class="mt-2 text-sm text-green-500">{{ successMessage }}</p>
 
         <button
           type="submit"
           :disabled="loading"
-          class="w-full px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-green-400 to-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 disabled:opacity-50"
+          class="w-full px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
         >
           {{ loading ? 'Signing Up...' : 'Sign Up' }}
         </button>
       </form>
 
-      <p class="text-sm text-center text-gray-600">
+      <p class="text-sm text-center text-gray-400">
         Already have an account?
-        <router-link to="/signin" class="text-blue-500 hover:underline">
+        <router-link to="/signin" class="text-blue-400 hover:underline">
           Sign in
         </router-link>
       </p>
@@ -66,6 +54,7 @@
 import { useForm, commonValidations } from '../composables/useForm'
 import api from '../api'
 import { useRouter } from 'vue-router'
+import BaseInput from '../components/BaseInput.vue'
 
 const router = useRouter()
 
@@ -78,7 +67,7 @@ const initialState = {
 const validations = {
   username: commonValidations.required('Username'),
   emailid: (value) => commonValidations.required('Email')(value) || commonValidations.email(value),
-  password: (value) => commonValidations.required('Password')(value) || commonValidations.minLength('Password', 6)(value),
+  password: commonValidations.required('Password'),
 }
 
 const submitAction = async (formData) => {

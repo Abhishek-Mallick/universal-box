@@ -3,9 +3,12 @@ import Home from '../views/Home.vue'
 import Signin from '../views/Signin.vue'
 import Signup from '../views/Signup.vue'
 import Account from '../views/Account.vue'
+import Snippets from '../views/Snippets.vue'
+import AddSnippet from '../views/AddSnippet.vue'
+import EditSnippet from '../views/EditSnippet.vue'
+import TaggedSnippets from '../views/TaggedSnippets.vue'
 import { useAuthStore } from '../stores/auth'
 
-// routes with route guards
 const routes = [
   {
     path: '/',
@@ -16,19 +19,42 @@ const routes = [
     path: '/signin',
     name: 'Signin',
     component: Signin,
-    meta: { requiresGuest: true }  // Only for non-authenticated users
+    meta: { requiresGuest: true }
   },
   {
     path: '/signup',
     name: 'Signup',
     component: Signup,
-    meta: { requiresGuest: true }  // Only for non-authenticated users
+    meta: { requiresGuest: true }
   },
   {
     path: '/account',
     name: 'Account',
     component: Account,
-    meta: { requiresAuth: true }  // Only for authenticated users
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/snippets',
+    name: 'Snippets',
+    component: Snippets,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/add-snippet',
+    name: 'AddSnippet',
+    component: AddSnippet,
+    meta: { requiresAuth: true, transition: 'slide-fade' }
+  },
+  {
+    path: '/edit-snippet/:id',
+    name: 'EditSnippet',
+    component: EditSnippet,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/tag/:tag',
+    name: 'TaggedSnippets',
+    component: TaggedSnippets
   }
 ]
 
@@ -37,22 +63,19 @@ const router = createRouter({
   routes
 })
 
-// Route guard to check authentication before navigating
 router.beforeEach(async (to, from, next) => {
   const authStore = useAuthStore()
 
-// Fetch user data if not already available
-  if (authStore.user === null) {
-    await authStore.fetchUser()  
+  if (!authStore.hasCheckedAuth) {
+    await authStore.fetchUser()
   }
 
-  // Redirect based on authentication and route meta properties
   if (to.meta.requiresAuth && !authStore.isAuthenticated) {
-    next('/signin') 
+    next('/signin')
   } else if (to.meta.requiresGuest && authStore.isAuthenticated) {
-    next('/account')  
+    next('/account')
   } else {
-    next()  
+    next()
   }
 })
 

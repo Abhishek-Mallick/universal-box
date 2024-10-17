@@ -1,87 +1,84 @@
+
+
 <template>
-  <div class="flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-    <div class="w-full max-w-md space-y-8">
-      <div class="bg-white p-8 border-4 border-black-800 rounded-lg shadow-xl">
-        <h2 class="text-3xl font-bold text-center mb-6">Sign In</h2>
-        <form class="space-y-6" @submit.prevent="handleSubmit">
-          <div>
-            <label for="emailid" class="block mb-2 text-sm font-medium">Email Address</label>
-            <input
-              type="email"
-              id="emailid"
-              v-model="formData.emailid"
-              :class="{'border-red-500': errors.emailid}"
-              class="w-full px-4 py-2 text-sm border-2 rounded-md focus:outline-none focus:ring-2"
-              placeholder="Enter your email"
-            />
-            <p v-if="errors.emailid" class="mt-2 text-sm text-red-500">{{ errors.emailid }}</p>
-          </div>
-          <div>
-            <label for="password" class="block mb-2 text-sm font-medium">Password</label>
-            <input
-              type="password"
-              id="password"
-              v-model="formData.password"
-              :class="{'border-red-500': errors.password}"
-              class="w-full px-4 py-2 text-sm border-2 rounded-md focus:outline-none focus:ring-2"
-              placeholder="Enter your password"
-            />
-            <p v-if="errors.password" class="mt-2 text-sm text-red-500">{{ errors.password }}</p>
-          </div>
-          <p v-if="serverError" class="mt-2 text-sm text-red-500">{{ serverError }}</p>
-          <p v-if="successMessage" class="mt-2 text-sm text-green-500">{{ successMessage }}</p>
-          <button
-            type="submit"
-            :disabled="loading"
-            class="w-full px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-green-400 to-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 disabled:opacity-50"
-          >
-            {{ loading ? 'Signing In...' : 'Sign In' }}
-          </button>
-        </form>
-        <p class="mt-4 text-sm text-center text-gray-600">
-          Don't have an account?
-          <router-link to="/signup" class="text-blue-500 hover:underline">
-            Sign Up
-          </router-link>
-        </p>
-      </div>
+  <div class="flex items-center justify-center py-8 bg-gray-900">
+    <div class="w-full max-w-md p-8 space-y-8 bg-gray-800 border border-gray-700 rounded-lg shadow-xl">
+      <h2 class="text-3xl font-bold text-center text-white">Sign In</h2>
+      <form @submit.prevent="handleSubmit" class="space-y-6">
+        <BaseInput
+          id="emailid"
+          label="Email Address"
+          v-model="formData.emailid"
+          :error="errors.emailid"
+          type="email"
+          placeholder="Enter your email"
+        />
+        <BaseInput
+          id="password"
+          label="Password"
+          v-model="formData.password"
+          :error="errors.password"
+          type="password"
+          placeholder="Enter your password"
+        />
+        <button
+          type="submit"
+          :disabled="loading"
+          class="w-full px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
+        >
+          {{ loading ? 'Signing In...' : 'Sign In' }}
+        </button>
+      </form>
+      <p class="mt-4 text-sm text-center text-gray-400">
+        Don't have an account?
+        <router-link to="/signup" class="text-blue-400 hover:underline">
+          Sign Up
+        </router-link>
+      </p>
     </div>
   </div>
 </template>
 
 <script setup>
-import { useForm, commonValidations } from '../composables/useForm'
+import { ref } from 'vue'
 import { useAuthStore } from '../stores/auth'
 import { useRouter } from 'vue-router'
+import { useToast } from 'vue-toastification'
+import { commonValidations } from '../composables/useForm'
+import BaseInput from '../components/BaseInput.vue'
 
 const authStore = useAuthStore()
 const router = useRouter()
+const toast = useToast()
 
-const initialState = {
+const formData = ref({
   emailid: '',
   password: '',
+})
+
+const errors = ref({})
+const loading = ref(false)
+
+const validateForm = () => {
+  errors.value = {
+    emailid: commonValidations.required('Email')(formData.value.emailid) || commonValidations.email(formData.value.emailid),
+    password: commonValidations.required('Password')(formData.value.password),
+  }
+  return Object.values(errors.value).every(error => !error)
 }
 
-const validations = {
-  emailid: (value) => commonValidations.required('Email')(value) || commonValidations.email(value),
-  password: commonValidations.required('Password'),
-}
+const handleSubmit = async () => {
+  if (!validateForm()) return
 
-const submitAction = async (formData) => {
-  await authStore.signin(formData)
-  return 'Signin successful!'
-}
-
-const {
-  formData,
-  errors,
-  serverError,
-  successMessage,
-  loading,
-  handleSubmit,
-} = useForm(initialState, validations, submitAction)
-
-handleSubmit.onSuccess = () => {
-  router.push('/account')
+  loading.value = true
+  try {
+    await authStore.signin(formData.value)
+    await router.push('/snippets')
+    toast.success('Signed in successfully!')
+  } catch (error) {
+    toast.error(`Error: ${error.response?.data?.message || error.message}`)
+  } finally {
+    loading.value = false
+  }
 }
 </script>

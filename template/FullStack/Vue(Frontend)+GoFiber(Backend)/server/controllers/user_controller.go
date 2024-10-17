@@ -13,13 +13,13 @@ func NewUserController() *UserController {
 	return &UserController{}
 }
 
-// endpoint to check API status
 func (uc *UserController) Test(c *fiber.Ctx) error {
+	// API status check
 	return c.JSON(fiber.Map{"message": "API is working!"})
 }
 
-// endpoint to clear user session
 func (uc *UserController) Signout(c *fiber.Ctx) error {
+	// Clear the user session by removing the access token
 	c.Cookie(&fiber.Cookie{
 		Name:     "access_token",
 		Value:    "",
@@ -29,11 +29,11 @@ func (uc *UserController) Signout(c *fiber.Ctx) error {
 		SameSite: "strict",
 		Path:     "/",
 	})
-	return c.JSON(fiber.Map{"success": true, "message": "User has been signed out!!"})
+	return c.JSON(fiber.Map{"success": true, "message": "User has been signed out!"})
 }
 
-// endpoint to fetch user details
 func (uc *UserController) GetProfile(c *fiber.Ctx) error {
+	// Fetch the current user's profile details
 	userID := c.Locals("userId").(uint)
 
 	var user models.User
@@ -41,6 +41,7 @@ func (uc *UserController) GetProfile(c *fiber.Ctx) error {
 		return fiber.NewError(fiber.StatusNotFound, "User not found")
 	}
 
+	// Return user profile information
 	return c.JSON(fiber.Map{
 		"success": true,
 		"user": fiber.Map{

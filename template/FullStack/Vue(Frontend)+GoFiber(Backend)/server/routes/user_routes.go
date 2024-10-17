@@ -7,8 +7,8 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-// configures user endpoints
 func SetupUserRoutes(router fiber.Router) {
+	// configures user endpoints
 	user := router.Group("/user")
 	userController := controllers.NewUserController()
 

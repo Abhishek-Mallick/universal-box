@@ -7,7 +7,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-// Verifies JWT token and sets user ID
+// Verify JWT token and sets user ID
 func VerifyToken(c *fiber.Ctx) error {
 	// Extract token from cookie
 	tokenString := c.Cookies("access_token")

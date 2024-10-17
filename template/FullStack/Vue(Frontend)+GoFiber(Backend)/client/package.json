@@ -14,9 +14,11 @@
     "axios": "^1.4.0",
     "pinia": "^2.1.0",
     "pinia-plugin-persistedstate": "^4.1.1",
+    "prismjs": "^1.29.0",
     "vue": "^3.3.4",
     "vue-router": "^4.2.3",
-    "vue-toastification": "next"
+    "vue-toastification": "next",
+    "vue3-code-block": "^2.2.14"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.1.4",

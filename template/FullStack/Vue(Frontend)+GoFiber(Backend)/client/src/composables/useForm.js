@@ -1,13 +1,13 @@
 import { reactive, ref } from 'vue'
 import { useToast } from 'vue-toastification'
 
-// regex to check if an email is in valid format
+// Check if an email is valid 
 const validEmail = (email) => {
-  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  const re = /\S+@\S+\.\S+/
   return re.test(email)
 }
 
-// Composable function to manage form state, validation, and submission
+// Composable for form state, validation, and submission
 export const useForm = (initialState, validations, submitAction) => {
   
   const formData = reactive({ ...initialState })
@@ -17,7 +17,7 @@ export const useForm = (initialState, validations, submitAction) => {
   const loading = ref(false)
   const toast = useToast()
 
-  // Validates the form fields using the provided validation rules
+  // Validates the form fields using the rules
   const validateForm = () => {
     let isValid = true
     Object.keys(validations).forEach(field => {
@@ -32,7 +32,7 @@ export const useForm = (initialState, validations, submitAction) => {
     return isValid
   }
 
-  // Handles form submission logic: validation, API requests, and error/success
+  // form submission
   const handleSubmit = async () => {
     serverError.value = ''
     successMessage.value = ''
@@ -64,7 +64,7 @@ export const useForm = (initialState, validations, submitAction) => {
   }
 }
 
-// Common validation helper
+// validation helper
 export const commonValidations = {
   required: (fieldName) => (value) => 
     value ? '' : `${fieldName} is required`,

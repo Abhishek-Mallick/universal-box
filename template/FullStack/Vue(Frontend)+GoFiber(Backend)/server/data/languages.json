@@ -1,0 +1,30 @@
+{
+  "languages": [
+    "Bash",
+    "Clojure",
+    "C",
+    "CSS",
+    "Elixir",
+    "Go",
+    "Haskell",
+    "Java",
+    "JavaScript",
+    "TypeScript",
+    "JSON",
+    "JSX",
+    "Julia",
+    "Kotlin",
+    "HTML",
+    "Nim",
+    "PHP",
+    "Python",
+    "Ruby",
+    "Rust",
+    "Sass",
+    "SCSS",
+    "SQL",
+    "TOML",
+    "YAML",
+    "Zig"
+  ]
+}

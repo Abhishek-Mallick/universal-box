@@ -2,7 +2,6 @@ package main
 
 import (
 	"log"
-
 	"server/config"
 	"server/middleware"
 	"server/models"
@@ -12,25 +11,27 @@ import (
 )
 
 func main() {
-	// env variables
+	// Load app configuration
 	config.Load()
 
-	// db connection
-	models.ConnectDB()
+	// Connect to database
+	if err := models.ConnectDB(); err != nil {
+		log.Fatalf("Failed to connect to database: %v", err)
+	}
 
-	// Fiber app with custom error handler
+	// Create new Fiber instance with custom error handler
 	app := fiber.New(fiber.Config{
 		ErrorHandler: middleware.ErrorHandler,
 	})
 
-	// global middleware
+	// Middleware setup (logging, CORS)
 	app.Use(middleware.Logger())
 	app.Use(middleware.Cors())
 
-	// API routes
+	// Setup routes
 	routes.SetupRoutes(app)
 
-	// Start the server
+	// Start server on configured port
 	port := config.Get("PORT")
 	log.Fatal(app.Listen(":" + port))
 }

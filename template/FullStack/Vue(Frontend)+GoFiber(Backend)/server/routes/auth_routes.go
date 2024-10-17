@@ -6,8 +6,8 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-// Configure authentication endpoints
 func SetupAuthRoutes(router fiber.Router) {
+	// Authentication endpoints
 	auth := router.Group("/auth")
 	authController := controllers.NewAuthController()
 
