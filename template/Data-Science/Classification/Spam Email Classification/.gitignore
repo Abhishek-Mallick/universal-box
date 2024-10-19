@@ -1,0 +1,3 @@
+venv/
+Model/model.pkl
+Model/spam_vectorizer.pkl
