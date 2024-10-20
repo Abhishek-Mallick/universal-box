@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Input from '../components/ui/Input';
+import Button from '../components/ui/Button';
 
 const Signup = () => {
   const [formData, setFormData] = useState({});
-
   const [errors, setErrors] = useState({});
   const [serverError, setServerError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
@@ -23,9 +24,7 @@ const Signup = () => {
 
     if (!formData.emailid.trim()) {
       errors.emailid = "Email is required";
-    } else if (
-      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formData.emailid)
-    ) {
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formData.emailid)) {
       errors.emailid = "Email address is invalid";
     }
 
@@ -47,6 +46,8 @@ const Signup = () => {
       return;
     }
 
+    setLoading(true);
+
     try {
       const res = await fetch("http://localhost:3000/api/auth/signup", {
         method: "POST",
@@ -55,15 +56,14 @@ const Signup = () => {
         },
         body: JSON.stringify(formData),
       });
+      setLoading(false);
       const data = await res.json();
       if (data.success === false) {
         return setErrorMessage(data.message);
       }
-      setLoading(false);
       if (res.ok) {
         navigate("/signin");
       }
-      // Check if the response is not successful
       if (!res.ok) {
         throw new Error("Failed to sign up");
       }
@@ -76,105 +76,62 @@ const Signup = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
-      <div className="w-full max-w-md p-8 space-y-6 bg-white border-4 border-black-800 rounded-lg shadow-xl">
-        <h2 className="text-3xl font-bold text-center">Create an Account</h2>
-        <form className="space-y-5" onSubmit={handleSubmit}>
-          {/* Username */}
-          <div>
-            <label
-              htmlFor="username"
-              className="block mb-2 text-sm font-medium"
-            >
-              Username
-            </label>
-            <input
-              type="text"
-              name="username"
+    <div className='flex justify-center min-h-56 p-[160px]'>
+      <div className="relative z-20 w-full max-w-md bg-[#040b18] bg-opacity-90 px-8 py-14 rounded-lg shadow-lg backdrop-blur-md">
+        <h2 className="text-center text-3xl font-bold text-white mb-16">Create an Account</h2>
+
+        <form onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <Input 
+              onChange={handleChange} 
+              placeholder="Username" 
+              type="text" 
               id="username"
-              value={formData.username}
-              onChange={handleChange}
-              className={`w-full px-4 py-2 text-sm border-2 rounded-md focus:outline-none focus:ring-2 ${
-                errors.username ? "border-red-500" : ""
-              }`}
-              placeholder="Enter your username"
+              className="w-full p-4 border border-[#C5C6C7] rounded-lg text-[#0B0C10] focus:ring-2 focus:ring-[#45A29E]"
             />
-            {errors.username && (
-              <p className="mt-2 text-sm text-red-500">{errors.username}</p>
-            )}
+            {errors.username && <p className="text-red-500">{errors.username}</p>}
           </div>
 
-          {/* Email */}
-          <div>
-            <label htmlFor="emailid" className="block mb-2 text-sm font-medium">
-              Email Address
-            </label>
-            <input
-              type="email"
-              name="emailid"
+          <div className="mb-4">
+            <Input 
+              onChange={handleChange} 
+              placeholder="Email Address" 
+              type="email" 
               id="emailid"
-              value={formData.emailid}
-              onChange={handleChange}
-              className={`w-full px-4 py-2 text-sm border-2 rounded-md focus:outline-none focus:ring-2 ${
-                errors.emailid ? "border-red-500" : ""
-              }`}
-              placeholder="Enter your email"
+              className="w-full p-4 border border-[#C5C6C7] rounded-lg text-[#0B0C10] focus:ring-2 focus:ring-[#45A29E]"
             />
-            {errors.emailid && (
-              <p className="mt-2 text-sm text-red-500">{errors.emailid}</p>
-            )}
+            {errors.emailid && <p className="text-red-500">{errors.emailid}</p>}
           </div>
 
-          {/* Password */}
-          <div>
-            <label
-              htmlFor="password"
-              className="block mb-2 text-sm font-medium"
-            >
-              Password
-            </label>
-            <input
-              type="password"
-              name="password"
+          <div className="mb-6">
+            <Input 
+              onChange={handleChange} 
+              placeholder="Password" 
+              type="password" 
               id="password"
-              value={formData.password}
-              onChange={handleChange}
-              className={`w-full px-4 py-2 text-sm border-2 rounded-md focus:outline-none focus:ring-2 ${
-                errors.password ? "border-red-500" : ""
-              }`}
-              placeholder="Enter your password"
+              className="w-full p-4 border border-[#C5C6C7] rounded-lg text-[#0B0C10] focus:ring-2 focus:ring-[#45A29E]"
             />
-            {errors.password && (
-              <p className="mt-2 text-sm text-red-500">{errors.password}</p>
-            )}
+            {errors.password && <p className="text-red-500">{errors.password}</p>}
           </div>
 
-          {/* Server Error */}
-          {serverError && (
-            <p className="mt-2 text-sm text-red-500">{serverError}</p>
-          )}
-
-          {/* Success Message */}
-          {successMessage && (
-            <p className="mt-2 text-sm text-green-500">{successMessage}</p>
-          )}
-
-          {/* Submit Button */}
-          <button
+          <Button 
+            name="Sign Up" 
             type="submit"
-            className="w-full px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-green-400 to-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2"
-          >
-            Sign Up
-          </button>
+            className="w-full bg-[#eeeeee] hover:bg-[#3B82F6] hover:shadow-sm hover:shadow-gray-400 font-semibold p-4 rounded-lg hover:text-white transition duration-400"
+          />
+
+          {serverError && <p className="text-red-500 mt-4">{serverError}</p>}
+          {successMessage && <p className="text-green-500 mt-4">{successMessage}</p>}
         </form>
 
-        {/* Additional Links */}
-        <p className="text-sm text-center text-gray-600">
-          Already have an account?{" "}
-          <a href="/signin" className="text-blue-500 hover:underline">
-            Sign in
-          </a>
-        </p>
+        <div className="mt-6 text-center text-[#C5C6C7]">
+          <span>Already have an account?</span>
+          <button 
+            onClick={() => navigate('/signin')} 
+            className="text-white hover:underline ml-2">
+            <span className='hover:text-blue-400'>Sign in</span>
+          </button>
+        </div>
       </div>
     </div>
   );
