@@ -4,6 +4,9 @@ import Home from './pages/Home'
 import Signin from './pages/Signin'
 import Signup from './pages/Signup'
 import Header from './components/Header'
+import ContactUs from './pages/ContactUs'
+import TermsOfService from './pages/TermsOfService'
+import  PrivacyPolicy from './pages/PrivacyPolicy'
 import './index.css';
 import Footer from './components/Footer'
 
@@ -15,6 +18,9 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/signin" element={<Signin />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path='/contactus' element={<ContactUs/>}></Route>
+        <Route path='/terms' element={<TermsOfService/>}></Route>
+        <Route path='/privacy' element={<PrivacyPolicy/>}></Route>
       </Routes>
       <Footer />
     </BrowserRouter>

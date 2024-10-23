@@ -1,30 +1,26 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import Input from '../components/ui/Input';
+import Button from '../components/ui/Button';
 
 const Signin = () => {
-  const [formData, setFormData] = useState({
-  });
-
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({ username: '', password: '' });
   const [errors, setErrors] = useState({});
   const [serverError, setServerError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.id]: e.target.value });
+    const { id, value } = e.target;
+    setFormData({ ...formData, [id]: value });
   };
 
   const validate = () => {
     const errors = {};
 
-
-    if (!formData.emailid.trim()) {
-      errors.emailid = 'Email is required';
-    } else if (
-      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formData.emailid)
-    ) {
-      errors.emailid = 'Email address is invalid';
+    if (!formData.username.trim()) {
+      errors.username = 'Username is required';
     }
 
     if (!formData.password) {
@@ -45,6 +41,8 @@ const Signin = () => {
       return;
     }
 
+    setLoading(true);
+
     try {
       const res = await fetch('http://localhost:3000/api/auth/signin', {
         method: 'POST',
@@ -53,107 +51,77 @@ const Signin = () => {
         },
         body: JSON.stringify(formData),
       });
-    
-      // Check if the response is not successful
+
       setLoading(false);
+
       if (!res.ok) {
         throw new Error('Failed to sign in');
-      } else if (res.ok) {
-        navigate('/');
       }
-    
+
       const data = await res.json();
-      if (!data.success === false) {
-        return setErrorMessage(data.message);
+      if (!data.success) {
+        setServerError(data.message);
+        return;
       }
+      
       setSuccessMessage('Signin successful!');
       setServerError('');
+      navigate('/');
     } catch (error) {
-      setServerError(error.message || 'An error occurred during signup');
+      setServerError(error.message || 'An error occurred during signin');
       setSuccessMessage('');
     }
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
-      <div className="w-full max-w-md p-8 space-y-6 bg-white border-4 border-black-800 rounded-lg shadow-xl">
-        <h2 className="text-3xl font-bold text-center">Log In</h2>
-        <form className="space-y-5" onSubmit={handleSubmit}>
+    <div className='flex justify-center min-h-56 p-[160px]'>
+      <div className="relative z-20 w-full max-w-md bg-[#040b18] bg-opacity-90 px-8 py-14 rounded-lg shadow-lg backdrop-blur-md">
+        <h2 className="text-center text-3xl font-bold text-white mb-16">Sign In</h2>
 
-          {/* Email */}
-          <div>
-            <label
-              htmlFor="emailid"
-              className="block mb-2 text-sm font-medium"
-            >
-              Email Address
-            </label>
-            <input
-              type="email"
-              name="emailid"
-              id="emailid"
-              value={formData.emailid}
+        <form onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <Input
               onChange={handleChange}
-              className={`w-full px-4 py-2 text-sm border-2 rounded-md focus:outline-none focus:ring-2 ${
-                errors.emailid ? 'border-red-500' : ''
-              }`}
-              placeholder="Enter your email"
+              placeholder="Username"
+              type="text"
+              id="username"
+              value={formData.username}
+              className="w-full p-4 border border-[#C5C6C7] rounded-lg text-[#0B0C10] focus:ring-2 focus:ring-[#45A29E]"
             />
-            {errors.emailid && (
-              <p className="mt-2 text-sm text-red-500">{errors.emailid}</p>
-            )}
+            {errors.username && <p className="text-red-500">{errors.username}</p>}
           </div>
 
-          {/* Password */}
-          <div>
-            <label
-              htmlFor="password"
-              className="block mb-2 text-sm font-medium"
-            >
-              Password
-            </label>
-            <input
+          <div className="mb-6">
+            <Input
+              onChange={handleChange}
+              placeholder="Password"
               type="password"
-              name="password"
               id="password"
               value={formData.password}
-              onChange={handleChange}
-              className={`w-full px-4 py-2 text-sm border-2 rounded-md focus:outline-none focus:ring-2 ${
-                errors.password ? 'border-red-500' : ''
-              }`}
-              placeholder="Enter your password"
+              className="w-full p-4 border border-[#C5C6C7] rounded-lg text-[#0B0C10] focus:ring-2 focus:ring-[#45A29E]"
             />
-            {errors.password && (
-              <p className="mt-2 text-sm text-red-500">{errors.password}</p>
-            )}
+            {errors.password && <p className="text-red-500">{errors.password}</p>}
           </div>
 
-          {/* Server Error */}
-          {serverError && (
-            <p className="mt-2 text-sm text-red-500">{serverError}</p>
-          )}
-
-          {/* Success Message */}
-          {successMessage && (
-            <p className="mt-2 text-sm text-green-500">{successMessage}</p>
-          )}
-
-          {/* Submit Button */}
-          <button
+          <Button
+            name="Sign in"
             type="submit"
-            className="w-full px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-green-400 to-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2"
-          >
-            Sign In
-          </button>
+            className="w-full bg-[#eeeeee] hover:bg-[#3B82F6] hover:shadow-sm hover:shadow-gray-400 font-semibold p-4 rounded-lg hover:text-white transition duration-400"
+          />
+
+          {serverError && <p className="text-red-500 mt-4">{serverError}</p>}
+          {successMessage && <p className="text-green-500 mt-4">{successMessage}</p>}
         </form>
 
-        {/* Additional Links */}
-        <p className="text-sm text-center text-gray-600">
-          Don't have an account?{' '}
-          <a href="/signup" className="text-blue-500 hover:underline">
-            Sign Up
-          </a>
-        </p>
+        <div className="mt-6 text-center text-[#C5C6C7]">
+          <span>Don't have an account?</span>
+          <button
+            onClick={() => navigate('/signup')}
+            className="text-white hover:underline ml-2"
+          >
+            <span className='hover:text-blue-400'>Signup Now</span>
+          </button>
+        </div>
       </div>
     </div>
   );
