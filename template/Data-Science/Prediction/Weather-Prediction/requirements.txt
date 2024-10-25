@@ -1,0 +1,6 @@
+requests
+pandas
+scikit-learn
+xgboost
+streamlit
+python-dotenv
