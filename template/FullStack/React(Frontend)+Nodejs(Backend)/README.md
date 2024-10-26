@@ -116,7 +116,7 @@ The application uses MongoDB for storing user information. The `users` collectio
 
 - **Architecture config :**
 
-  https://github.com/user-attachments/assets/bf6c6ba3-a046-4634-9b96-5dc327b8cf19
+https://github.com/user-attachments/assets/bf6c6ba3-a046-4634-9b96-5dc327b8cf19
 
 ---
 
