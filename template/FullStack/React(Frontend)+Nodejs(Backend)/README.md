@@ -114,7 +114,7 @@ The application uses MongoDB for storing user information. The `users` collectio
 
   Visit `http://localhost:80/` in your web browser.
 
-- **Architecture config :**
+## Architecture config :
 
 https://github.com/user-attachments/assets/bf6c6ba3-a046-4634-9b96-5dc327b8cf19
 
