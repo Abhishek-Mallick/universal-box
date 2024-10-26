@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo
+    container_name: mongodb_uni
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_template_data:/data/db
+  
+  backend:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: univ_template_nodejs_server
+    depends_on:
+      - mongodb
+    ports:
+      - "3000:3000"
+    environment:
+       MONGO_URL: mongodb://mongodb_uni:27017/uni
+       JWT_SECRET: jwt_secret
+
+  frontend:
+    build: 
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: univ_template_react_client
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
+    environment:
+       REACT_APP_BASE_URL: http://localhost:3000
+
+volumes:
+  mongodb_template_data:
