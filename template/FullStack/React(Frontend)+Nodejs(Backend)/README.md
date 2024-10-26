@@ -26,6 +26,10 @@ This repository provides a simple FullStack template for building modern web app
 - **MongoDB**: A NoSQL database known for its flexibility and scalability.
 - **Mongoose**: An elegant MongoDB object modeling for Node.js.
 
+### Devops
+
+- **Docker** : Docker is an open-source containerization platform by which you can pack your application and all its dependencies into a standardized unit called a container
+
 ## Installation
 1. **Populate the .env.example file**:
 
@@ -95,7 +99,25 @@ The application uses MongoDB for storing user information. The `users` collectio
 - **emailid**: String, unique, cannot be null.
 - **password**: String, hashed, cannot be null.
 
+
+## Instant Docker Setup
+
+> **Note :** You should have [Docker](https://docs.docker.com/get-started/get-docker/) installed on your machine and it should be online
+
+- **Run the following command (Docker compose gets automatically downloaded with Docker Desktop) :**
+
+  ```bash
+  docker-compose up
+  ```
+
+- **Access the application :**
+
+  Visit `http://localhost:80/` in your web browser.
+
+- **Architecture config :**
+
+  https://github.com/user-attachments/assets/bf6c6ba3-a046-4634-9b96-5dc327b8cf19
+
 ---
 
 Made using [Universal-Box](https://github.com/Abhishek-Mallick/universal-box)
-
