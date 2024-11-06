@@ -1,8 +1,6 @@
-# INTRODUCTION
+## Introduction
 
-## Overview
-
-The Spam Email Classification App is a web application built using Streamlit that identifies spam emails based on various input parameters. The app leverages a pre-trained machine learning model to provide accurate classification. Users can input details such as email subject, sender address, email body, and other metadata to determine whether an email is likely to be spam or not. This tool helps in efficiently filtering out unwanted emails and enhancing inbox security
+The **Spam Email Classification** App is a web application built using Streamlit that identifies spam emails based on various input parameters. The app leverages a pre-trained machine learning model to provide accurate classification. Users can input details such as email subject, sender address, email body, and other metadata to determine whether an email is likely to be spam or not. This tool helps in efficiently filtering out unwanted emails and enhancing inbox security
 
 ## Features
 
@@ -92,5 +90,4 @@ This notebook allows you to experiment with the code and datasets without settin
 
 ## Contact
 
-For any questions or feedback, please contact [adarshrout321@gmail.com](mailto:adarshrout321@gmail.com).
-
+Visit codebase [here](https://github.com/Abhishek-Mallick/universal-box/tree/main/template/Data-Science/Classification/Spam%20Email%20Classification)

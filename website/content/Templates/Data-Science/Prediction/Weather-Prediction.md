@@ -1,4 +1,4 @@
-# Weather Forecast and Prediction App
+## Introduction
 
 This is a simple weather forecasting app built with **Streamlit** that allows users to:
 - Enter the name of a city to get **today's weather** details.

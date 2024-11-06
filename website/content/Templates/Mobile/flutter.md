@@ -1,5 +1,4 @@
-# Universal Box Flutter Template
-
+## Introduction
 This template demonstrates a simple Flutter application that fetches and displays quotes from an API. It uses the `http` package for making HTTP requests and the `flutter_dotenv` package for managing environment variables.
 
 ## Dependencies

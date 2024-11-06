@@ -1,6 +1,4 @@
-# Unity3D Template
-
-## Overview
+## Introdcution
 This Unity template project includes a simple sphere that moves around on a plane and doesn't fall off. It's designed to help you get started with basic Unity projects quickly and easily.
 
 ## Features
