@@ -39,5 +39,6 @@ This Unity template project includes a simple sphere that moves around on a plan
 - [Unity Learn](https://learn.unity.com/)
 - [Sample Projects](https://learn.unity.com/tutorial/sample-projects)
 
-## Contributing
-Feel free to fork this project and submit pull requests. For major changes, please open an issue first to discuss what you would like to change.
+---
+
+Made using [Universal-Box](https://github.com/Abhishek-Mallick/universal-box)

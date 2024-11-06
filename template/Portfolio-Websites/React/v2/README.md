@@ -50,4 +50,6 @@ Navigate to your project directory and run
 
 4. **Access the Portfolio-Website**:Open your browser and navigate to `http://127.0.0.1:3000/`
 
+---
+
 Made using [Universal-Box](https://github.com/Abhishek-Mallick/universal-box)

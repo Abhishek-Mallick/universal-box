@@ -36,3 +36,7 @@ API_KEY=your_api_key_here
 4. Use `flutter run` to start the application.
 
 This will launch the app, and you should see a quote displayed on the screen. Press the refresh button to fetch a new quote.
+
+---
+
+Made using [Universal-Box](https://github.com/Abhishek-Mallick/universal-box)

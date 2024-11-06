@@ -111,3 +111,10 @@ Key dependencies:
 - `matplotlib`
 - `pandas`
 
+## 📒 Google Colab Notebook
+
+For a more interactive experience, you can also run the Diabetes Prediction models in a Google Colab notebook. [NOTEBOOK LINK](https://drive.google.com/file/d/10H632c5TtFngciOzKwMW8_Yre1jOQ5gP/view?usp=sharing)
+
+---
+
+Made using [Universal-Box](https://github.com/Abhishek-Mallick/universal-box)

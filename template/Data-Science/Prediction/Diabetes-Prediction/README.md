@@ -150,3 +150,6 @@ For a more interactive experience, you can also run the Diabetes Prediction mode
 
 This notebook allows you to experiment with the code and datasets without setting up a local environment.
 
+---
+
+Made using [Universal-Box](https://github.com/Abhishek-Mallick/universal-box)

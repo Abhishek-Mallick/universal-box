@@ -65,3 +65,7 @@ cat hasura-exports/sample-data.sql | docker exec -i hasura-graphql-postgres-1 ps
 Visit http://localhost:8080/console/api/api-explorer
 
 Check [Documentation](./docs.md) for more info
+
+---
+
+Made using [Universal-Box](https://github.com/Abhishek-Mallick/universal-box)

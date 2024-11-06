@@ -13,9 +13,7 @@ This repository provides a simple FullStack template for building modern web app
 - **Syntax Highlighting**: Supports syntax highlighting for multiple programming languages using rismjs.
 ---
 
-
 # Screenshots:
-
 
 ### Public Snippets
 <img src="./img/01.png" width="500" height="300">
@@ -289,5 +287,3 @@ Upon first run, the backend server will seed initial data:
 ---
 
 Made using [Universal-Box](https://github.com/Abhishek-Mallick/universal-box)
-
----

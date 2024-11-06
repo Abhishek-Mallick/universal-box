@@ -81,3 +81,6 @@ Predicted Temperature for Tomorrow: 14.32°C
 - **Pandas**: For data manipulation and preparation.
 - **Scikit-learn**: For preprocessing and scaling data.
 
+---
+
+Made using [Universal-Box](https://github.com/Abhishek-Mallick/universal-box)

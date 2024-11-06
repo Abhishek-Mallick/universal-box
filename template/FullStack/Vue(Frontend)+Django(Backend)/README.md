@@ -160,5 +160,3 @@ The application uses **SQLite3** for persistence. The `User` model in Django con
 ---
 
 Made using [Universal-Box](https://github.com/Abhishek-Mallick/universal-box)
-
----

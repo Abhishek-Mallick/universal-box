@@ -4,7 +4,7 @@
 
 The Flight Price Prediction App is a web application built using Streamlit that predicts flight prices based on various input parameters. The app leverages a pre-trained machine learning model to provide accurate price predictions. Users can input details such as airline, source city, destination city, class, stops, departure time, arrival time, flight, duration, and days left for departure to get an estimated flight price.
 
-## Features
+## 🚀Features
 
 - **User-Friendly Interface**: Simple and intuitive interface for inputting flight details.
 - **Real-Time Predictions**: Provides instant flight price predictions based on user inputs.
@@ -21,7 +21,7 @@ The Flight Price Prediction App is a web application built using Streamlit that 
 - Scikit-learn
 - Joblib
 
-### Setup
+### 🛠 Setup
 
 1. **Create a Virtual Environment**
 
@@ -79,12 +79,10 @@ flight-price-prediction
 └── README.md
 ```
 
-## Acknowledgements
+## 📒 Google Colab Notebook
 
-- The app uses data from the `Dataset.csv` file for predictions.
-- The machine learning model was trained using scikit-learn.
+For a more interactive experience, you can also run the Diabetes Prediction models in a Google Colab notebook. [NOTEBOOK LINK](https://colab.research.google.com/drive/1r8UkLwYhL1BEahhPXlx9abhFk3vdgdZT?usp=sharing)
 
-## Contact
+---
 
-For any questions or feedback, please contact [deepraj21.bera@gmail.com](mailto:deepraj21.bera@gmail.com).
-
+Made using [Universal-Box](https://github.com/Abhishek-Mallick/universal-box)

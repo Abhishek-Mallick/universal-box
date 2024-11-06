@@ -9,11 +9,18 @@ This project is a template for creating a Spring Boot API using Java. It provide
 
 ## Getting Started
 
-### Clone the Repository
-```bash
-git clone https://github.com/yourusername/universal-box.git
-cd universal-box/template/API/springboot-java
-```
+### Installation Steps
+To utilize the Spring Boot Framework Template with Universal-Box, follow these steps:
+
+1. **Initialize the project**:
+   ```bash
+   universal-box init
+   ```
+2. **Select the Apollo GraphQL Server Template**:
+Select the following from the menu:
+   ```bash
+    API > springboot-java
+    ```
 
 ### Run the Application
 ```bash
@@ -37,3 +44,6 @@ curl -X POST http://localhost:8080/api/users \
 curl -X GET http://localhost:8080/api/users
 ```
 
+---
+
+Made using [Universal-Box](https://github.com/Abhishek-Mallick/universal-box)

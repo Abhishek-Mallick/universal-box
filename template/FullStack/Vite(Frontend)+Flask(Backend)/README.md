@@ -72,6 +72,6 @@ Follow this documentation to get the Github_ClientId and Github_ClientSecret: [G
 README.md
 ```
 
-## Usage
+---
 
-Feel free to use this template and make your own changes.
+Made using [Universal-Box](https://github.com/Abhishek-Mallick/universal-box)

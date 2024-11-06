@@ -50,4 +50,6 @@ Navigate to your project directory and run using [LiveServer](https://marketplac
 
 3. **Access the Portfolio-Website**:Open your browser and navigate to `http://127.0.0.1:5500/index.html`.
 
+---
+
 Made using [Universal-Box](https://github.com/Abhishek-Mallick/universal-box)

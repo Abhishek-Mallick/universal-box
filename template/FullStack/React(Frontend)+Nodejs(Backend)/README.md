@@ -117,7 +117,7 @@ The application uses MongoDB for storing user information. The `users` collectio
 ## Architecture config :
 
 ![architecture](https://github.com/user-attachments/assets/1f6de5a6-4bf8-4832-a48d-e129172258a8)
----
 
+---
 
 Made using [Universal-Box](https://github.com/Abhishek-Mallick/universal-box)

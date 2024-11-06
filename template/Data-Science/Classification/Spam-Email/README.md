@@ -90,7 +90,6 @@ This notebook allows you to experiment with the code and datasets without settin
 - The app uses data from the `email.csv` file for classifications.
 - The machine learning model was trained using scikit-learn.
 
-## Contact
+---
 
-For any questions or feedback, please contact [adarshrout321@gmail.com](mailto:adarshrout321@gmail.com).
-
+Made using [Universal-Box](https://github.com/Abhishek-Mallick/universal-box)
