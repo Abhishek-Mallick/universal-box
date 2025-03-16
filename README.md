@@ -85,6 +85,10 @@ Here's some [example YAML scripts](https://github.com/Abhishek-Mallick/universal
 - **`deploy`**: Trigger the build and deployment pipeline.  
 - **`--help`**: Display the help message with command usage.
 
+
+### Architecture Diagram
+![architecture-diagram](https://github.com/user-attachments/assets/710318b3-0a74-4e83-b471-447d6250dbe2)
+
 ### Examples
 
 ```bash
