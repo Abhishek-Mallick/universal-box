@@ -12,7 +12,7 @@
   <a href="https://img.shields.io/github/actions/workflow/status/Abhishek-Mallick/universal-box/.github%2Fworkflows%2Frelease.yml" target="_blank"><img src="https://img.shields.io/github/actions/workflow/status/Abhishek-Mallick/universal-box/.github%2Fworkflows%2Frelease.yml?branch=main&style=flat&colorA=000000&colorB=000000" alt="CI" /></a>
   <a href="https://www.npmjs.com/package/universal-box" target="_blank"><img src="https://img.shields.io/npm/v/universal-box?style=flat&colorA=000000&colorB=000000" alt="NPM Version" /></a>
     <a href="https://www.npmjs.com/package/universal-box" target="_blank"><img src="https://img.shields.io/npm/dt/universal-box?style=flat&colorA=000000&colorB=000000" alt="NPM Downloads" /></a>
-  <a href="https://discord.gg/aWtZQTQPe4" target="_blank"><img src="https://img.shields.io/discord/1164935524990066740?style=flat&colorA=000000&colorB=000000&label=discord&logo=discord&logoColor=ffffff" /></a>
+  <a href="https://discord.gg/Ebusy32ctb" target="_blank"><img src="https://img.shields.io/discord/1164935524990066740?style=flat&colorA=000000&colorB=000000&label=discord&logo=discord&logoColor=ffffff" /></a>
   <a href="https://opensource.org/licenses/Apache-2.0"><img alt="License" src="https://img.shields.io/github/license/Abhishek-Mallick/universal-box?color=black" /></a>
 <a href="https://snyk.io/advisor/npm-package/universal-box" target="_blank">
   <img src="https://snyk.io/advisor/npm-package/universal-box/badge.svg" alt="Snyk" style="border: none;"/>
@@ -25,7 +25,7 @@
           <a href="https://universal-box.vercel.app/">📚 Read the docs</a>
         </td>
         <td>
-          <a href="https://discord.gg/aWtZQTQPe4">💬 Join our Discord</a>
+          <a href="https://discord.gg/Ebusy32ctb">💬 Join our Discord</a>
         </td>
         <td>
           <a href="https://universal-box.instatus.com" target="_blank">🔍 Monitor Project Status</a>

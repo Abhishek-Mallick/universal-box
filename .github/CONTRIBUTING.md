@@ -30,7 +30,7 @@ There are two main types of contributions in this repository:
 
 ## Before You Contribute
 Before starting to contribute, please make sure to:
-- [Open an issue](https://github.com/Abhishek-Mallick/universal-box/issues/new) or discuss your idea on [Discord](https://discord.gg/aWtZQTQPe4) to get feedback and align with the project's goals.
+- [Open an issue](https://github.com/Abhishek-Mallick/universal-box/issues/new) or discuss your idea on [Discord](https://discord.gg/Ebusy32ctb) to get feedback and align with the project's goals.
 - Review the [Code of Conduct](https://github.com/Abhishek-Mallick/universal-box/blob/main/.github/CODE_OF_CONDUCT.md) and agree to abide by it.
 
 ## Your First Contribution
@@ -82,7 +82,7 @@ Be sure to include a **clear title and description**, as much **relevant informa
 ## Contribution Guidelines
 
 ### Core Work Contributions
-For contributions to the core functionality of Universal-Box, it's recommended to discuss your ideas on [Discord](https://discord.gg/aWtZQTQPe4) with the team handling the core functionality or by raising a [Feature Request](https://github.com/Abhishek-Mallick/universal-box/issues/new?labels=enhancement&template=feature_request.md).
+For contributions to the core functionality of Universal-Box, it's recommended to discuss your ideas on [Discord](https://discord.gg/Ebusy32ctb) with the team handling the core functionality or by raising a [Feature Request](https://github.com/Abhishek-Mallick/universal-box/issues/new?labels=enhancement&template=feature_request.md).
 
 ### Template Contributions
 Template contributions can be picked up by resolving issues listed in the [Issues tab](https://github.com/Abhishek-Mallick/universal-box/issues) or by suggesting new templates or directories to be introduced.

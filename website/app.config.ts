@@ -20,7 +20,7 @@ export default defineAppConfig({
       nav: [],
       links: [{
         'icon': 'i-simple-icons-discord',
-        'to': 'https://discord.gg/aWtZQTQPe4',
+        'to': 'https://discord.gg/Ebusy32ctb',
         'target': '_blank',
         'aria-label': 'Universal-Box on Discord'
       },{
@@ -47,7 +47,7 @@ export default defineAppConfig({
       'aria-label': 'Universal-Box Website'
     }, {
       'icon': 'i-simple-icons-discord',
-      'to': 'https://discord.gg/aWtZQTQPe4',
+      'to': 'https://discord.gg/Ebusy32ctb',
       'target': '_blank',
       'aria-label': 'Universal-Box on Discord'
     }, {
