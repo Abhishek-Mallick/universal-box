@@ -42,7 +42,7 @@ export default defineAppConfig({
     colorMode: false,
     links: [{
       'icon': 'lucide:box',
-      'to': 'https://universal-box.dev/',
+      'to': 'https://universal-box.vercel.app/',
       'target': '_blank',
       'aria-label': 'Universal-Box Website'
     }, {

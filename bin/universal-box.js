@@ -136,7 +136,7 @@ function initProject() {
         );
         console.log(
           chalk.gray(
-            "Need help? Visit our documentation: https://universal-box.dev/"
+            "Need help? Visit our documentation: https://universal-box.vercel.app/"
           )
         );
       } catch (error) {
@@ -324,7 +324,7 @@ ${chalk.bold("Examples:")}
   )}
 
 ${chalk.gray("Need help? Visit our documentation:")} ${chalk.underline.blue(
-    "https://universal-box.dev/"
+    "https://universal-box.vercel.app/"
   )}
 `);
 }

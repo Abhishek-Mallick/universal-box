@@ -22,7 +22,7 @@
     <tbody>
       <tr>
         <td>
-          <a href="https://universal-box.dev/">📚 Read the docs</a>
+          <a href="https://universal-box.vercel.app/">📚 Read the docs</a>
         </td>
         <td>
           <a href="https://discord.gg/aWtZQTQPe4">💬 Join our Discord</a>
@@ -64,7 +64,7 @@ Once installed, you can initialize a new project with:
 
 Here's a brief overview of the available commands:
 
-- **`init`**: Initialize a new project using one of the [starter templates](https://universal-box.dev/templates).
+- **`init`**: Initialize a new project using one of the [starter templates](https://universal-box.vercel.app/templates).
 
 https://github.com/user-attachments/assets/6e0e25e0-0ec4-4293-b555-9729ae7fb8d4
 
@@ -103,7 +103,7 @@ universal-box get https://github.com/username/repo/tree/<path_to_sub-directory>
 
 ## Documentation
 
-For more details and advanced usage, visit the [Universal-Box Documentation](https://universal-box.dev/).
+For more details and advanced usage, visit the [Universal-Box Documentation](https://universal-box.vercel.app/).
 
 ## License
 

@@ -58,7 +58,7 @@ universal-box init
   ---
   title: Prebuilt Templates for Every Need.
   icon: i-heroicons-cube
-  to: https://universal-box.dev/templates
+  to: https://universal-box.vercel.app/templates
   target: _blank
   ---
   Explore our extensive library of **50+ project templates** designed for various applications. Select and download your preferred template in just two commands!
@@ -88,7 +88,7 @@ universal-box init
   ---
   title: Comprehensive Support and Resources.
   icon: i-heroicons-document-text
-  to: https://universal-box.dev/docs
+  to: https://universal-box.vercel.app/docs
   target: _blank
   ---
   Access detailed documentation and community support to guide you through setup, customization, and troubleshooting for your projects.
