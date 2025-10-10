@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Realtime Chat — WebSockets</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="brand">Realtime Chat</div>
+        <form id="joinForm" class="join-form">
+          <input id="username" placeholder="Your name" maxlength="24" required />
+          <input id="room" placeholder="Room name (e.g. general)" maxlength="32" required />
+          <button id="joinBtn" type="submit">Join</button>
+        </form>
+
+        <div class="room-info" id="roomInfo" hidden>
+          <div class="room-name" id="roomName"></div>
+          <button id="leaveBtn" class="leave">Leave</button>
+        </div>
+      </aside>
+
+      <main class="chat" aria-live="polite">
+        <header class="chat-header">
+          <div class="title">Chat</div>
+          <div class="subtitle" id="subtitle">Join a room to start chatting</div>
+        </header>
+
+        <ul id="messages" class="messages"></ul>
+
+        <div class="composer">
+          <div class="typing" id="typing" aria-hidden="true"></div>
+          <input id="messageInput" placeholder="Type a message and press Enter" disabled />
+          <button id="sendBtn" disabled>Send</button>
+        </div>
+      </main>
+    </div>
+
+    <!-- Socket.IO client will be served from the server at /socket.io/socket.io.js -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
