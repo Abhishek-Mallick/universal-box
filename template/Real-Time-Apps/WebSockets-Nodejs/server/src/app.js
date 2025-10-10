@@ -1,11 +1,11 @@
+import path from 'path';
 import dotenv from 'dotenv';
 import express from 'express';
 import helmet from 'helmet';
 import cors from 'cors';
 import { createServer } from 'http';
-import { Server } from 'socket.io';
-import path from 'path';
 import compression from 'compression';
+
 import { logger } from './utils/logger.js';
 
 const __dirname = path.resolve();

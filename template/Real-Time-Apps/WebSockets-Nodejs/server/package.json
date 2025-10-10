@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "nodemon src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "husky"
+    "prepare": "husky",
+    "lint": "eslint .",
+    "format": "prettier --write \"src/**/*.{js,cjs,mjs,json,md}\""
   },
   "keywords": [],
   "author": "",
