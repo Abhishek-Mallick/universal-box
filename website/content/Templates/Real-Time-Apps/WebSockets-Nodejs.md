@@ -2,6 +2,8 @@
 This template provides the foundation for a real-time application using WebSockets (Socket.IO). It features a simple chat application where multiple users can communicate in real time. The setup includes both server-side and client-side code, showcasing how to broadcast and receive messages.
 
 ## Screenshots
+<img width="1149" height="838" alt="Screen Shot 2025-10-11 at 11 08 28 AM" src="https://github.com/user-attachments/assets/6b266bb7-c2f8-485f-96ca-7f140a4f25e6" />
+
 
 
 
