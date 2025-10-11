@@ -64,7 +64,11 @@ Once installed, you can initialize a new project with:
 
 Here's a brief overview of the available commands:
 
-- **`init`**: Initialize a new project using one of the [starter templates](https://universal-box.vercel.app/templates).
+- **`init [project-name]`**: Initialize a new project using one of the [starter templates](https://universal-box.vercel.app/templates).
+  
+  **Options:**
+  - `--force`: Automatically overwrite existing directory without prompting
+  - `--dry-run`: Show which files and folders would be copied or created without actually writing to disk
 
 https://github.com/user-attachments/assets/6e0e25e0-0ec4-4293-b555-9729ae7fb8d4
 
@@ -94,6 +98,9 @@ Here's some [example YAML scripts](https://github.com/Abhishek-Mallick/universal
 ```bash
 universal-box --help
 universal-box init
+universal-box init my-app
+universal-box init my-app --dry-run
+universal-box init my-app --force
 universal-box lint
 universal-box generate <file.yml>
 universal-box deploy
@@ -111,3 +118,4 @@ This project is licensed under the Apache-2.0 License. See the [LICENSE](LICENSE
 
 Copyright (c) 2024 Abhishek Mallick  
 [LinkedIn](https://www.linkedin.com/in/abhishek-mallick09/)
+
