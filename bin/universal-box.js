@@ -13,6 +13,7 @@ const setupPrettier = require("./generate/setup-prettier.js");
 const setupFlake8 = require("./generate/setup-flake8.js");
 const setupBlack = require("./generate/setup-black.js")
 const setupPylint = require("./generate/setup-pylint.js")
+const { isGitHubURLValid } = require("./generate/utils.js");
 
 // Scaffold directory is maintained as a mirror version of the templates directory. Maintained by maintainers.
 const scaffoldDir = path.resolve(__dirname, "../scaffold");
@@ -45,6 +46,10 @@ switch (command) {
     const repoUrl = args[0];
     if (!repoUrl) {
       console.error("Please provide a repository URL.");
+      process.exit(1);
+    }
+    if(!isGitHubURLValid(repoUrl)) {
+      console.error("Please provide a valid GitHub URL.");
       process.exit(1);
     }
     cloneRepository1(repoUrl, "universal-box");
