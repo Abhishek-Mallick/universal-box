@@ -1,20 +1,9 @@
----
-title: "WebSockets — Node.js"
-description: "A small real-time chat template using Node.js, Express and Socket.IO. Includes a simple frontend and server with rooms and typing indicators."
-tags: ["real-time", "websockets", "socket.io", "nodejs"]
----
-
-# WebSockets — Node.js
-
+## Introduction
 This template provides the foundation for a real-time application using WebSockets (Socket.IO). It features a simple chat application where multiple users can communicate in real time. The setup includes both server-side and client-side code, showcasing how to broadcast and receive messages.
 
-## Key Features
+## Screenshots
 
-- Server Setup: Express.js server with Socket.IO attached and a health endpoint
-- Client Interface: Vanilla HTML/CSS/JavaScript frontend (located in `client/public`)
-- Real-Time Communication: Message broadcasting, user join/leave notifications
-- Rooms & Namespaces: Demonstrates Socket.IO rooms and the `/chat` namespace
-- Typing indicators: `typing:start` / `typing:stop` events to show when users are typing
+
 
 ## Tech stack
 
