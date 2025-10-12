@@ -12,7 +12,8 @@ const setupESLint = require("./generate/setup-eslint.js");
 const setupPrettier = require("./generate/setup-prettier.js");
 const setupFlake8 = require("./generate/setup-flake8.js");
 const setupBlack = require("./generate/setup-black.js")
-const setupPylint = require("./generate/setup-pylint.js")
+const setupPylint = require("./generate/setup-pylint.js");
+const validateProjectName = require("../utils/validate_project_name.utils.js");
 
 // Scaffold directory is maintained as a mirror version of the templates directory. Maintained by maintainers.
 const scaffoldDir = path.resolve(__dirname, "../scaffold");
@@ -76,18 +77,8 @@ function initProject() {
       },
     ])
     .then(async (answers) => {
-      const projectName = answers.projectName;
-
-      // Error handling for same dir name
-      const projectDir = path.resolve(process.cwd(), projectName);
-      if (fs.existsSync(projectDir)) {
-        console.error(
-          chalk.red(
-            `❌ A project with the name "${projectName}" already exists. Please choose a different name.`
-          )
-        );
-        return;
-      }
+      
+      let projectName = await validateProjectName(answers.projectName);
 
       const selectedTemplate = await selectTemplate(scaffoldDir);
       let relativeTemplatePath = path.relative(scaffoldDir, selectedTemplate);
