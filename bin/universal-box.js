@@ -25,7 +25,13 @@ const [, , command, ...args] = process.argv;
 
 switch (command) {
   case "init":
-    initProject();
+    const flags = {
+      force: args.includes('--force'),
+      dryRun: args.includes('--dry-run')
+    };
+
+    const projectNameArg = args.find(arg => !arg.startsWith('--'));
+    initProject(flags, projectNameArg);
     break;
   case "--help":
     showHelp();
@@ -71,27 +77,42 @@ switch (command) {
     );
 }
 
-function initProject() {
-  inquirer
-    .prompt([
+function initProject(flags = {}, projectNameArg = null) {
+  let projectNamePromise;
+  
+  if (projectNameArg) {
+    projectNamePromise = Promise.resolve({ projectName: projectNameArg });
+  } else {
+    projectNamePromise = inquirer.prompt([
       {
         type: "input",
         name: "projectName",
         message: "Enter the project name:",
       },
-    ])
-    .then(async (answers) => {
+    ]);
+  }
+  
+  	projectNamePromise.then(async (answers) => {
       const projectName = answers.projectName;
 
-      // Error handling for same dir name
+      // Check existing directory with --force support
       const projectDir = path.resolve(process.cwd(), projectName);
       if (fs.existsSync(projectDir)) {
-        console.error(
-          chalk.red(
-            `❌ A project with the name "${projectName}" already exists. Please choose a different name.`
-          )
-        );
-        return;
+        if (flags.force) {
+          console.log(chalk.yellow(`⚠️  Directory "${projectName}" already exists. Using --force to overwrite...`));
+          if (!flags.dryRun) {
+            await fs.emptyDir(projectDir);
+          }
+        } else if (flags.dryRun) {
+          console.log(chalk.yellow(`⚠️  Directory "${projectName}" already exists (dry-run mode).`));
+        } else {
+          console.error(
+            chalk.red(
+              `❌ A project with the name "${projectName}" already exists. Please choose a different name or use --force to overwrite.`
+            )
+          );
+          return;
+        }
       }
 
       const selectedTemplate = await selectTemplate(scaffoldDir);
@@ -104,6 +125,45 @@ function initProject() {
       const repoURL = `${templatesRepoBaseURL}/${encodedTemplatePath}`;
 
       console.log("Codebase available at: ", repoURL);
+
+      // Dry-run mode with detailed file output
+      if (flags.dryRun) {
+        console.log(chalk.cyan("\n🔍 DRY RUN MODE - No files will be created\n"));
+        console.log(chalk.bold("The following would be created:\n"));
+        
+        // Get file list from local scaffold template
+        const fileList = await getTemplateFiles(selectedTemplate, projectName);
+        
+        if (fileList.files.length > 0 || fileList.dirs.length > 0) {
+          console.log(chalk.gray("Directory structure:"));
+          console.log(chalk.gray("─────────────────────────────────────────"));
+          
+          fileList.dirs.forEach(dir => {
+            console.log(chalk.blue(`  📁 ${dir}/`));
+          });
+          
+          fileList.files.forEach(file => {
+            console.log(chalk.green(`  📄 ${file}`));
+          });
+          
+          console.log(chalk.gray("─────────────────────────────────────────"));
+          console.log(chalk.cyan(`\nTotal: ${fileList.files.length} files, ${fileList.dirs.length} directories`));
+        } else {
+          console.log(chalk.yellow("No files found in template (this might indicate an issue)."));
+        }
+        
+        console.log(chalk.gray(`\nTemplate: ${relativeTemplatePath}`));
+        console.log(chalk.gray(`Source: ${repoURL}`));
+        console.log(chalk.yellow("\n💡 To create the project, run without --dry-run flag:"));
+        console.log(chalk.cyan(`   universal-box init ${projectName}`));
+        
+        if (fs.existsSync(projectDir)) {
+          console.log(chalk.yellow("\n⚠️  Note: Directory already exists. Use --force to overwrite."));
+          console.log(chalk.cyan(`   universal-box init ${projectName} --force`));
+        }
+        
+        return;
+      }
 
       try {
         await cloneRepository1(repoURL, projectName);
@@ -151,6 +211,39 @@ function initProject() {
         );
       }
     });
+}
+
+async function getTemplateFiles(templatePath, projectName) {
+  const files = [];
+  const dirs = [];
+  
+  async function walkDirectory(currentPath, relativePath = '') {
+    try {
+      const entries = await fs.readdir(currentPath, { withFileTypes: true });
+      
+      for (const entry of entries) {
+        const fullPath = path.join(currentPath, entry.name);
+        const relPath = path.join(relativePath, entry.name);
+        
+        if (entry.isDirectory()) {
+          // Add directory (with project name as root)
+          dirs.push(path.join(projectName, relPath));
+          // Recursively walk subdirectory
+          await walkDirectory(fullPath, relPath);
+        } else if (entry.isFile()) {
+          // Add file (with project name as root)
+          files.push(path.join(projectName, relPath));
+        }
+      }
+    } catch (error) {
+      // Skip unreadable directories (e.g., permission issues)
+      console.error(chalk.dim(`Warning: Could not read ${currentPath}`));
+    }
+  }
+  
+  await walkDirectory(templatePath);
+  
+  return { files, dirs };
 }
 
 async function lintProject() {
@@ -303,11 +396,14 @@ function showHelp() {
 ${chalk.blue.bold("Universal Box - The Ultimate Project Scaffolding Tool")}
 
 ${chalk.bold("Usage:")}
-  ${chalk.green("universal-box")} <command>
+  ${chalk.green("universal-box")} <command> [options]
 
 ${chalk.bold("Commands:")}
-  ${chalk.cyan("init")}         ${chalk.dim("Initialize a new project")}
-  ${chalk.cyan("get")}          ${chalk.dim(
+  ${chalk.cyan("init [project-name]")}  ${chalk.dim("Initialize a new project")}
+                          ${chalk.dim("Options:")}
+                            ${chalk.gray("--force     Overwrite existing directory without prompting")}
+                            ${chalk.gray("--dry-run   Preview what would be created without actually creating")}
+  ${chalk.cyan("get")}                   ${chalk.dim(
     "Clone a GitHub repository or a specific subdirectory from it"
   )}
   ${chalk.cyan("lint")}         ${chalk.dim("Add the default linting configurations")}
@@ -320,6 +416,10 @@ ${chalk.bold("Commands:")}
 ${chalk.bold("Examples:")}
   ${chalk.green("universal-box --help")}
   ${chalk.green("universal-box init")}
+  ${chalk.green("universal-box init my-app")}
+  ${chalk.green("universal-box init my-app --dry-run")}
+  ${chalk.green("universal-box init my-app --force")}
+  ${chalk.green("universal-box init my-app --force --dry-run")}
   ${chalk.green("universal-box deploy")}
   ${chalk.green("universal-box lint")}
   ${chalk.green("universal-box generate <idea.yml>")}
