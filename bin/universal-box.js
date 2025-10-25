@@ -14,9 +14,10 @@ const setupFlake8 = require("./generate/setup-flake8.js");
 const setupBlack = require("./generate/setup-black.js")
 const setupPylint = require("./generate/setup-pylint.js")
 const { isGitHubURLValid } = require("./generate/utils.js");
+const validateProjectName = require("../utils/validate_project_name.utils.js");
 
 // Scaffold directory is maintained as a mirror version of the templates directory. Maintained by maintainers.
-const scaffoldDir = path.resolve(__dirname, "../scaffold");
+const scaffoldDir = path.resolve(__dirname, "../template");
 const templatesRepoBaseURL =
   "https://github.com/Abhishek-Mallick/universal-box/tree/main/template";
 
@@ -93,27 +94,7 @@ function initProject(flags = {}, projectNameArg = null) {
   }
   
   	projectNamePromise.then(async (answers) => {
-      const projectName = answers.projectName;
-
-      // Check existing directory with --force support
-      const projectDir = path.resolve(process.cwd(), projectName);
-      if (fs.existsSync(projectDir)) {
-        if (flags.force) {
-          console.log(chalk.yellow(`⚠️  Directory "${projectName}" already exists. Using --force to overwrite...`));
-          if (!flags.dryRun) {
-            await fs.emptyDir(projectDir);
-          }
-        } else if (flags.dryRun) {
-          console.log(chalk.yellow(`⚠️  Directory "${projectName}" already exists (dry-run mode).`));
-        } else {
-          console.error(
-            chalk.red(
-              `❌ A project with the name "${projectName}" already exists. Please choose a different name or use --force to overwrite.`
-            )
-          );
-          return;
-        }
-      }
+      let projectName = await validateProjectName(answers.projectName);
 
       const selectedTemplate = await selectTemplate(scaffoldDir);
       let relativeTemplatePath = path.relative(scaffoldDir, selectedTemplate);
