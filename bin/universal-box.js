@@ -11,12 +11,13 @@ const { generateFromConfig } = require("./generate/generate-from-config.js");
 const setupESLint = require("./generate/setup-eslint.js");
 const setupPrettier = require("./generate/setup-prettier.js");
 const setupFlake8 = require("./generate/setup-flake8.js");
-const setupBlack = require("./generate/setup-black.js")
-const setupPylint = require("./generate/setup-pylint.js")
+const setupBlack = require("./generate/setup-black.js");
+const setupPylint = require("./generate/setup-pylint.js");
 const { isGitHubURLValid } = require("./generate/utils.js");
+const validateProjectName = require("../utils/validate_project_name.utils.js");
 
 // Scaffold directory is maintained as a mirror version of the templates directory. Maintained by maintainers.
-const scaffoldDir = path.resolve(__dirname, "../scaffold");
+const scaffoldDir = path.resolve(__dirname, "../template");
 const templatesRepoBaseURL =
   "https://github.com/Abhishek-Mallick/universal-box/tree/main/template";
 
@@ -26,11 +27,11 @@ const [, , command, ...args] = process.argv;
 switch (command) {
   case "init":
     const flags = {
-      force: args.includes('--force'),
-      dryRun: args.includes('--dry-run')
+      force: args.includes("--force"),
+      dryRun: args.includes("--dry-run"),
     };
 
-    const projectNameArg = args.find(arg => !arg.startsWith('--'));
+    const projectNameArg = args.find((arg) => !arg.startsWith("--"));
     initProject(flags, projectNameArg);
     break;
   case "--help":
@@ -39,13 +40,16 @@ switch (command) {
   case "deploy":
     console.log(
       chalk.yellow(
-        "Deployment utility function is still under development in a UAT environment and will be published soon."
-      )
+        "Deployment utility function is still under development in a UAT environment and will be published soon.",
+      ),
     );
     break;
   case "lint":
     lintProject().catch((error) => {
-      console.error(chalk.red("An error occurred during lint setup:"), error.message);
+      console.error(
+        chalk.red("An error occurred during lint setup:"),
+        error.message,
+      );
     });
     break;
   case "get":
@@ -54,32 +58,34 @@ switch (command) {
       console.error("Please provide a repository URL.");
       process.exit(1);
     }
-    if(!isGitHubURLValid(repoUrl)) {
+    if (!isGitHubURLValid(repoUrl)) {
       console.error("Please provide a valid GitHub URL.");
       process.exit(1);
     }
     cloneRepository1(repoUrl, "universal-box");
     break;
   case "generate":
-      const configFileName = args[0];
-      if (!configFileName) {
-        console.error("Please provide a configuration file name (e.g., idea.yml).");
-        process.exit(1);
-      }
-      generateFromConfig(configFileName);
-      break;
-  
+    const configFileName = args[0];
+    if (!configFileName) {
+      console.error(
+        "Please provide a configuration file name (e.g., idea.yml).",
+      );
+      process.exit(1);
+    }
+    generateFromConfig(configFileName);
+    break;
+
   default:
     console.log(
       chalk.red(
-        'Unknown command. Use "universal-box --help" for available commands.'
-      )
+        'Unknown command. Use "universal-box --help" for available commands.',
+      ),
     );
 }
 
 function initProject(flags = {}, projectNameArg = null) {
   let projectNamePromise;
-  
+
   if (projectNameArg) {
     projectNamePromise = Promise.resolve({ projectName: projectNameArg });
   } else {
@@ -91,140 +97,135 @@ function initProject(flags = {}, projectNameArg = null) {
       },
     ]);
   }
-  
-  	projectNamePromise.then(async (answers) => {
-      const projectName = answers.projectName;
 
-      // Check existing directory with --force support
-      const projectDir = path.resolve(process.cwd(), projectName);
+  projectNamePromise.then(async (answers) => {
+    let projectName = await validateProjectName(answers.projectName, flags);
+    const projectDir = path.resolve(process.cwd(), projectName);
+
+    const selectedTemplate = await selectTemplate(scaffoldDir);
+    let relativeTemplatePath = path.relative(scaffoldDir, selectedTemplate);
+    relativeTemplatePath = relativeTemplatePath.replace(/\\/g, "/");
+
+    const encodedTemplatePath = relativeTemplatePath
+      .replace(/ /g, "%20") // Encode spaces
+      .replace(/\+/g, "%2B"); // Encode plus sign
+    const repoURL = `${templatesRepoBaseURL}/${encodedTemplatePath}`;
+
+    console.log("Codebase available at: ", repoURL);
+
+    // Dry-run mode with detailed file output
+    if (flags.dryRun) {
+      console.log(chalk.cyan("\n🔍 DRY RUN MODE - No files will be created\n"));
+      console.log(chalk.bold("The following would be created:\n"));
+
+      // Get file list from local scaffold template
+      const fileList = await getTemplateFiles(selectedTemplate, projectName);
+
+      if (fileList.files.length > 0 || fileList.dirs.length > 0) {
+        console.log(chalk.gray("Directory structure:"));
+        console.log(chalk.gray("─────────────────────────────────────────"));
+
+        fileList.dirs.forEach((dir) => {
+          console.log(chalk.blue(`  📁 ${dir}/`));
+        });
+
+        fileList.files.forEach((file) => {
+          console.log(chalk.green(`  📄 ${file}`));
+        });
+
+        console.log(chalk.gray("─────────────────────────────────────────"));
+        console.log(
+          chalk.cyan(
+            `\nTotal: ${fileList.files.length} files, ${fileList.dirs.length} directories`,
+          ),
+        );
+      } else {
+        console.log(
+          chalk.yellow(
+            "No files found in template (this might indicate an issue).",
+          ),
+        );
+      }
+
+      console.log(chalk.gray(`\nTemplate: ${relativeTemplatePath}`));
+      console.log(chalk.gray(`Source: ${repoURL}`));
+      console.log(
+        chalk.yellow("\n💡 To create the project, run without --dry-run flag:"),
+      );
+      console.log(chalk.cyan(`   universal-box init ${projectName}`));
+
       if (fs.existsSync(projectDir)) {
-        if (flags.force) {
-          console.log(chalk.yellow(`⚠️  Directory "${projectName}" already exists. Using --force to overwrite...`));
-          if (!flags.dryRun) {
-            await fs.emptyDir(projectDir);
-          }
-        } else if (flags.dryRun) {
-          console.log(chalk.yellow(`⚠️  Directory "${projectName}" already exists (dry-run mode).`));
-        } else {
-          console.error(
-            chalk.red(
-              `❌ A project with the name "${projectName}" already exists. Please choose a different name or use --force to overwrite.`
-            )
-          );
-          return;
-        }
+        console.log(
+          chalk.yellow(
+            "\n⚠️  Note: Directory already exists. Use --force to overwrite.",
+          ),
+        );
+        console.log(chalk.cyan(`   universal-box init ${projectName} --force`));
       }
 
-      const selectedTemplate = await selectTemplate(scaffoldDir);
-      let relativeTemplatePath = path.relative(scaffoldDir, selectedTemplate);
-      relativeTemplatePath = relativeTemplatePath.replace(/\\/g, "/");
+      return;
+    }
 
-      const encodedTemplatePath = relativeTemplatePath
-        .replace(/ /g, "%20") // Encode spaces
-        .replace(/\+/g, "%2B"); // Encode plus sign
-      const repoURL = `${templatesRepoBaseURL}/${encodedTemplatePath}`;
+    try {
+      await cloneRepository1(repoURL, projectName);
 
-      console.log("Codebase available at: ", repoURL);
-
-      // Dry-run mode with detailed file output
-      if (flags.dryRun) {
-        console.log(chalk.cyan("\n🔍 DRY RUN MODE - No files will be created\n"));
-        console.log(chalk.bold("The following would be created:\n"));
-        
-        // Get file list from local scaffold template
-        const fileList = await getTemplateFiles(selectedTemplate, projectName);
-        
-        if (fileList.files.length > 0 || fileList.dirs.length > 0) {
-          console.log(chalk.gray("Directory structure:"));
-          console.log(chalk.gray("─────────────────────────────────────────"));
-          
-          fileList.dirs.forEach(dir => {
-            console.log(chalk.blue(`  📁 ${dir}/`));
-          });
-          
-          fileList.files.forEach(file => {
-            console.log(chalk.green(`  📄 ${file}`));
-          });
-          
-          console.log(chalk.gray("─────────────────────────────────────────"));
-          console.log(chalk.cyan(`\nTotal: ${fileList.files.length} files, ${fileList.dirs.length} directories`));
-        } else {
-          console.log(chalk.yellow("No files found in template (this might indicate an issue)."));
-        }
-        
-        console.log(chalk.gray(`\nTemplate: ${relativeTemplatePath}`));
-        console.log(chalk.gray(`Source: ${repoURL}`));
-        console.log(chalk.yellow("\n💡 To create the project, run without --dry-run flag:"));
-        console.log(chalk.cyan(`   universal-box init ${projectName}`));
-        
-        if (fs.existsSync(projectDir)) {
-          console.log(chalk.yellow("\n⚠️  Note: Directory already exists. Use --force to overwrite."));
-          console.log(chalk.cyan(`   universal-box init ${projectName} --force`));
-        }
-        
-        return;
-      }
-
-      try {
-        await cloneRepository1(repoURL, projectName);
-
-        console.log(
-          chalk.green(
-            `✅ Success! Project "${projectName}" has been initialized with the selected template.`
-          )
-        );
-        console.log(chalk.yellow("\nNext steps:"));
-        console.log(chalk.yellow(`1. Change to your new project directory:`));
-        console.log(chalk.cyan(`   cd ${projectName}`));
-        console.log(
-          chalk.yellow(
-            "2. Refer to the README.md file for installation and running commands."
-          )
-        );
-        console.log(
-          chalk.yellow(
-            "   This file contains all necessary instructions specific to your project type."
-          )
-        );
-        console.log(
-          chalk.yellow(
-            "3. Start your development server (check package.json or README.md for specific commands)"
-          )
-        );
-        console.log(
-          chalk.yellow(
-            "\nFor more information, refer to the README.md file in your project directory."
-          )
-        );
-        console.log(
-          chalk.blue("\n------ Happy Coding with Universal-Box 🚀 ------")
-        );
-        console.log(
-          chalk.gray(
-            "Need help? Visit our documentation: https://universal-box.vercel.app/"
-          )
-        );
-      } catch (error) {
-        console.error(
-          chalk.red("An error occurred while cloning the repository."),
-          error.message
-        );
-      }
-    });
+      console.log(
+        chalk.green(
+          `✅ Success! Project "${projectName}" has been initialized with the selected template.`,
+        ),
+      );
+      console.log(chalk.yellow("\nNext steps:"));
+      console.log(chalk.yellow(`1. Change to your new project directory:`));
+      console.log(chalk.cyan(`   cd ${projectName}`));
+      console.log(
+        chalk.yellow(
+          "2. Refer to the README.md file for installation and running commands.",
+        ),
+      );
+      console.log(
+        chalk.yellow(
+          "   This file contains all necessary instructions specific to your project type.",
+        ),
+      );
+      console.log(
+        chalk.yellow(
+          "3. Start your development server (check package.json or README.md for specific commands)",
+        ),
+      );
+      console.log(
+        chalk.yellow(
+          "\nFor more information, refer to the README.md file in your project directory.",
+        ),
+      );
+      console.log(
+        chalk.blue("\n------ Happy Coding with Universal-Box 🚀 ------"),
+      );
+      console.log(
+        chalk.gray(
+          "Need help? Visit our documentation: https://universal-box.vercel.app/",
+        ),
+      );
+    } catch (error) {
+      console.error(
+        chalk.red("An error occurred while cloning the repository."),
+        error.message,
+      );
+    }
+  });
 }
 
 async function getTemplateFiles(templatePath, projectName) {
   const files = [];
   const dirs = [];
-  
-  async function walkDirectory(currentPath, relativePath = '') {
+
+  async function walkDirectory(currentPath, relativePath = "") {
     try {
       const entries = await fs.readdir(currentPath, { withFileTypes: true });
-      
+
       for (const entry of entries) {
         const fullPath = path.join(currentPath, entry.name);
         const relPath = path.join(relativePath, entry.name);
-        
+
         if (entry.isDirectory()) {
           // Add directory (with project name as root)
           dirs.push(path.join(projectName, relPath));
@@ -240,9 +241,9 @@ async function getTemplateFiles(templatePath, projectName) {
       console.error(chalk.dim(`Warning: Could not read ${currentPath}`));
     }
   }
-  
+
   await walkDirectory(templatePath);
-  
+
   return { files, dirs };
 }
 
@@ -251,39 +252,39 @@ async function lintProject() {
     const projectDir = process.cwd();
 
     const { projectType } = await inquirer.prompt([
-      { 
-        type: "list", 
-        name: "projectType", 
-        message: "Select the project type:", 
-        choices: ["JavaScript", "Python"] 
+      {
+        type: "list",
+        name: "projectType",
+        message: "Select the project type:",
+        choices: ["JavaScript", "Python"],
       },
     ]);
 
     if (projectType === "JavaScript") {
       const responses = await inquirer.prompt([
-        { 
-          type: "confirm", 
-          name: "useAirbnb", 
-          message: "Use Airbnb ESLint config?", 
-          default: false 
+        {
+          type: "confirm",
+          name: "useAirbnb",
+          message: "Use Airbnb ESLint config?",
+          default: false,
         },
-        { 
-          type: "confirm", 
-          name: "useReact", 
-          message: "Is this a React project?", 
-          default: false 
+        {
+          type: "confirm",
+          name: "useReact",
+          message: "Is this a React project?",
+          default: false,
         },
-        { 
-          type: "confirm", 
-          name: "useTypeScript", 
-          message: "Do you want to use TypeScript?", 
-          default: false 
+        {
+          type: "confirm",
+          name: "useTypeScript",
+          message: "Do you want to use TypeScript?",
+          default: false,
         },
-        { 
-          type: "confirm", 
-          name: "usePrettier", 
-          message: "Include Prettier for formatting?", 
-          default: false 
+        {
+          type: "confirm",
+          name: "usePrettier",
+          message: "Include Prettier for formatting?",
+          default: false,
         },
       ]);
 
@@ -307,41 +308,48 @@ async function lintProject() {
       }
 
       // Install necessary dependencies based on selections
-      let deps = 'npm install eslint';
+      let deps = "npm install eslint";
       if (responses.useAirbnb) {
-        deps += ' eslint-config-airbnb';
+        deps += " eslint-config-airbnb";
       }
       if (responses.useReact) {
-        deps += ' eslint-plugin-react';
+        deps += " eslint-plugin-react";
       }
       if (responses.useTypeScript) {
-        deps += ' @typescript-eslint/parser @typescript-eslint/eslint-plugin';
+        deps += " @typescript-eslint/parser @typescript-eslint/eslint-plugin";
       }
       if (responses.usePrettier) {
-        deps += ' prettier eslint-config-prettier eslint-plugin-prettier';
+        deps += " prettier eslint-config-prettier eslint-plugin-prettier";
       }
-      deps += ' --save-dev --legacy-peer-deps';
+      deps += " --save-dev --legacy-peer-deps";
 
       await installDependencies(deps, projectDir);
 
       // If Prettier is selected, create .prettierignore
       if (responses.usePrettier) {
-        console.log(chalk.blue('🔧 Setting up Prettier ignore file...'));
+        console.log(chalk.blue("🔧 Setting up Prettier ignore file..."));
         setupPrettierIgnore(projectDir);
       }
 
       // If TypeScript is selected, ensure TypeScript is installed
       if (responses.useTypeScript) {
-        await installDependencies('npm install typescript --save-dev', projectDir);
+        await installDependencies(
+          "npm install typescript --save-dev",
+          projectDir,
+        );
         console.log(chalk.blue("🔧 Initializing TypeScript..."));
-        await installDependencies('npx tsc --init', projectDir);
+        await installDependencies("npx tsc --init", projectDir);
       }
-
     } else if (projectType === "Python") {
       setupFlake8(projectDir);
       await installDependencies("pip install flake8", projectDir);
       const { useBlack } = await inquirer.prompt([
-        { type: "confirm", name: "useBlack", message: "Include Black for code formatting?", default: false },
+        {
+          type: "confirm",
+          name: "useBlack",
+          message: "Include Black for code formatting?",
+          default: false,
+        },
       ]);
 
       if (useBlack) {
@@ -350,7 +358,12 @@ async function lintProject() {
       }
 
       const { usePylint } = await inquirer.prompt([
-        { type: "confirm", name: "usePylint", message: "Include Pylint for code analysis?", default: false },
+        {
+          type: "confirm",
+          name: "usePylint",
+          message: "Include Pylint for code analysis?",
+          default: false,
+        },
       ]);
 
       if (usePylint) {
@@ -359,7 +372,11 @@ async function lintProject() {
       }
     }
 
-    console.log(chalk.green(`✅ Linter setup complete! Run your linter using the appropriate commands.`));
+    console.log(
+      chalk.green(
+        `✅ Linter setup complete! Run your linter using the appropriate commands.`,
+      ),
+    );
   } catch (error) {
     console.error(chalk.red(`❌ Error setting up linter: ${error.message}`));
   }
@@ -367,28 +384,28 @@ async function lintProject() {
 
 function setupTypeScriptConfig(projectDir) {
   const tsconfig = {
-    "compilerOptions": {
-      "target": "ES2021",
-      "module": "CommonJS",
-      "strict": true,
-      "esModuleInterop": true,
-      "skipLibCheck": true,
-      "forceConsistentCasingInFileNames": true,
-      "outDir": "./dist",
-      "rootDir": "./src",
-      "moduleResolution": "node",
-      "resolveJsonModule": true,
-      "isolatedModules": true,
-      "noEmit": true
+    compilerOptions: {
+      target: "ES2021",
+      module: "CommonJS",
+      strict: true,
+      esModuleInterop: true,
+      skipLibCheck: true,
+      forceConsistentCasingInFileNames: true,
+      outDir: "./dist",
+      rootDir: "./src",
+      moduleResolution: "node",
+      resolveJsonModule: true,
+      isolatedModules: true,
+      noEmit: true,
     },
-    "include": ["src/**/*"],
-    "exclude": ["node_modules", "**/*.spec.ts"]
+    include: ["src/**/*"],
+    exclude: ["node_modules", "**/*.spec.ts"],
   };
 
-  const filePath = path.join(projectDir, 'tsconfig.json');
+  const filePath = path.join(projectDir, "tsconfig.json");
   fs.writeFileSync(filePath, JSON.stringify(tsconfig, null, 2));
 
-  console.log('✅ TypeScript configuration has been set up.');
+  console.log("✅ TypeScript configuration has been set up.");
 }
 
 function showHelp() {
@@ -404,11 +421,11 @@ ${chalk.bold("Commands:")}
                             ${chalk.gray("--force     Overwrite existing directory without prompting")}
                             ${chalk.gray("--dry-run   Preview what would be created without actually creating")}
   ${chalk.cyan("get")}                   ${chalk.dim(
-    "Clone a GitHub repository or a specific subdirectory from it"
+    "Clone a GitHub repository or a specific subdirectory from it",
   )}
   ${chalk.cyan("lint")}         ${chalk.dim("Add the default linting configurations")}
   ${chalk.cyan("deploy")}       ${chalk.dim(
-    "Trigger build and deployment pipeline"
+    "Trigger build and deployment pipeline",
   )}
   ${chalk.cyan("generate")}     ${chalk.dim("Generate project from a configuration file")}
   ${chalk.cyan("--help")}       ${chalk.dim("Display this help message")}
@@ -425,11 +442,11 @@ ${chalk.bold("Examples:")}
   ${chalk.green("universal-box generate <idea.yml>")}
   ${chalk.green("universal-box get https://github.com/username/repo")}
   ${chalk.green(
-    "universal-box get https://github.com/username/repo/tree/<path_to_sub-directory>"
+    "universal-box get https://github.com/username/repo/tree/<path_to_sub-directory>",
   )}
 
 ${chalk.gray("Need help? Visit our documentation:")} ${chalk.underline.blue(
-    "https://universal-box.vercel.app/"
+    "https://universal-box.vercel.app/",
   )}
 `);
 }
@@ -469,17 +486,18 @@ function getDirectoryContents(dir) {
       (dirent) =>
         dirent.isDirectory() ||
         (dirent.isFile() &&
-          (dirent.name === "README.md" || dirent.name === "dump"))
+          (dirent.name === "README.md" || dirent.name === "dump")),
     )
     .map((dirent) => dirent.name);
 }
-
 
 function installDependencies(command, projectDir) {
   return new Promise((resolve, reject) => {
     exec(command, { cwd: projectDir }, (error, stdout, stderr) => {
       if (error) {
-        console.error(chalk.red(`❌ Error installing dependencies:\n${stderr}`));
+        console.error(
+          chalk.red(`❌ Error installing dependencies:\n${stderr}`),
+        );
         return reject(error);
       }
       console.log(chalk.green(`✅ Installed dependencies.\n${stdout}`));
@@ -498,6 +516,6 @@ coverage
 *.bundle.js
 `;
 
-  const filePath = path.join(projectDir, '.prettierignore');
+  const filePath = path.join(projectDir, ".prettierignore");
   fs.writeFileSync(filePath, prettierIgnoreContent);
 }
